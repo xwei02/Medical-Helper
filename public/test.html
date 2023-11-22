@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg " id="nav-color">
+        <a class="navbar-brand" href="test.html">醫療小幫手</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="test.html">首頁</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="medical_form.html">手術問卷</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="health_leaflet.html">修改衛教單張</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="personal_medicalcare.html">個人醫療</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="user_info_modifiy.html">用戶基本資料修改</a>
+              </li>
+            <li class="nav-item">
+                <a class="nav-link" href="response.html">回饋</a>
+            </li> 
+          </ul>
+          <div class="ms-auto">
+            <a class="btn btn-light" href="user_login.html">登入</a>
+            <a class="btn btn-light" href="signin.html">註冊</a>
+          </div>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form> 
+        </div>
+    </nav>
+    <!--導覽頁-->
+    <div class=" mt-4">
+        <div class="row">
+            <div class="col-lg-3">
+              <div class="flex-shrink-0 p-3" style="width: 280px;">
+                <ul class="list-unstyled ps-0">
+                  <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                    護理指導
+                    </button>
+                    <div class="collapse show" id="home-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">目錄總覽</a></li>
+                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">文件總覽</a></li>
+                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">最新討論</a></li>
+                    </ul>
+                    </div>
+                </li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+                    目錄/資料夾
+                </button>
+                    <div class="collapse" id="dashboard-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">神經內科</a></li>
+                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">神經外科</a></li>
+                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">精神病</a></li>
+                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">心臟內科</a></li>
+                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">骨科</a></li>
+                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">胸腔外科</a></li>
+                    </ul>
+                    </div>
+                </li>
+          
+                <li class="border-top my-3"></li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+                    Account
+                    </button>
+                    <div class="collapse" id="account-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New...</a></li>
+                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a></li>
+                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Settings</a></li>
+                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign out</a></li>
+                    </ul>
+                    </div>
+                </li>
+                </ul>
+            </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="row">
+                  <!-- 第一个主要内容区块 -->
+                  <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <h2 class="card-title">主要內容標題</h2>
+                        <p class="card-text">這裡是主要內容的詳細信息。</p>
+                        <img width="180" height="130"src="diabetes.jpg" />
+                        <p class="card-text">這裡是主要內容的詳細信息。</p>
+  
+                        <!-- 更多內容 -->
+                      </div>
+                    </div>
+                  </div>
+  
+                  <!-- 第二个主要内容区块 -->
+                  <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <h2 class="card-title">主要內容標題</h2>
+                        <p class="card-text">這裡是主要內容的詳細信息。</p>
+                        <!-- 更多內容 -->
+                      </div>
+                    </div>
+                  </div>
+  
+                  <!-- 第三个主要内容区块 -->
+                  <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <h2 class="card-title">主要內容標題</h2>
+                        <p class="card-text">這裡是主要內容的詳細信息。</p>
+                        <!-- 更多內容 -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+              </div>
+        </div>
+    </div>
+  </body>
+</html>
