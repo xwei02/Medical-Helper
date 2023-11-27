@@ -63,5 +63,42 @@
         <a class="btn btn-primary rounded-pill px-3" type="button" href="newest_testrev.html">最近檢查/檢驗預約</a>
         <a class="btn btn-secondary rounded-pill px-3" type="button" href="newest_testrec.html">最近檢查/檢驗紀錄</a>
     </div>
+    <table class="container table table-striped">
+      <!-- <thead>
+          
+      </thead> -->
+      <tbody id="tableBody">
+        <tr>
+          <th scope="col">檢驗項目名稱</th>
+          <th scope="col">檢查日期</th>
+          <th scope="col">報到位置</th>
+          <th scope="col">採檢前準備</th>
+          <th scope="col">採檢注意事項</th>
+          <th scope="col">可送檢時間</th>
+        </tr>
+      </tbody>
+  </table>     
   </body>
 </html>
+
+<script>
+  fetch('/api/inspection_appointment') // 替換為您的 API 端點
+  .then(response => response.json())
+    .then(user => {
+      const tableBody = document.getElementById('tableBody');
+      user.forEach(inspection_appointment => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${inspection_appointment.inspection_item}</td>
+                <td>${inspection_appointment.appointment_date}</td>
+                <td>${inspection_appointment.chicking_location}</td>
+                <td>${inspection_appointment.test_preparation}</td>
+                <td>${inspection_appointment.inspection_precautions}</td>
+                <td>${inspection_appointment.inspection_availableTime}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    })
+  .catch(error => console.error('錯誤:', error));
+
+</script>

@@ -64,7 +64,10 @@
         <a class="btn btn-primary rounded-pill px-3" type="button" href="newest_testrec.html">最近檢查/檢驗紀錄</a>
     </div>
     <table class="container table table-striped">
-      <thead>
+      <!-- <thead>
+          
+      </thead> -->
+      <tbody id="tableBody">
         <tr>
           <th scope="col">檢驗項目</th>
           <th scope="col">檢驗日期</th>
@@ -72,7 +75,28 @@
           <th scope="col">檢驗完成</th>
           <th scope="col">檢驗是否異常</th>
         </tr>
-      </thead>
-  </table>     
+      </tbody> 
+    </table>     
   </body>
 </html>
+
+<script>
+  fetch('/api/inspection_records') // 替換為您的 API 端點
+  .then(response => response.json())
+    .then(user => {
+      const tableBody = document.getElementById('tableBody');
+      user.forEach(inspection_records => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${inspection_records.inspection_item}</td>
+                <td>${inspection_records.inspection_date}</td>
+                <td>${inspection_records.inspection_funded}</td>
+                <td>${inspection_records.inspection_YN}</td>
+                <td>${inspection_records.inspection_abnormalYN}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    })
+  .catch(error => console.error('錯誤:', error));
+
+</script>

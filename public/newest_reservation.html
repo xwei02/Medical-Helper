@@ -63,5 +63,42 @@
         <a class="btn btn-secondary rounded-pill px-3" type="button" href="newest_testrev.html">最近檢查/檢驗預約</a>
         <a class="btn btn-secondary rounded-pill px-3" type="button" href="newest_testrec.html">最近檢查/檢驗紀錄</a>
     </div>
+    <table class="container table table-striped">
+      <!-- <thead>
+          
+      </thead> -->
+      <tbody id="tableBody">
+        <tr>
+          <th scope="col">就診科別</th>
+          <th scope="col">看診日期</th>
+          <th scope="col">就診時段</th>
+          <th scope="col">門診醫師</th>
+          <th scope="col">門診位置</th>
+          <th scope="col">就醫序號</th>
+        </tr>
+      </tbody> 
+  </table>     
   </body>
 </html>
+
+<script>
+  fetch('/api/medical_appointment') // 替換為您的 API 端點
+  .then(response => response.json())
+    .then(user => {
+      const tableBody = document.getElementById('tableBody');
+      user.forEach(medical_appointment => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${medical_appointment.appointment_division}</td>
+                <td>${medical_appointment.appointment_date}</td>
+                <td>${medical_appointment.appointment_timeperiod}</td>
+                <td>${medical_appointment.doctor_name}</td>
+                <td>${medical_appointment.clinic_location}</td>
+                <td>${medical_appointment.medical_treatmentNum}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    })
+  .catch(error => console.error('錯誤:', error));
+
+</script>
