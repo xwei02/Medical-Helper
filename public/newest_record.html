@@ -88,12 +88,15 @@
     .then(user => {
       const tableBody = document.getElementById('tableBody');
       user.forEach(medical_record => {
+      // 解析日期並轉換格式
+      const date = new Date(medical_record.appointment_date);
+      const formattedDate = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${medical_record.medical_department}</td>
                 <td>${medical_record.medical_division}</td>
                 <td>${medical_record.doctor_name}</td>
-                <td>${medical_record.appointment_date}</td>
+                <td>${formattedDate}</td>
                 <td>${medical_record.return_appointment}</td>
             `;
             tableBody.appendChild(row);

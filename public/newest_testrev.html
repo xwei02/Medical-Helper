@@ -87,10 +87,13 @@
     .then(user => {
       const tableBody = document.getElementById('tableBody');
       user.forEach(inspection_appointment => {
+        // 解析日期並轉換格式
+      const date = new Date(inspection_appointment.appointment_date);
+      const formattedDate = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${inspection_appointment.inspection_item}</td>
-                <td>${inspection_appointment.appointment_date}</td>
+                <td>${formattedDate}</td>
                 <td>${inspection_appointment.chicking_location}</td>
                 <td>${inspection_appointment.test_preparation}</td>
                 <td>${inspection_appointment.inspection_precautions}</td>

@@ -73,7 +73,7 @@
                   <option value="髖關節核心減壓手術">髖關節核心減壓手術</option>
                   <option value="高位脛骨截骨矯正手術">高位脛骨截骨矯正手術</option>
           </select>
-          <button type="submit" class="btn btn-success mt-4">確定</button>
+          <a type="submit" class="btn btn-success mt-4" id="google-form-button" href="https://docs.google.com/forms/d/e/1FAIpQLSdlaI3bECPbsxQnotDHP3cPWSbva3CBtTLQi94YmOY2VcoyrQ/viewform?usp=sharing"> 確定</a>
         </form>
       </div>
     </div>
@@ -91,4 +91,14 @@
       </div>
    </body>
 </html>
+
+<script>
+  document.getElementById('google-form-button').addEventListener('click', function() {
+    // 在這裡指定 Google 表單的連結
+    var googleFormLink = 'https://docs.google.com/forms/d/e/1FAIpQLSdlaI3bECPbsxQnotDHP3cPWSbva3CBtTLQi94YmOY2VcoyrQ/viewform?usp=sharing';
+    // 通過 window.location.href 跳轉到 Google 表單
+    window.location.href = googleFormLink;
+  });
+</script>
+
  

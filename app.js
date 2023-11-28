@@ -84,6 +84,17 @@ app.get('/api/inspection_records', (req, res) => {
     });
 });
 
+app.get('/api/user_password', (req, res) => {
+    connection.query('SELECT * FROM user_password', (error, results, fields) => {
+        if (error) {
+            res.status(500).send('資料庫查詢錯誤');
+            return;
+        }
+        res.json(results); // 發送JSON格式的數據
+    });
+});
+
+
 
 
 

@@ -87,3 +87,33 @@
   </div>
 </body>
 </html>
+
+<script>
+function handleLogin(event) {
+  event.preventDefault();
+
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+
+  fetch('/api/user_password')
+    .then(response => response.json())
+    .then(users => {
+      const user = users.find(users => users.user_idNumber === username);
+
+      if (user && user.user_password == password) {
+        localStorage.setItem('user', JSON.stringify(user));
+
+        window.location.href = 'test.html';
+      } else {
+        // 登入失敗
+        alert('登入失敗：帳號或密碼錯誤');
+      }
+    })
+    .catch(error => console.error('錯誤:', error));
+}
+
+document.querySelector('form').addEventListener('submit', handleLogin);
+  
+</script>
+  
+  

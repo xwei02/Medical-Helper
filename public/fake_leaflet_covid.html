@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>醫療小幫手</title>
+
+    <link rel="stylesheet" href="/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        .flex-shrink-0 {
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .btn-toggle {
+            background-color: #d0cfe8;
+            color: rgb(0, 0, 0);
+            margin-bottom: 10px;
+        }
+
+        .btn-toggle:hover {
+            background-color: #0056b3;
+        }
+
+        .link-body-emphasis {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .list-unstyled {
+            padding-left: 0;
+        }
+
+        .list-unstyled li a {
+            display: block;
+            padding: 5px 10px;
+        }
+
+        .list-unstyled li a:hover {
+            background-color: #e7e7e7;
+            border-radius: 10px;
+        }
+
+        .article-container {
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .article-content {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg" id="nav-color">
+        <a class="navbar-brand" href="test.html">醫療小幫手</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="test.html">首頁</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="medical_form.html">手術問卷</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="health_leaflet.html">修改衛教單張</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="personal_medicalcare.html">個人醫療</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="user_info_modifiy.html">用戶基本資料修改</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="response.html">回饋</a>
+                </li> 
+            </ul>
+            <div class="ms-auto">
+                <a class="btn btn-light" href="user_login.html">登入</a>
+                <a class="btn btn-light" href="signin.html">註冊</a>
+            </div>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form> 
+        </div>
+    </nav>
+
+    <div class="container flex-shrink-0">
+        <div class="article-container">
+            <h1 class="article-title">人工髖關節置換術手術前後照護</h1><br>
+            <img width="750" height="350" src="covid.jpg" style="box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);" />
+            <p class="article-content">
+                <h5><strong>【本篇學習重點】</strong></h5><br>
+                1. 距發病日至少10天，採檢Ct值≧30，才能解除隔離。<br>
+                2. 若有COVID-19相關症狀，請撥1922，依指示就醫。<br>
+                3. 居家照護應多喝水、均衡飲食，並保持愉快的心情。<br>
+
+                <br>
+                <h5><strong>一、解除隔離治療的條件：</strong></h5><br>
+                嚴重特殊傳染性肺炎屬於第五類法定傳染病，確診病人應依規定於指定機構進行隔離治療， 符合衛生福利部疾病管制署所發布之嚴重特殊傳染性肺炎確診個案處置及解除隔離條件者：<br>
+                1. 符合退燒至少1天，且症狀緩解及距發病日已達10天(無症狀者，發病日以採檢日計算)，間隔24小時2次呼吸道檢體(包含痰液、咽喉或鼻咽)檢驗SARS-COV-2-RT-PCR檢駛結果為陰性或Ct值≧30，得解除隔離治療，並進行7天自主健康管理。<br>
+                2. 確診之初次呼吸道檢體病毒量低（Ct值≧30），且同時符合無 COVID-19 相關症狀、 抽血檢驗SARS-CoV-2 anti-N 抗體陽性，以及確診後2日內第1次採檢和間隔至少24小時的第2次呼吸道檢體(包含痰液、咽喉或鼻咽)檢驗SARS-COV-2-RT-PCR檢驗結果為 陰性或Ct值≧30，才能解除隔離治療，並進行7天自主健康管理。<br>
+                <br>
+                <h5><strong>二、出院當天準備須知：</strong></h5><br>
+                當收到衛生主管機關回傳法定傳染病「解除隔離治療通知書」及「自主健康管理通知書」 後，病人或家屬簽屬通知書(會留存副本一份請自行保管)後，即可出院並進行7天自主健康 管理，出院當天注意事項如下：<br>
+                1. 請家屬帶乾淨換洗衣服一套，於沐浴後換上，並佩戴外科口罩。<br>
+                2. 住院隔離所使用之物品，護理師協助酒精消毒後，以雙層塑膠袋包妥後即可攜帶回家。<br>
+                3. 辦完出院手續後，護理師會教導您出院藥物服用時間及注意事項，並帶您搭乘專用電梯下樓。<br>
+                4. 如返家隔離有困難時，可請家屬協助安排防疫專責旅館居住。<br>
+                5. 出院當天不可搭乘大眾運輸工具，可自行騎車返家或由家人開車接回，或搭乘計程車 (須記下車牌、戴口罩、窗戶打開)。<br>
+                6. 自主健康管理期間非急迫需求之醫療或檢查原則上應延後，若出現COVID-19相關疑似 症狀(如發燒、呼吸道症狀、嗅/味覺異常或不明原因腹瀉或肺炎)時，應先主動與當地衛生局聯繫或撥打防疫專線1922，依指示就醫，千萬不可自行前往就醫或搭乘大眾運輸工具。<br>
+                7. 如未確實遵守各項自主健康管理規定，係違反「傳染病防治法」第36條、第48條規定，將依同法第70條、第67條，可裁處新臺幣3千元以上1萬5千元以下、6萬元以上30 萬元以下罰鍰。<br>
+
+                <br>
+                <h5><strong>三、照護原則：</strong></h5><br>
+                1. 適量補充水分。<br>
+                2. 攝取足夠營養，如蛋白質（豆類、牛奶、蛋、肉類、魚湯…等）、維生素（蔬菜、水 果、雜糧…等），以增加抵抗力。<br>
+                3. 適量補充單元不飽和脂肪酸，如海鮮、深海魚、亞麻籽、橄欖油、葵花油、堅果…等 食物。<br>
+                4. 若有咳嗽現象，不宜進食冰冷刺激性食物。<br>
+                5. 適度運動、充足睡眠，保持心情愉快，如需心理諮詢服務，可撥打24小時免付費1925 安心專線。<br>
+                <br>
+              </p>
+        </div>
+    </div>
+</body>
+</html>

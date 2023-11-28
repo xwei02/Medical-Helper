@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>醫療小幫手</title>
+
+    <link rel="stylesheet" href="/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        .flex-shrink-0 {
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .btn-toggle {
+            background-color: #d0cfe8;
+            color: rgb(0, 0, 0);
+            margin-bottom: 10px;
+        }
+
+        .btn-toggle:hover {
+            background-color: #0056b3;
+        }
+
+        .link-body-emphasis {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .list-unstyled {
+            padding-left: 0;
+        }
+
+        .list-unstyled li a {
+            display: block;
+            padding: 5px 10px;
+        }
+
+        .list-unstyled li a:hover {
+            background-color: #e7e7e7;
+            border-radius: 10px;
+        }
+
+        .article-container {
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .article-content {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg" id="nav-color">
+        <a class="navbar-brand" href="test.html">醫療小幫手</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="test.html">首頁</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="medical_form.html">手術問卷</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="health_leaflet.html">修改衛教單張</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="personal_medicalcare.html">個人醫療</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="user_info_modifiy.html">用戶基本資料修改</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="response.html">回饋</a>
+                </li> 
+            </ul>
+            <div class="ms-auto">
+                <a class="btn btn-light" href="user_login.html">登入</a>
+                <a class="btn btn-light" href="signin.html">註冊</a>
+            </div>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form> 
+        </div>
+    </nav>
+
+    <div class="container flex-shrink-0">
+        <div class="article-container">
+            <h1 class="article-title">上石膏病人之照護</h1><br>
+
+            <img width="750" height="350" src="bone2.jpg" style="box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);" />
+            <p class="article-content">
+                <h5><strong>【本篇學習重點】</strong></h5><br>
+                1. 石膏還未乾前避免壓迫，不可覆蓋床單或衣物。<br>
+                2. 皮膚癢時不可將任何物品伸入石膏內抓癢。<br>
+                3. 臥床時以枕頭抬高受傷肢體，減輕腫脹。<br>
+                4. 石膏要保持清潔乾燥避免沖濕石膏。<br>
+                5. 下床需穿著石膏鞋，以柺杖或助行器輔助行走避免跌倒。<br>
+                <br>
+                <h5><strong>一、為什麼需要打石膏？</strong></h5><br>
+                當肢體骨折、肌腱和韌帶受傷時，手術前後可能會打上石膏用來固定及保護受傷的肢體，若肢體有畸形時打上石膏也可矯正或預防畸形。<br>
+                <br>
+                <h5><strong>二、我該注意什麼?</strong></h5><br>
+                1. 剛上石膏後10~15分鐘，局部會有發熱感覺，此為正常現象；在石膏還未乾燥前，避免壓迫不可覆蓋床單或衣物，不可承重。<br>
+                2. 石膏邊緣維持平整，預防皮膚受摩擦破損。<br>
+                3. 皮膚癢時，可輕拍石膏或以吹風機冷風朝石膏內吹，千萬不可將任何物品伸入石膏內抓癢，以免皮膚受損。<br>
+                4. 每天需觀察石膏表面有無滲液、滲血，上石膏肢體末端若有腫脹、疼痛、皮膚蒼白、冰冷及感覺遲鈍、麻木像針刺感等異常現象，請告知醫護人員。<br>
+                5. 復健運動：<br>
+                A. 上石膏肢體需做肌肉收縮運動，例如：下肢上石膏者須作股四頭肌運動，方法為膝蓋下壓大腿肌肉收縮運動，以防肌肉萎縮。<br>
+                B. 露出石膏外的關節經醫護人員指示後執行關節活動，維持其最大的活動度，例如：腳趾或手指的關節運動。<br>
+
+                6. 臥床及活動之注意事項：<br>
+                A. 臥床時以枕頭抬高上石膏肢體，促進血循，減輕腫脹。<br>
+                B. 上肢打石膏者，下床時須以好的手或經醫師指示使用手臂吊帶支撐上石膏肢體。<br>
+                C. 下肢上石膏者，下床需穿著石膏鞋，以保持石膏清潔，並以柺杖或助行器輔助行走並避免滑倒。<br>
+                D. 下肢上石膏者下床時，可能會有充血腫脹感，故應漸進性增加下床時間，並於休息時將上石膏肢體抬高減輕腫脹。<br>
+                <br>
+                <h5><strong>三、居家照顧：</strong></h5><br>
+                1. 石膏要保持清潔乾燥，洗澡時肢體可用塑膠袋緊密包裹或使用石膏防水罩，避免沖濕石膏，若不慎弄濕可用吹風機冷風吹乾。<br>
+                2. 上石膏的肢體需抬高，以減輕腫脹，持續執行住院期間教導的復健運動。<br>
+                3. 石膏內不可放入任何物品，不可自行將石膏拆掉，以免影響治療效果。<br>
+                4. 若有下列異常情形請立即回骨科門診追蹤︰<br>
+                A. 上石膏肢體出現異常腫脹、刺痛、麻木或冰冷等感覺。<br>
+                B. 石膏破裂或鬆動。<br>
+                C. 石膏內感覺灼熱或有異味。<br>
+                <br>
+                <h5><strong>四、石膏拆除後注意事</strong></h5><br>
+                1. 石膏鋸開時會有震動、受壓迫的感覺，但不會割傷到皮膚，請不用擔心。<br>
+                2. 石膏拆除後皮膚有乾燥、脫屑情形，可用中性肥皂及溫水清洗。<br>
+                3. 石膏拆除後可能有肌肉無力、關節僵硬等現象，須漸進性增加患肢的活動。<br>
+                <br>
+              </p>
+        </div>
+    </div>
+</body>
+</html>
