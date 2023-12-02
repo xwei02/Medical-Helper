@@ -18,10 +18,23 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap">
+    <style>
+      h2 {
+        font-family: 'Noto Sans TC', sans-serif;
+        text-align: center;
+        border-radius: 20px;
+        margin-bottom: 20px;
+        padding: 10px;
+        background-color: #f8f9fa; /* 背景色 */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 陰影效果 */
+      }
+    </style>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg " id="nav-color">
-        <a class="navbar-brand" href="test.html">醫療小幫手</a>
+        <a class="navbar-brand" href="test.html">
+            <img src="medical_icon.png" alt="Logo" width="40" height="40"> 醫療小幫手</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -36,19 +49,21 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="test.html">首頁</a>
+              <a class="nav-link" href="test.html">
+                <img src="home_icon.png" alt="Logo" width="25" height="25"> 首頁</a>
             </li>
             
           </ul>
           <div class="ms-auto">
-            <a class="btn btn-light" id="add-data-button">登出</a>
+            <a class="btn btn-light" id="login-button" href="user_login.html">登入</a>
           </div>
         </div>
     </nav>
     
   <div class="container d-flex mb-3 justify-content-center mt-5" id="login">
     <div class="form-container">
-      <h1 class="text-center mb-5">註冊新帳號</h1>
+        <h2 class="text-center mb-5" style=" border-radius: 100px;">
+            <img src="sign_up.png" alt="Logo" width="65" height="65"> 註冊新帳號</h2>
       <form>
         <div class="mb-3 form-group"> 
           <label for="username" class="form-label">帳號</label>
@@ -60,9 +75,6 @@
         </div>
         <div class="d-flex justify-content-center">
           <button type="submit" id="signupForm" class="btn btn-success">註冊</button>
-        </div>
-        <div class="login-links">
-          <a href="user_login.html" class="link-primary">登入</a>
         </div>
         <!-- <div class="login-links">
           <a href="signup.html" class="link-primary">註冊新帳號</a>
