@@ -52,7 +52,7 @@
             </li>  
           </ul>
           <div class="ms-auto">
-            <a class="btn btn-light" id="logout-button">登出</a>
+            <a class="btn btn-light" id="logout-button" id="logout-button">登出</a>
           </div>
         </div>
     </nav>
@@ -86,6 +86,8 @@
 </html>
 
 <script>
+  const admin = localStorage.getItem('admin'); // 直接获取字符串
+  const user = JSON.parse(localStorage.getItem('user'));
 document.addEventListener('DOMContentLoaded', function() {
   const userId = JSON.parse(localStorage.getItem('user'));
   fetch(`/api/userinfo_change?userId=${userId}`)
@@ -124,10 +126,15 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch(error => console.error('錯誤:', error));
 });
 
-const logoutButton = document.getElementById('logout-button');
-
-logoutButton.addEventListener('click', function() {
-  localStorage.removeItem('user');
-  window.location.href = 'user_login.html';
+    const logoutButton = document.getElementById('logout-button');
+    logoutButton.addEventListener('click', function() {
+    // 检查localStorage中是否有admin信息
+    if (localStorage.getItem('admin')) {
+      localStorage.removeItem('admin'); // 移除管理员信息
+      window.location.href = 'manager_login.html'; // 跳转到管理员登录页面
+    } else if (localStorage.getItem('user')) {
+      localStorage.removeItem('user'); // 移除用户信息
+      window.location.href = 'user_login.html'; // 跳转到用户登录页面
+    }
 });
 </script>

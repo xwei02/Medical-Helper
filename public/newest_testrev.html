@@ -53,7 +53,7 @@
             </li>  
           </ul>
           <div class="ms-auto">
-            <a class="btn btn-light" id="logout-button">登出</a>
+            <a class="btn btn-light" id="logout-button" id="logout-button">登出</a>
           </div>
         </div>
     </nav>
@@ -81,17 +81,19 @@
   </body>
 </html>
 <script>
-  const userId = JSON.parse(localStorage.getItem('user'));
-  
-  fetch(`/api/inspection_appointment?userId=${userId}`) // 替换为您的 API 端点
+  const admin = localStorage.getItem('admin'); // 直接获取字符串
+  const user = JSON.parse(localStorage.getItem('user'));
+  fetch(`/api/inspection_appointment?userId=${user}`) // 替换为您的 API 端点
   .then(response => response.json())
     .then(user => {
       const tableBody = document.getElementById('tableBody');
       user.forEach(inspection_appointment => {
+            const date = new Date(inspection_appointment.appointment_date);
+            const formattedDate = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${inspection_appointment.inspection_item}</td>
-                <td>${inspection_appointment.appointment_date}</td>
+                <td>${formattedDate}</td>
                 <td>${inspection_appointment.chicking_location}</td>
                 <td>${inspection_appointment.test_preparation}</td>
                 <td>${inspection_appointment.inspection_precautions}</td>
@@ -100,13 +102,17 @@
             tableBody.appendChild(row);
         });
     })
-  .catch(error => console.error('錯誤:', error));
-
-  const logoutButton = document.getElementById('logout-button');
-
-  logoutButton.addEventListener('click', function() {
-    localStorage.removeItem('user');
-    window.location.href = 'user_login.html';
-  });
+    
+    const logoutButton = document.getElementById('logout-button');
+    logoutButton.addEventListener('click', function() {
+    // 检查localStorage中是否有admin信息
+    if (localStorage.getItem('admin')) {
+      localStorage.removeItem('admin'); // 移除管理员信息
+      window.location.href = 'manager_login.html'; // 跳转到管理员登录页面
+    } else if (localStorage.getItem('user')) {
+      localStorage.removeItem('user'); // 移除用户信息
+      window.location.href = 'user_login.html'; // 跳转到用户登录页面
+    }
+});
 
 </script>
