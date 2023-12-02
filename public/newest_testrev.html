@@ -53,7 +53,7 @@
             </li>  
           </ul>
           <div class="ms-auto">
-            <a class="btn btn-light" id="add-data-button">登出</a>
+            <a class="btn btn-light" id="logout-button">登出</a>
           </div>
         </div>
     </nav>
@@ -80,20 +80,18 @@
   </table>     
   </body>
 </html>
-
 <script>
-  fetch('/api/inspection_appointment') // 替換為您的 API 端點
+  const userId = JSON.parse(localStorage.getItem('user'));
+  
+  fetch(`/api/inspection_appointment?userId=${userId}`) // 替换为您的 API 端点
   .then(response => response.json())
     .then(user => {
       const tableBody = document.getElementById('tableBody');
       user.forEach(inspection_appointment => {
-        // 解析日期並轉換格式
-      const date = new Date(inspection_appointment.appointment_date);
-      const formattedDate = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${inspection_appointment.inspection_item}</td>
-                <td>${formattedDate}</td>
+                <td>${inspection_appointment.appointment_date}</td>
                 <td>${inspection_appointment.chicking_location}</td>
                 <td>${inspection_appointment.test_preparation}</td>
                 <td>${inspection_appointment.inspection_precautions}</td>
@@ -103,5 +101,12 @@
         });
     })
   .catch(error => console.error('錯誤:', error));
+
+  const logoutButton = document.getElementById('logout-button');
+
+  logoutButton.addEventListener('click', function() {
+    localStorage.removeItem('user');
+    window.location.href = 'user_login.html';
+  });
 
 </script>

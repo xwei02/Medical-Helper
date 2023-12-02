@@ -39,18 +39,7 @@
             <li class="nav-item">
               <a class="nav-link" href="test.html">首頁</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="medical_form.html">手術問卷</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="personal_medicalcare.html">個人醫療</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="user_info_modifiy.html">用戶基本資料修改</a>
-              </li>
-            <li class="nav-item">
-                <a class="nav-link" href="response.html">回饋</a>
-            </li>  
+            
           </ul>
           <div class="ms-auto">
             <a class="btn btn-light" id="add-data-button">登出</a>
@@ -77,7 +66,7 @@
           <a href="#" class="link-primary">忘記密碼?</a>
         </div>
         <div class="login-links">
-          <a href="signin.html" class="link-primary">註冊新帳號</a>
+          <a href="signup.html" class="link-primary">註冊新帳號</a>
         </div>
         <div class="login-links">
             <a href="manager_login.html" class="link-primary" >管理者登入</a>
@@ -101,8 +90,7 @@ function handleLogin(event) {
       const user = users.find(users => users.user_idNumber === username);
 
       if (user && user.user_password == password) {
-        localStorage.setItem('user', JSON.stringify(user));
-
+        localStorage.setItem('user', user.user_id);
         window.location.href = 'test.html';
       } else {
         // 登入失敗
@@ -113,7 +101,7 @@ function handleLogin(event) {
 }
 
 document.querySelector('form').addEventListener('submit', handleLogin);
-  
+
 </script>
   
   

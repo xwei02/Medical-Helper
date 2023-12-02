@@ -53,7 +53,7 @@
             </li>  
           </ul>
           <div class="ms-auto">
-            <a class="btn btn-light" id="add-data-button">登出</a>
+            <a class="btn btn-light" id="logout-button">登出</a>
           </div>
         </div>
     </nav>
@@ -79,20 +79,18 @@
     </table>     
   </body>
 </html>
-
 <script>
-  fetch('/api/inspection_records') // 替換為您的 API 端點
+  const user = JSON.parse(localStorage.getItem('user'));
+  
+  fetch(`/api/inspection_records?userId=${userId}`) // 替换为您的 API 端点
   .then(response => response.json())
     .then(user => {
       const tableBody = document.getElementById('tableBody');
       user.forEach(inspection_records => {
-      // 解析日期並轉換格式
-      const date = new Date(inspection_records.inspection_date);
-      const formattedDate = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${inspection_records.inspection_item}</td>
-                <td>${formattedDate}</td>
+                <td>${inspection_records.inspection_date}</td>
                 <td>${inspection_records.inspection_funded}</td>
                 <td>${inspection_records.inspection_YN}</td>
                 <td>${inspection_records.inspection_abnormalYN}</td>
@@ -101,5 +99,10 @@
         });
     })
   .catch(error => console.error('錯誤:', error));
+  const logoutButton = document.getElementById('logout-button');
 
+  logoutButton.addEventListener('click', function() {
+    localStorage.removeItem('user');
+    window.location.href = 'user_login.html';
+  });
 </script>

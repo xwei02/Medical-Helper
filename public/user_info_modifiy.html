@@ -6,7 +6,6 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="/style.css" />
-    <script src="/modal.js"></script>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -53,45 +52,31 @@
             </li>  
           </ul>
           <div class="ms-auto">
-            <a class="btn btn-light" id="add-data-button">登出</a>
+            <a class="btn btn-light" id="logout-button">登出</a>
           </div>
         </div>
     </nav>
     <div class="container">
         <div class="row justify-content-center">
-          <div class="col-lg-8">
+          <div class="col-lg-5">
             <div class="form-container">
               <h2 class="text-center mb-4">用戶基本資料修改</h2>
               <form>
-                <div class="row">
-                  <div class="col-md-6 mb-3">
-                    <label for="firstName" class="form-label">姓名</label>
-                    <input type="text" class="form-control" id="firstName" required>
-                  </div>
-                  <div class="col-md-6 mb-3">
+                  <div class="justify-content-center">
                     <label for="email" class="form-label">電子信箱Email</label>
                     <input type="email" class="form-control" id="email" required>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6 mb-3">
-                    <label for="idNumber" class="form-label">身份證字號</label>
-                    <input type="text" class="form-control" id="idNumber" required>
-                  </div>
-                  <div class="col-md-6 mb-3">
+                  <div class="justify-content-center">
                     <label for="phoneNumber" class="form-label">手機號碼</label>
                     <input type="tel" class="form-control" id="phoneNumber" required>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6 mb-3">
+                  <div class="justify-content-center">
                     <label for="address" class="form-label">通訊地址</label>
                     <input type="text" class="form-control" id="address" required>
                   </div>
-                </div>
                 <div class="d-flex justify-content-between mt-4">
-                  <button type="submit" class="btn btn-success">儲存</button>
-                  <button type="button" class="btn btn-secondary">編輯</button>
+                  <button type="submit" id="change" class="btn btn-success">儲存</button>
+                  <!-- <button type="button" class="btn btn-secondary">編輯</button> -->
                 </div>
             </div>
           </div>
@@ -99,3 +84,50 @@
       </div>
   </body>
 </html>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const userId = JSON.parse(localStorage.getItem('user'));
+  fetch(`/api/userinfo_change?userId=${userId}`)
+    .then(response => response.json())
+    .then(user => {
+      user.forEach(user => {
+        document.getElementById('email').value = user.user_email;
+        document.getElementById('phoneNumber').value = user.user_phoneNumber;
+        document.getElementById('address').value = user.user_address;
+      })
+    })
+    .catch(error => console.error('錯誤:', error));
+});
+            
+  document.querySelector('#change').addEventListener('click', function(event) {
+    event.preventDefault();
+    const userId = JSON.parse(localStorage.getItem('user'));
+    const email = document.getElementById('email').value;
+    const phoneNumber = document.getElementById('phoneNumber').value;
+    const address = document.getElementById('address').value;
+
+    fetch('/api/updateUserInfo', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId, email, phoneNumber, address }),
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('資料更新成功');
+        } else {
+            alert('資料更新失敗');
+        }
+    })
+    .catch(error => console.error('錯誤:', error));
+});
+
+const logoutButton = document.getElementById('logout-button');
+
+logoutButton.addEventListener('click', function() {
+  localStorage.removeItem('user');
+  window.location.href = 'user_login.html';
+});
+</script>
