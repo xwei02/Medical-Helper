@@ -94,7 +94,7 @@
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
   
-    fetch('/api/admin_password')
+    fetch('/api/admin_account')
       .then(response => response.json())
       .then(admins => {
         const admin = admins.find(admins => admins.admin_id === username);

@@ -12,7 +12,7 @@ const upload = multer({ dest: 'uploads/' }); // 设置文件上传的临时目�
 
 // Connect to MySQL
 const connection = mysql.createConnection({
-    host: 'localhost', // 注意：这里应该是 'localhost' 而非 '127.0.0.1:3306'
+    host: 'localhost', 
     port : 3306,
     user: 'root',
     password: 'wei920116',
@@ -175,8 +175,8 @@ app.get('/api/user_password', (req, res) => {
     });
 });
 
-app.get('/api/admin_password', (req, res) => {
-    connection.query('SELECT * FROM admin_password', (error, results, fields) => {
+app.get('/api/admin_account', (req, res) => {
+    connection.query('SELECT * FROM admin_account', (error, results, fields) => {
         if (error) {
             res.status(500).send('資料庫查詢錯誤');
             return;
@@ -289,12 +289,53 @@ app.get('/images', (req, res) => {
     });
 });
 
+app.post('/api/user_question', (req, res) => {
+    // 提取请求体中的数据
+    const { user_id, user_qtext } = req.body; // 不需要从请求体中提取 user_qtime
 
+    // 构造 SQL 查询
+    const query = 'INSERT INTO user_question (user_id, user_qtext, user_qtime) VALUES (?, ?, NOW())';
+
+    // 执行查询
+    connection.query(query, [user_id, user_qtext], (error, results, fields) => {
+        if (error) {
+            console.error('Database error:', error);
+            res.status(500).send('資料庫寫入錯誤');
+            return;
+        }
+        res.json({ success: true, message: 'Question added successfully' });
+    });
+});
+
+app.post('/api/admin_reply', (req, res) => {
+    // 提取请求体中的数据
+    const { admin_id, admin_rtext, question_id } = req.body; // 不需要从请求体中提取 user_qtime
+
+    // 构造 SQL 查询
+    const query = 'INSERT INTO admin_reply (admin_id, admin_rtext, question_id, admin_rtime) VALUES (?, ?, ?, NOW())';
+
+    // 执行查询
+    connection.query(query, [admin_id, admin_rtext, question_id], (error, results, fields) => {
+        if (error) {
+            console.error('Database error:', error);
+            res.status(500).send('資料庫寫入錯誤');
+            return;
+        }
+        res.json({ success: true, message: 'Question added successfully' });
+    });
+});
+
+app.get('/api/user_questions', (req, res) => {
+    connection.query('SELECT * FROM user_question', (error, results, fields) => {
+        if (error) {
+            console.error('Database error:', error);
+            res.status(500).send('Error fetching questions');
+            return;
+        }
+        res.json(results);
+    });
+});
  
-
-
-
-
 // 啟動伺服器
 const port = 3000;
 app.listen(port, () => {

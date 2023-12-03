@@ -6,7 +6,6 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="/style.css" />
-    <script src="/modal.js"></script>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -54,7 +53,7 @@
                   <img src="modify.png" alt="Logo" width="28" height="28"> 用戶基本資料修改</a>
               </li>
             <li class="nav-item">
-                <a class="nav-link" href="response.html" style="font-weight: bold">
+                <a class="nav-link" href="user_feedback.html" style="font-weight: bold">
                   <img src="reply2.png" alt="Logo" width="30" height="30"> 回饋</a>
             </li>  
           </ul>
@@ -65,21 +64,18 @@
     </nav>
     <div class="container d-flex mb-3 justify-content-center mt-5" id="login">
       <div class="form-container">
-        <h2 class="text-center mb-5">手術問卷查詢</h2>
-        <form id="add-data-form">
-          <select class="form-select" id="property" required>
-                  <option value="骨科部">骨科部</option>
-                  <option value="口腔醫學部">口腔醫學部</option>
-                  <option value="外科部胸腔部">外科部胸腔部</option>
-                  <option value="腫瘤醫學部">腫瘤醫學部</option>
-          </select>
-          <select class="form-select mt-4" id="property" required>
-                  <option value="人工膝關節置換術">人工膝關節置換術</option>
-                  <option value="韌帶重建手術">韌帶重建手術</option>
-                  <option value="髖關節核心減壓手術">髖關節核心減壓手術</option>
-                  <option value="高位脛骨截骨矯正手術">高位脛骨截骨矯正手術</option>
-          </select>
-          <a type="submit" class="btn btn-success mt-4" id="google-form-button" href="https://docs.google.com/forms/d/e/1FAIpQLSdlaI3bECPbsxQnotDHP3cPWSbva3CBtTLQi94YmOY2VcoyrQ/viewform?usp=sharing"> 確定</a>
+        <h2 class="text-center mb-5">手術問卷</h2>
+        <form id="question-form">
+
+            <div class="mb-3">
+              <label for="eventId" class="form-label">輸入內容:</label>
+              <input type="text" name="questionText" id="questionText" class="form-control" style="width: 700px; height: 200px;">
+          </div>
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="btn btn-success">登入</button>
+            </div>
+    
+          <!-- <a type="submit" class="btn btn-success mt-4" id="google-form-button" href="https://docs.google.com/forms/d/e/1FAIpQLSdlaI3bECPbsxQnotDHP3cPWSbva3CBtTLQi94YmOY2VcoyrQ/viewform?usp=sharing"> 確定</a> -->
         </form>
       </div>
     </div>
@@ -102,13 +98,6 @@
   const admin = localStorage.getItem('admin'); // 直接获取字符串
   const user = JSON.parse(localStorage.getItem('user'));
 
-  document.getElementById('google-form-button').addEventListener('click', function() {
-    // 在這裡指定 Google 表單的連結
-    var googleFormLink = 'https://docs.google.com/forms/d/e/1FAIpQLSdlaI3bECPbsxQnotDHP3cPWSbva3CBtTLQi94YmOY2VcoyrQ/viewform?usp=sharing';
-    // 通過 window.location.href 跳轉到 Google 表單
-    window.location.href = googleFormLink;
-  });
-
   const logoutButton = document.getElementById('logout-button');
   logoutButton.addEventListener('click', function() {
   // 检查localStorage中是否有admin信息
@@ -120,6 +109,66 @@
     window.location.href = 'user_login.html'; // 跳转到用户登录页面
   }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('question-form');
+      if (!form) {
+          console.error('Form not found');
+          return;
+      }
+  
+      form.addEventListener('submit', function(event) {
+          event.preventDefault();
+  
+          const userId = JSON.parse(localStorage.getItem('user'));
+          if (!userId) {
+              console.error('User ID not found');
+              return;
+          }
+  
+          const questionTextElement = document.getElementById('questionText');
+          if (!questionTextElement) {
+              console.error('Question text element not found');
+              return;
+          }
+          const questionText = questionTextElement.value;
+  
+          fetch('/api/user_question', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                  user_id: userId,
+                  user_qtext: questionText,
+                  // user_qtime: new Date().toISOString()
+              })
+          })
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error('Network response was not ok');
+              }
+              return response.json();
+          })
+          .then(data => {
+            console.log('Success:', data);
+
+            // 显示提交成功的消息
+            alert('Question submitted successfully');
+
+            // 清除表单
+            const questionTextElement = document.getElementById('questionText');
+            if (questionTextElement) {
+                questionTextElement.value = ''; // 输入字段清空
+            }
+          })
+          .catch((error) => {
+              console.error('Error:', error);
+              // 在这里处理错误，比如显示错误消息
+              // 例如：alert('Error submitting question');
+          });
+      });
+  });
 </script>
 
  

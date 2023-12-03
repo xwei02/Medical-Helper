@@ -90,7 +90,8 @@
                   <img src="leaflet.png" alt="Logo" width="25" height="25"> 手術問卷</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="leaflets_change" href="health_leaflet.html" style="font-weight: bold">修改衛教單張</a>
+                <a class="nav-link" id="leaflets_change" href="health_leaflet.html" style="font-weight: bold">
+                  <img src="leaflet2.png" alt="Logo" width="28" height="28"> 衛教單張管理</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="personal_medicalcare" href="personal_medicalcare.html" style="font-weight: bold">
@@ -101,9 +102,13 @@
                   <img src="modify.png" alt="Logo" width="28" height="28"> 用戶基本資料修改</a>
               </li>
             <li class="nav-item">
-                <a class="nav-link" id="response" href="response.html" style="font-weight: bold">
+                <a class="nav-link" id="response" href="user_feedback.html" style="font-weight: bold">
                   <img src="reply2.png" alt="Logo" width="30" height="30"> 回饋</a>
             </li> 
+            <li class="nav-item">
+              <a class="nav-link" id="manager_response" href="manager_response.html" style="font-weight: bold">
+                <img src="reply2.png" alt="Logo" width="30" height="30"> 回饋</a>
+          </li> 
           </ul>
           <div class="ms-auto">
             <a class="btn btn-light" href="user_login.html" id="login-button">登入</a>
@@ -276,6 +281,7 @@ if(admin){
   document.getElementById('userinfo_change').style.display = 'none';
   document.getElementById('personal_medicalcare').style.display = 'none';
   document.getElementById('medical_form').style.display = 'none';
+  document.getElementById('response').style.display = 'none';
 
 }else if (user) {
   // user登入，顯示登入按鈕
@@ -283,6 +289,7 @@ if(admin){
   document.getElementById('signup-button').style.display = 'none';
   document.getElementById('logout-button').style.display = 'inline-block';
   document.getElementById('leaflets_change').style.display = 'none';
+  document.getElementById('manager_response').style.display = 'none';
 
 }else {
   // user未登入，顯示登入及註冊按鈕
@@ -294,6 +301,7 @@ if(admin){
   document.getElementById('medical_form').style.display = 'none';
   document.getElementById('personal_medicalcare').style.display = 'none';
   document.getElementById('response').style.display = 'none';
+  document.getElementById('manager_response').style.display = 'none';
 }
 
 
