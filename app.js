@@ -1,4 +1,7 @@
 const express = require('express');
+const nodemailer = require('nodemailer');
+const bodyParser = require('body-parser');
+const { google } = require('googleapis');
 const app = express();
 
 app.use(express.static("public"));
@@ -15,7 +18,7 @@ const connection = mysql.createConnection({
     host: 'localhost', 
     port : 3306,
     user: 'root',
-    password: 'wei920116',
+    password: 'Yvonne920415',
     database: 'newschema'
 });
 
@@ -335,7 +338,39 @@ app.get('/api/user_questions', (req, res) => {
         res.json(results);
     });
 });
- 
+
+
+// // 設定 Gmail 服務帳戶
+
+app.post('/sendVerificationEmail', async (req, res) => {
+    const userEmail = req.body.email;
+const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    auth: {
+        user: 'yvonneli0415@gmail.com',
+        pass: 'clxn sxnh ypha vtkx',
+    },
+    });
+
+  // 發送 Gmail 驗證身分的郵件
+  
+  try {
+    const result = await transporter.sendMail({
+      from: 'yvonneli0415@gmail.com',
+      to: userEmail,
+      subject: 'Gmail 驗證身分',
+      text: '請點擊以下連結以驗證您的身分：http://localhost:3000/user_login.html',
+    });
+    res.json({ success: true, messageId: result.messageId });
+  } catch (error) {
+    console.error('Error sending verification email', error);
+    res.status(500).json({ success: false, error: 'Error sending verification email' });
+  }
+});
+
+
+
 // 啟動伺服器
 const port = 3000;
 app.listen(port, () => {
