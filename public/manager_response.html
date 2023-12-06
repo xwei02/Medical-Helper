@@ -45,17 +45,14 @@
                 <img src="leaflet2.png" alt="Logo" width="28" height="28"> 衛教單張管理</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="merenge_response.html" style="font-weight: bold">
+                <a class="nav-link" href="manager_response.html" style="font-weight: bold">
                 <img src="reply2.png" alt="Logo" width="30" height="30"> 回饋</a>
             </li> 
           </ul>
           <div class="ms-auto">
             <a class="btn btn-light" href="#" id="logout-button" >登出</a>
           </div>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form> 
+          <div id="userNameDisplay" class="user-name-display"></div>
         </div>
     </nav>
     <div class="container d-flex mb-3 justify-content-center mt-5" id="login">
@@ -72,7 +69,7 @@
                 <input type="text" name="replyText" id="replyText" class="form-control" style="width: 700px; height: 200px;">
             </div>            
             <div class="d-flex justify-content-center">
-              <button type="submit" class="btn btn-success">登入</button>
+              <button type="submit" class="btn btn-success">送出</button>
             </div>
     
           <!-- <a type="submit" class="btn btn-success mt-4" id="google-form-button" href="https://docs.google.com/forms/d/e/1FAIpQLSdlaI3bECPbsxQnotDHP3cPWSbva3CBtTLQi94YmOY2VcoyrQ/viewform?usp=sharing"> 確定</a> -->
@@ -83,17 +80,17 @@
 </html>
 
 <script>
-  const admin = localStorage.getItem('admin'); // 直接获取字符串
-  const user = JSON.parse(localStorage.getItem('user'));
+  const admin = localStorage.getItem('admin'); // 去得lacalStorage裡的admin資訊
+  const user = JSON.parse(localStorage.getItem('user')); // 去得lacalStorage裡的user資訊
   const logoutButton = document.getElementById('logout-button');
     logoutButton.addEventListener('click', function() {
-    // 检查localStorage中是否有admin信息
+    // 檢查localStorage中是否有admin資訊
     if (localStorage.getItem('admin')) {
-      localStorage.removeItem('admin'); // 移除管理员信息
-      window.location.href = 'manager_login.html'; // 跳转到管理员登录页面
-    } else if (localStorage.getItem('user')) {
-      localStorage.removeItem('user'); // 移除用户信息
-      window.location.href = 'user_login.html'; // 跳转到用户登录页面
+      localStorage.removeItem('admin'); // 移除管理員資訊
+      window.location.href = 'manager_login.html'; // 跳轉到管理員登入頁面
+    } else if (localStorage.getItem('user')) {     // 檢查localStorage中是否有user資訊
+      localStorage.removeItem('user'); // 移除使用者資訊
+      window.location.href = 'user_login.html'; // 跳轉到使用者登入頁面
     }
   });
   document.addEventListener('DOMContentLoaded', function() {
@@ -104,7 +101,7 @@
         console.error('Form not found');
         return;
     }
-  
+  // 回答user提問
     form.addEventListener('submit', function(event) {
         event.preventDefault();
   
@@ -127,8 +124,8 @@
             },
             body: JSON.stringify({
                 admin_id: adminId,
-                question_id: selectedQuestionId, // 新增 question_id
-                admin_qtext: replyText,
+                question_id: selectedQuestionId,
+                admin_rtext: replyText,
             })
         })
         .then(response => {
@@ -140,7 +137,7 @@
         .then(data => {
             console.log('Success:', data);
 
-                // 显示提交成功的消息
+                // 顯示提交成功的消息
             alert('Question submitted successfully');
 
                 // 清除表单
@@ -156,7 +153,7 @@
     });
     fetchQuestions();
   });
-
+// 顯示問題選項
   function fetchQuestions() {
     fetch('/api/user_questions')
     .then(response => response.json())

@@ -6,7 +6,6 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="/style.css" />
-    <script src="/modal.js"></script>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -51,8 +50,9 @@
             </li>  
           </ul>
           <div class="ms-auto">
-            <a class="btn btn-light" id="add-data-button">登出</a>
+            <a class="btn btn-light" id="logout-button">登出</a>
           </div>
+          <div id="userNameDisplay" class="user-name-display"></div>
         </div>
     </nav>
     <div class="d-flex gap-2 justify-content-center py-5">
@@ -65,15 +65,128 @@
     </div>
         <div class ="container mt-4 d-flex align-items-center justify-content-center">
         <form id="add-data-form">
-            <select class="form-select" id="property" required>
-                <option value="人工髖關節置換術手術前後照護">人工髖關節置換術手術前後照護</option>
-                <option value="上石膏病人之照護">上石膏病人之照護</option>
-                <option value="COVID-19病人出院自我照護">COVID-19病人出院自我照護</option>
-                <option value="腫瘤醫學部">心肌炎之照護</option>
-                <option value="大腸鏡檢查前後注意事項">大腸鏡檢查前後注意事項</option>
-                <option value="腫瘤醫學部">背痛保健</option>
-            </select>
+          <label for="questionSelect" class="form-label">選擇衛教單張:</label>
+          <select id="questionSelect" class="form-select"></select>
         </form>
     </div>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <div class="container d-flex flex-column align-items-center ">
+        <label for="leaflet_title">輸入標題:</label>
+        <input type="text" id="leaflet_title" name="leaflet_title" placeholder="Title" required>
+        <div class="col-md-6">
+          <label class="form-label" for="customFile"></label>
+          <input type="file" class="form-control" name="image" required>
+          <label class="form-label" for="customFile"></label>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="leaflet_txt" class="form-label">輸入內容:</label>
+          <textarea class="form-control" id="leaflet_txt" name="leaflet_txt" placeholder="Text" required style="width: 700px; height: 200px;"></textarea>
+        </div>
+        <div>
+          <button class="btn btn-light">取消</button>
+          <button type="submit" id="change" class="btn btn-success">儲存</button>
+        </div>
+      </div>
+    </form>
   </body>
 </html>
+<script>
+  // 顯示選擇之衛教單張之內容
+document.addEventListener('DOMContentLoaded', function() {
+  const questionSelect = document.getElementById('questionSelect');
+  const titleInput = document.querySelector('input[name="leaflet_title"]');
+  const contentTextarea = document.querySelector('textarea[name="leaflet_txt"]');
+  const imageInput = document.querySelector('input[type="file"]');
+
+  questionSelect.addEventListener('change', function() {
+    const selectedTitle = questionSelect.value;
+    fetchLeafletInfo(selectedTitle);
+  });
+
+  let currentLeafletTitle = null; // 全局變量
+  function fetchLeafletInfo(leafletTitle) {
+    currentLeafletTitle = leafletTitle; // 保存當前 leaflet_title
+    fetch(`/api/leaflet_info?leaflet_title=${encodeURIComponent(leafletTitle)}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      titleInput.value = data.leaflet_title; 
+      contentTextarea.value = data.leaflet_txt; 
+    })
+    .catch(error => console.error('Error:', error));
+  }
+  // 顯示衛教單選項
+  function fetchQuestions() {
+    fetch('/api/leaflet_title')
+    .then(response => response.json())
+    .then(leaflets => {
+      leaflets.forEach(leaflet => {
+        const option = document.createElement('option');
+        option.value = leaflet.leaflet_title;
+        option.textContent = leaflet.leaflet_title;
+        questionSelect.appendChild(option);
+      });
+
+      // 加載第一個選項的title
+      if (leaflets.length > 0) {
+        fetchLeafletInfo(leaflets[0].leaflet_title);
+      }
+    })
+    .catch(error => console.error('Error fetching leaflets:', error));
+  }
+
+  fetchQuestions(); // 初始化時調用
+
+  document.querySelector('#change').addEventListener('click', function(event) {
+    event.preventDefault();
+    const leaflet_title = document.getElementById('leaflet_title').value;
+    const leaflet_txt = document.getElementById('leaflet_txt').value;
+    const admin = localStorage.getItem('admin'); 
+    fetch('/api/update_leaflet', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ admin, leaflet_title, leaflet_txt, original_title: currentLeafletTitle }),
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('資料更新成功');
+        } else {
+            alert('資料更新失敗');
+        }
+    })
+    .catch(error => console.error('錯誤:', error));
+  });
+
+  // 登出功能
+  const logoutButton = document.getElementById('logout-button');
+  logoutButton.addEventListener('click', function() {
+    if (localStorage.getItem('admin')) {
+      localStorage.removeItem('admin');
+      window.location.href = 'manager_login.html';
+    } else if (localStorage.getItem('user')) {
+      localStorage.removeItem('user');
+      window.location.href = 'user_login.html';
+    }
+  });
+  });
+
+  const admin = localStorage.getItem('admin'); // 去得lacalStorage裡的admin資訊
+  const user = JSON.parse(localStorage.getItem('user')); // 去得lacalStorage裡的user資訊
+  const logoutButton = document.getElementById('logout-button');
+    logoutButton.addEventListener('click', function() {
+    // 檢查localStorage中是否有admin資訊
+    if (localStorage.getItem('admin')) {
+      localStorage.removeItem('admin'); // 移除管理員資訊
+      window.location.href = 'manager_login.html'; // 跳轉到管理員登入頁面
+    } else if (localStorage.getItem('user')) {     // 檢查localStorage中是否有user資訊
+      localStorage.removeItem('user'); // 移除使用者資訊
+      window.location.href = 'user_login.html'; // 跳轉到使用者登入頁面
+    }
+  });
+</script>

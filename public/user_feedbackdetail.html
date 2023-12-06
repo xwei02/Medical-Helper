@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/style.css" />
+   
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg " id="nav-color">
+        <a class="navbar-brand" href="test.html" style="font-weight: bold">
+          <img src="medical_icon.png" alt="Logo" width="40" height="40">醫療小幫手 </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="test.html" style="font-weight: bold">
+                <img src="home_icon.png" alt="Logo" width="25" height="25"> 首頁</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="medical_form.html" style="font-weight: bold">
+                <img src="leaflet.png" alt="Logo" width="25" height="25"> 手術問卷</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="personal_medicalcare.html" style="font-weight: bold">
+                <img src="personal_medical.png" alt="Logo" width="30" height="30"> 個人醫療</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="user_info_modifiy.html" style="font-weight: bold">
+                  <img src="modify.png" alt="Logo" width="28" height="28"> 用戶基本資料修改</a>
+              </li>
+            <li class="nav-item">
+                <a class="nav-link" href="user_feedback.html" style="font-weight: bold">
+                  <img src="reply2.png" alt="Logo" width="30" height="30"> 回饋</a>
+            </li>  
+          </ul>
+          <div class="ms-auto">
+            <a class="btn btn-light" id="logout-button" id="logout-button">登出</a>
+          </div>
+          <div id="userNameDisplay" class="user-name-display"></div>
+        </div>
+    </nav>
+    <div class="d-flex gap-2 justify-content-center py-5">
+        <h2 class="container text-center" >護理師回饋</h2>
+    </div>
+    <div id="feedbackDetailContainer" class="container text-center" ></div>
+    </table>
+  </body>
+</html>
+
+<script>
+  const userId = JSON.parse(localStorage.getItem('user'));
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const questionId = urlParams.get('question_id');
+
+    if (!questionId) {
+        console.error('Question ID not provided');
+        return;
+    }
+// 顯示詳細回答
+    fetch(`/api/user_feedback_detail?questionId=${questionId}`)
+    .then(response => response.json())
+    .then(data => {
+        const feedbackDetailContainer = document.getElementById('feedbackDetailContainer'); // 確保您的 HTML 中有這個元素
+
+        if (data.length === 0) {
+            feedbackDetailContainer.innerHTML = '<p>沒有找到相關的問題和回答。</p>';
+            return;
+        }
+
+        // 假設返回的數據是一個數組，且數組中的每個元素包含問題和回答的詳細信息
+        data.forEach(item => {
+            const questionElement = document.createElement('div');
+            questionElement.innerHTML = `
+                <h5>問題：</h5>
+                <p>${item.user_qtext}</p>
+                <h5>提問時間：</h5>
+                <p>${new Date(item.user_qtime).toLocaleString()}</p>
+            `;
+
+            const answerElement = document.createElement('div');
+            answerElement.innerHTML = `
+                <h5>回答：</h5>
+                <p>${item.admin_rtext || '暫無回答'}</p>
+                <h5>回答時間：</h5>
+                <p>${item.admin_rtime ? new Date(item.admin_rtime).toLocaleString() : '暫無'}</p>
+            `;
+
+            feedbackDetailContainer.appendChild(questionElement);
+            feedbackDetailContainer.appendChild(answerElement);
+        });
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+
+// 在頁面顯示user名字
+document.addEventListener('DOMContentLoaded', function() {
+  const userId = JSON.parse(localStorage.getItem('user')); // 確保這裡正確地獲取用戶 ID
+  fetch(`/api/user_name?userId=${userId}`) // 在請求中包含 userId 查詢參數
+  .then(response => response.json())
+  .then(user => {
+    const userNameDisplay = document.getElementById('userNameDisplay');
+    user.forEach(user_name => {
+      userNameDisplay.textContent = 'Hello, ' + user_name.user_name; // 假設返回的是一個數組，並取第一個元素
+
+    })
+  })
+  .catch(error => console.error('Error:', error));
+});
+
+
+  const admin = localStorage.getItem('admin'); // 去得lacalStorage裡的admin資訊
+  const user = JSON.parse(localStorage.getItem('user')); // 去得lacalStorage裡的user資訊
+  const logoutButton = document.getElementById('logout-button');
+  logoutButton.addEventListener('click', function() {
+    // 檢查localStorage中是否有admin資訊
+    if (localStorage.getItem('admin')) {
+      localStorage.removeItem('admin'); // 移除管理員資訊
+      window.location.href = 'manager_login.html'; // 跳轉到管理員登入頁面
+    } else if (localStorage.getItem('user')) {     // 檢查localStorage中是否有user資訊
+      localStorage.removeItem('user'); // 移除使用者資訊
+      window.location.href = 'user_login.html'; // 跳轉到使用者登入頁面
+    }
+  });
+</script>

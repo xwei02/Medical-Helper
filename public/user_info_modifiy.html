@@ -73,6 +73,8 @@
           <div class="ms-auto">
             <a class="btn btn-light" id="logout-button" id="logout-button">登出</a>
           </div>
+          <div id="userNameDisplay" class="user-name-display"></div>
+
         </div>
     </nav>
     <div class="container">
@@ -106,8 +108,9 @@
 </html>
 
 <script>
-  const admin = localStorage.getItem('admin'); // 直接获取字符串
-  const user = JSON.parse(localStorage.getItem('user'));
+const admin = localStorage.getItem('admin'); // 去得lacalStorage裡的admin資訊
+const user = JSON.parse(localStorage.getItem('user')); // 去得lacalStorage裡的user資訊
+// 顯示基本該用戶原本資訊
 document.addEventListener('DOMContentLoaded', function() {
   const userId = JSON.parse(localStorage.getItem('user'));
   fetch(`/api/userinfo_change?userId=${userId}`)
@@ -122,6 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch(error => console.error('錯誤:', error));
 });
             
+// 更新使用者資訊
   document.querySelector('#change').addEventListener('click', function(event) {
     event.preventDefault();
     const userId = JSON.parse(localStorage.getItem('user'));
@@ -146,15 +150,30 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch(error => console.error('錯誤:', error));
 });
 
-    const logoutButton = document.getElementById('logout-button');
-    logoutButton.addEventListener('click', function() {
-    // 检查localStorage中是否有admin信息
-    if (localStorage.getItem('admin')) {
-      localStorage.removeItem('admin'); // 移除管理员信息
-      window.location.href = 'manager_login.html'; // 跳转到管理员登录页面
-    } else if (localStorage.getItem('user')) {
-      localStorage.removeItem('user'); // 移除用户信息
-      window.location.href = 'user_login.html'; // 跳转到用户登录页面
-    }
+document.addEventListener('DOMContentLoaded', function() {
+  const userId = JSON.parse(localStorage.getItem('user')); // 確保這裡正確地獲取用戶 ID
+  fetch(`/api/user_name?userId=${userId}`) // 在請求中包含 userId 查詢參數
+  .then(response => response.json())
+  .then(user => {
+    const userNameDisplay = document.getElementById('userNameDisplay');
+    user.forEach(user_name => {
+      userNameDisplay.textContent = 'Hello, ' + user_name.user_name; // 假設返回的是一個數組，並取第一個元素
+
+    })
+  })
+  .catch(error => console.error('Error:', error));
 });
+
+
+  const logoutButton = document.getElementById('logout-button');
+  logoutButton.addEventListener('click', function() {
+    // 檢查localStorage中是否有admin資訊
+    if (localStorage.getItem('admin')) {
+      localStorage.removeItem('admin'); // 移除管理員資訊
+      window.location.href = 'manager_login.html'; // 跳轉到管理員登入頁面
+    } else if (localStorage.getItem('user')) {     // 檢查localStorage中是否有user資訊
+      localStorage.removeItem('user'); // 移除使用者資訊
+      window.location.href = 'user_login.html'; // 跳轉到使用者登入頁面
+    }
+  });
 </script>

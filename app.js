@@ -18,7 +18,7 @@ const connection = mysql.createConnection({
     host: 'localhost', 
     port : 3306,
     user: 'root',
-    password: 'Yvonne920415',
+    password: 'wei920116',
     database: 'newschema'
 });
 
@@ -52,27 +52,50 @@ app.get('/api/user', (req, res) => {
     });
 });
 
-app.get('/api/userinfo_change', (req, res) => {
-// 從查詢參數獲取 userId
-const userId = req.query.userId;
+app.get('/api/user_name', (req, res) => {
+    // 從查詢參數獲取 userId
+    const userId = req.query.userId;
 
-// 如果沒有提供 userId，返回錯誤
-if (!userId) {
-    res.status(400).send('缺少必要的查詢參數：userId');
-    return;
-}
-
-// 修改 SQL 查詢以包含 userId 條件
-const query = 'SELECT * FROM user WHERE user_id = ?';
-
-// 執行帶有 userId 條件的查詢
-connection.query(query, [userId], (error, results, fields) => {
-    if (error) {
-        res.status(500).send('資料庫查詢錯誤');
+    // 如果沒有提供 userId，返回錯誤
+    if (!userId) {
+        res.status(400).send('缺少必要的查詢參數：userId');
         return;
     }
-    res.json(results); // 發送JSON格式的數據
+
+    // 修改 SQL 查詢以包含 userId 條件
+    const query = 'SELECT * FROM user WHERE user_id = ?';
+
+    // 執行帶有 userId 條件的查詢
+    connection.query(query, [userId], (error, results, fields) => {
+        if (error) {
+            res.status(500).send('資料庫查詢錯誤');
+            return;
+        }
+        res.json(results); // 發送JSON格式的數據
+    });
 });
+
+app.get('/api/userinfo_change', (req, res) => {
+    // 從查詢參數獲取 userId
+    const userId = req.query.userId;
+
+    // 如果沒有提供 userId，返回錯誤
+    if (!userId) {
+        res.status(400).send('缺少必要的查詢參數：userId');
+        return;
+    }
+
+    // 修改 SQL 查詢以包含 userId 條件
+    const query = 'SELECT * FROM user WHERE user_id = ?';
+
+    // 執行帶有 userId 條件的查詢
+    connection.query(query, [userId], (error, results, fields) => {
+        if (error) {
+            res.status(500).send('資料庫查詢錯誤');
+            return;
+        }
+        res.json(results); // 發送JSON格式的數據
+    });
 });
 
 app.get('/api/medical_record', (req, res) => {
@@ -367,6 +390,160 @@ const transporter = nodemailer.createTransport({
     console.error('Error sending verification email', error);
     res.status(500).json({ success: false, error: 'Error sending verification email' });
   }
+});
+
+app.get('/api/user_feedback', (req, res) => {
+    const userId = req.query.userId;
+    const query = `SELECT 
+    user_question.question_id,
+    user_question.user_qtext,
+    user_question.user_qtime,
+    admin_reply.admin_rtext,
+    admin_reply.admin_rtime
+    FROM 
+        user_question
+    LEFT JOIN 
+        admin_reply ON user_question.question_id = admin_reply.question_id
+    WHERE 
+        user_question.user_id = ?;`;
+
+    connection.query(query, [userId], (error, results) => {
+        if (error) {
+            console.error('Database error:', error);
+            res.status(500).send('Error fetching feedback');
+            return;
+        }
+        res.json(results);
+    });
+});
+
+app.get('/api/user_questions', (req, res) => {
+    connection.query('SELECT * FROM user_question', (error, results, fields) => {
+        if (error) {
+            console.error('Database error:', error);
+            res.status(500).send('Error fetching questions');
+            return;
+        }
+        res.json(results);
+    });
+});
+
+app.get('/api/user_questions', (req, res) => {
+    connection.query('SELECT * FROM user_question', (error, results, fields) => {
+        if (error) {
+            console.error('Database error:', error);
+            res.status(500).send('Error fetching questions');
+            return;
+        }
+        res.json(results);
+    });
+});
+
+app.get('/api/leaflet_title', (req, res) => {
+    connection.query('SELECT * FROM leaflet', (error, results, fields) => {
+        if (error) {
+            console.error('Database error:', error);
+            res.status(500).send('Error fetching questions');
+            return;
+        }
+        res.json(results);
+    });
+});
+
+// leaflet_modify抓leaflet用的
+app.get('/api/leaflet_info', (req, res) => {
+    const { leaflet_title } = req.query;
+
+    if (!leaflet_title) {
+        res.status(400).send('Missing leaflet title');
+        return;
+    }
+
+    const query = 'SELECT * FROM leaflet WHERE leaflet_title = ?';
+
+    connection.query(query, [leaflet_title], (error, results, fields) => {
+        if (error) {
+            console.error('Database error:', error);
+            res.status(500).send('Database query error');
+            return;
+        }
+
+        // 檢查是否找到了記錄
+        if (results.length === 0) {
+            res.status(404).send('Leaflet not found');
+            return;
+        }
+
+        // 回傳找到的第一條記錄
+        res.json(results[0]);
+    });
+});
+
+app.post('/api/update_leaflet', (req, res) => {
+    const adminId = req.body.admin;
+    const leaflet_title = req.body.leaflet_title;
+    const leaflet_txt = req.body.leaflet_txt;
+    const original_title  = req.body.original_title;
+
+    const updateQuery = 'UPDATE leaflet SET admin_id = ?, leaflet_title = ?, leaflet_txt = ? WHERE leaflet_title = ?';
+
+    connection.query(updateQuery, [adminId, leaflet_title, leaflet_txt, original_title], (error, results) => {
+        if (error) {
+            res.status(500).send('資料庫更新錯誤');
+            return;
+        }
+        res.send('資料更新成功');
+    });
+});
+
+app.delete('/api/delete_leaflet', (req, res) => {
+    const { leaflet_title } = req.query;
+  
+    if (!leaflet_title) {
+      res.status(400).send('缺少必要的參數：leaflet_title');
+      return;
+    }
+  
+    const deleteQuery = 'DELETE FROM leaflet WHERE leaflet_title = ?';
+  
+    connection.query(deleteQuery, [leaflet_title], (error, results) => {
+      if (error) {
+        console.error('Database error:', error);
+        res.status(500).send('資料庫刪除錯誤');
+        return;
+      }
+      res.send('文章刪除成功');
+    });
+  });
+
+  app.get('/api/user_feedback_detail', (req, res) => {
+    const questionId = req.query.questionId;
+
+    if (!questionId) {
+        res.status(400).send('缺少必要的查詢參數：questionId');
+        return;
+    }
+
+    const query = `SELECT 
+                     user_question.user_qtext,
+                     user_question.user_qtime,
+                     admin_reply.admin_rtext,
+                     admin_reply.admin_rtime
+                   FROM 
+                     user_question
+                   LEFT JOIN 
+                     admin_reply ON user_question.question_id = admin_reply.question_id
+                   WHERE 
+                     user_question.question_id = ?;`;
+
+    connection.query(query, [questionId], (error, results) => {
+        if (error) {
+            console.error('Database error:', error);
+            res.status(500).send('資料庫查詢錯誤');
+            return;
+        }
+        res.json(results);
+    });
 });
 
 

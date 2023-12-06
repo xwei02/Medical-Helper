@@ -115,10 +115,13 @@
             <a class="btn btn-light" href="signup.html" id="signup-button">註冊</a>
             <a class="btn btn-light" href="#" id="logout-button" style="display: none;">登出</a>
           </div>
-          <form class="d-flex" role="search">
+          <div id="userNameDisplay" class="user-name-display"></div>
+          <!-- <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
-          </form> 
+          </form>  -->
+            <!-- 用戶名稱將在這裡顯示 -->
+        
         </div>
     </nav>
     <!--導覽頁-->
@@ -269,10 +272,10 @@
 </html>
 
 <script>
-// 檢查user是否登入
-const admin = localStorage.getItem('admin'); // 直接获取字符串
-const user = JSON.parse(localStorage.getItem('user'));
+const admin = localStorage.getItem('admin'); // 去得lacalStorage裡的admin資訊
+const user = JSON.parse(localStorage.getItem('user')); // 去得lacalStorage裡的user資訊
 
+// 檢查user是否登入
 if(admin){
   // admin登入，顯示登入按鈕
   document.getElementById('login-button').style.display = 'none';
@@ -304,19 +307,30 @@ if(admin){
   document.getElementById('manager_response').style.display = 'none';
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+  const userId = JSON.parse(localStorage.getItem('user')); // 確保這裡正確地獲取用戶 ID
+  fetch(`/api/user_name?userId=${userId}`) // 在請求中包含 userId 查詢參數
+  .then(response => response.json())
+  .then(user => {
+    const userNameDisplay = document.getElementById('userNameDisplay');
+    user.forEach(user_name => {
+      userNameDisplay.textContent = 'Hello, ' + user_name.user_name; // 假設返回的是一個數組，並取第一個元素
 
-const logoutButton = document.getElementById('logout-button');
-
-logoutButton.addEventListener('click', function() {
-  // 检查localStorage中是否有admin信息
-  if (localStorage.getItem('admin')) {
-    localStorage.removeItem('admin'); // 移除管理员信息
-    window.location.href = 'manager_login.html'; // 跳转到管理员登录页面
-  } else if (localStorage.getItem('user')) {
-    localStorage.removeItem('user'); // 移除用户信息
-    window.location.href = 'user_login.html'; // 跳转到用户登录页面
-  }
+    })
+  })
+  .catch(error => console.error('Error:', error));
 });
 
+const logoutButton = document.getElementById('logout-button');
+logoutButton.addEventListener('click', function() {
+  // 檢查localStorage中是否有admin資訊
+  if (localStorage.getItem('admin')) {
+    localStorage.removeItem('admin'); // 移除管理員資訊
+    window.location.href = 'manager_login.html'; // 跳轉到管理員登入頁面
+  } else if (localStorage.getItem('user')) {     // 檢查localStorage中是否有user資訊
+    localStorage.removeItem('user'); // 移除使用者資訊
+    window.location.href = 'user_login.html'; // 跳轉到使用者登入頁面
+  }
+});
 
 </script>

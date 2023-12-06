@@ -6,7 +6,6 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="/style.css" />
-    <script src="/modal.js"></script>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -51,8 +50,9 @@
             </li>  
           </ul>
           <div class="ms-auto">
-            <a class="btn btn-light" id="add-data-button">登出</a>
+            <a class="btn btn-light" id="logout-button">登出</a>
           </div>
+          <div id="userNameDisplay" class="user-name-display"></div>
         </div>
     </nav>
     <div class="d-flex gap-2 justify-content-center py-5">
@@ -62,3 +62,18 @@
     </div>
   </body>
 </html>
+<script>
+  const admin = localStorage.getItem('admin'); // 去得lacalStorage裡的admin資訊
+  const user = JSON.parse(localStorage.getItem('user')); // 去得lacalStorage裡的user資訊
+  const logoutButton = document.getElementById('logout-button');
+    logoutButton.addEventListener('click', function() {
+    // 檢查localStorage中是否有admin資訊
+    if (localStorage.getItem('admin')) {
+      localStorage.removeItem('admin'); // 移除管理員資訊
+      window.location.href = 'manager_login.html'; // 跳轉到管理員登入頁面
+    } else if (localStorage.getItem('user')) {     // 檢查localStorage中是否有user資訊
+      localStorage.removeItem('user'); // 移除使用者資訊
+      window.location.href = 'user_login.html'; // 跳轉到使用者登入頁面
+    }
+  });
+</script>

@@ -53,13 +53,15 @@
                   <img src="modify.png" alt="Logo" width="28" height="28"> 用戶基本資料修改</a>
               </li>
             <li class="nav-item">
-                <a class="nav-link" href="user_feedback.html" style="font-weight: bold">
+                <a class="nav-link" href="response.html" style="font-weight: bold">
                   <img src="reply2.png" alt="Logo" width="30" height="30"> 回饋</a>
             </li>  
           </ul>
           <div class="ms-auto">
             <a class="btn btn-light"  id="logout-button">登出</a>
           </div>
+          <div id="userNameDisplay" class="user-name-display"></div>
+
         </div>
     </nav>
     <div class="container d-flex mb-3 justify-content-center mt-5" id="login">
@@ -72,44 +74,32 @@
               <input type="text" name="questionText" id="questionText" class="form-control" style="width: 700px; height: 200px;">
           </div>
             <div class="d-flex justify-content-center">
-              <button type="submit" class="btn btn-success">登入</button>
+              <button type="submit" class="btn btn-success">送出</button>
             </div>
     
           <!-- <a type="submit" class="btn btn-success mt-4" id="google-form-button" href="https://docs.google.com/forms/d/e/1FAIpQLSdlaI3bECPbsxQnotDHP3cPWSbva3CBtTLQi94YmOY2VcoyrQ/viewform?usp=sharing"> 確定</a> -->
         </form>
       </div>
     </div>
-    <!-- 模態框 -->
-    <div class="modal-content" id="modal2" style="display: none;">
-      <span class="close">&times;</span>
-      <h3 class="modal-title">確認是否刪除</h3>
-      <form id="add-data-form">
-          <div class="mb-3">
-          <label for="weight" class="form-label">您確定要刪除[人工髖關節置換術手術前後照護]</label>
-          </div>
-          <button type="submit" class="btn btn-success">確定</button>
-          <button type="submit" class="btn btn-secondary">取消</button>
-      </form>
-      </div>
+
    </body>
 </html>
 
 <script>
-  const admin = localStorage.getItem('admin'); // 直接获取字符串
-  const user = JSON.parse(localStorage.getItem('user'));
-
+  const admin = localStorage.getItem('admin'); // 去得lacalStorage裡的admin資訊
+  const user = JSON.parse(localStorage.getItem('user')); // 去得lacalStorage裡的user資訊
   const logoutButton = document.getElementById('logout-button');
-  logoutButton.addEventListener('click', function() {
-  // 检查localStorage中是否有admin信息
-  if (localStorage.getItem('admin')) {
-    localStorage.removeItem('admin'); // 移除管理员信息
-    window.location.href = 'manager_login.html'; // 跳转到管理员登录页面
-  } else if (localStorage.getItem('user')) {
-    localStorage.removeItem('user'); // 移除用户信息
-    window.location.href = 'user_login.html'; // 跳转到用户登录页面
-  }
-});
-
+    logoutButton.addEventListener('click', function() {
+    // 檢查localStorage中是否有admin資訊
+    if (localStorage.getItem('admin')) {
+      localStorage.removeItem('admin'); // 移除管理員資訊
+      window.location.href = 'manager_login.html'; // 跳轉到管理員登入頁面
+    } else if (localStorage.getItem('user')) {     // 檢查localStorage中是否有user資訊
+      localStorage.removeItem('user'); // 移除使用者資訊
+      window.location.href = 'user_login.html'; // 跳轉到使用者登入頁面
+    }
+  });
+// user輸入問題
 document.addEventListener('DOMContentLoaded', function() {
       const form = document.getElementById('question-form');
       if (!form) {
@@ -153,22 +143,35 @@ document.addEventListener('DOMContentLoaded', function() {
           .then(data => {
             console.log('Success:', data);
 
-            // 显示提交成功的消息
+            // 顯示提交成功的訊息
             alert('Question submitted successfully');
 
-            // 清除表单
+            // 清除表單
             const questionTextElement = document.getElementById('questionText');
             if (questionTextElement) {
-                questionTextElement.value = ''; // 输入字段清空
+                questionTextElement.value = ''; // 輸入字段清空
             }
           })
           .catch((error) => {
-              console.error('Error:', error);
-              // 在这里处理错误，比如显示错误消息
-              // 例如：alert('Error submitting question');
+            console.error('Error:', error);
+            alert('Error submitting question');
           });
       });
   });
+// 在頁面顯示user名字
+  document.addEventListener('DOMContentLoaded', function() {
+  const userId = JSON.parse(localStorage.getItem('user')); 
+  fetch(`/api/user_name?userId=${userId}`) 
+  .then(response => response.json())
+  .then(user => {
+    const userNameDisplay = document.getElementById('userNameDisplay');
+    user.forEach(user_name => {
+      userNameDisplay.textContent = 'Hello, ' + user_name.user_name; 
+
+    })
+  })
+  .catch(error => console.error('Error:', error));
+});
 </script>
 
  

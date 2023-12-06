@@ -6,7 +6,6 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="/style.css" />
-    <script src="/modal.js"></script>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -51,8 +50,9 @@
             </li>  
           </ul>
           <div class="ms-auto">
-            <a class="btn btn-light" id="add-data-button">登出</a>
+            <a class="btn btn-light" id="logout-button">登出</a>
           </div>
+          <div id="userNameDisplay" class="user-name-display"></div>
         </div>
     </nav>
     <div class="d-flex gap-2 justify-content-center py-5">
@@ -65,35 +65,71 @@
     </div>
         <div class ="container mt-4 d-flex align-items-center justify-content-center">
         <form id="add-data-form">
-            <select class="form-select" id="property" required>
-                <option value="人工髖關節置換術手術前後照護">人工髖關節置換術手術前後照護</option>
-                <option value="上石膏病人之照護">上石膏病人之照護</option>
-                <option value="COVID-19病人出院自我照護">COVID-19病人出院自我照護</option>
-                <option value="腫瘤醫學部">心肌炎之照護</option>
-                <option value="大腸鏡檢查前後注意事項">大腸鏡檢查前後注意事項</option>
-                <option value="腫瘤醫學部">背痛保健</option>
-            </select>
+          <label for="questionSelect" class="form-label">選擇衛教單張:</label>
+          <select id="questionSelect" class="form-select"></select>
         </form>
     </div>
     <div class="container mt-4 d-flex align-items-center justify-content-center">
         <a class="btn btn-light" >取消</a>
-        <button type="button" class="btn btn-danger" id="add-data-button">
-            刪除
-        </button>
-        <!-- https://getbootstrap.com/docs/5.3/components/buttons/ -->
-    </div>
-    <!-- 模態框 -->
-    <div class="modal-content" id="modal" style="display: none;">
-        <span class="close">&times;</span>
-        <h3 class="modal-title">確認是否刪除</h3>
-        <form id="add-data-form">
-            <div class="mb-3">
-            <label for="weight" class="form-label">您確定要刪除[人工髖關節置換術手術前後照護]</label>
-            </div>
-            <button type="submit" class="btn btn-success">確定</button>
-            <button type="submit" class="btn btn-secondary">取消</button>
-        </form>
+        <button type="button" class="btn btn-danger" id="delete-button">刪除</button>
     </div>
     </body>
 </html>
+<script>
+  // 顯示衛教單選項
+  document.addEventListener('DOMContentLoaded', function() {
+    fetch('/api/leaflet_title')
+    .then(response => response.json())
+    .then(leaflets => {
+      leaflets.forEach(leaflet => {
+        const option = document.createElement('option');
+        option.value = leaflet.leaflet_title;
+        option.textContent = leaflet.leaflet_title;
+        questionSelect.appendChild(option);
+      });
+
+      // 加載第一個選項的title
+      if (leaflets.length > 0) {
+        fetchLeafletInfo(leaflets[0].leaflet_title);
+      }
+    })
+    .catch(error => console.error('Error fetching leaflets:', error));
+  })
+// 刪除文章邏輯
+  document.getElementById('delete-button').addEventListener('click', function() {
+    const selectedTitle = document.getElementById('questionSelect').value;
+    if (selectedTitle) {
+      if (confirm('確定要刪除這篇文章嗎？')) {
+        fetch(`/api/delete_leaflet?leaflet_title=${encodeURIComponent(selectedTitle)}`, {
+          method: 'DELETE',
+        })
+        .then(response => {
+          if (response.ok) {
+            alert('文章已刪除');
+            location.reload(); // 重新加載頁面或進行其他更新操作
+          } else {
+            alert('刪除失敗');
+          }
+        })
+        .catch(error => console.error('錯誤:', error));
+      }
+    } else {
+      alert('請選擇一篇要刪除的文章');
+    }
+  });
+
+  const admin = localStorage.getItem('admin'); // 去得lacalStorage裡的admin資訊
+  const user = JSON.parse(localStorage.getItem('user')); // 去得lacalStorage裡的user資訊
+  const logoutButton = document.getElementById('logout-button');
+    logoutButton.addEventListener('click', function() {
+    // 檢查localStorage中是否有admin資訊
+    if (localStorage.getItem('admin')) {
+      localStorage.removeItem('admin'); // 移除管理員資訊
+      window.location.href = 'manager_login.html'; // 跳轉到管理員登入頁面
+    } else if (localStorage.getItem('user')) {     // 檢查localStorage中是否有user資訊
+      localStorage.removeItem('user'); // 移除使用者資訊
+      window.location.href = 'user_login.html'; // 跳轉到使用者登入頁面
+    }
+  });
+</script>
     
