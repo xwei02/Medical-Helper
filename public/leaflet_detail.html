@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>醫療小幫手</title>
+
+    <link rel="stylesheet" href="/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        .flex-shrink-0 {
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .btn-toggle {
+            background-color: #d0cfe8;
+            color: rgb(0, 0, 0);
+            margin-bottom: 10px;
+        }
+
+        .btn-toggle:hover {
+            background-color: #0056b3;
+        }
+
+        .link-body-emphasis {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .list-unstyled {
+            padding-left: 0;
+        }
+
+        .list-unstyled li a {
+            display: block;
+            padding: 5px 10px;
+        }
+
+        .list-unstyled li a:hover {
+            background-color: #e7e7e7;
+            border-radius: 10px;
+        }
+
+        .article-container {
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .article-content {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg" id="nav-color">
+        <a class="navbar-brand" href="test.html" style="font-weight: bold">
+            <img src="medical_icon.png" alt="Logo" width="40" height="40"> 醫療小幫手</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="test.html" style="font-weight: bold">
+                        <img src="home_icon.png" alt="Logo" width="25" height="25"> 首頁</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="medical_form" href="medical_form.html" style="font-weight: bold">
+                        <img src="leaflet.png" alt="Logo" width="25" height="25"> 手術問卷</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="leaflets_change" href="health_leaflet.html" style="font-weight: bold">
+                        <img src="leaflet2.png" alt="Logo" width="28" height="28">修改衛教單張</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="personal_medicalcare" href="personal_medicalcare.html" style="font-weight: bold">
+                    <img src="personal_medical.png" alt="Logo" width="30" height="30"> 個人醫療</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="userinfo_change" href="user_info_modifiy.html" style="font-weight: bold">
+                        <img src="modify.png" alt="Logo" width="28" height="28"> 用戶基本資料修改</a>
+                  </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="response" href="response.html" style="font-weight: bold">
+                        <img src="reply2.png" alt="Logo" width="30" height="30"> 回饋</a>
+                </li> 
+              </ul>
+              <div class="ms-auto">
+                <a class="btn btn-light" href="user_login.html" id="login-button">登入</a>
+                <a class="btn btn-light" href="signup.html" id="signup-button">註冊</a>
+                <a class="btn btn-light" href="#" id="logout-button" style="display: none;">登出</a>
+              </div>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form> 
+        </div>
+    </nav>
+
+    <div class="container flex-shrink-0">
+        <div class="article-container">
+                <div id="leafletDetailContainer" class="container mt-4"></div>            
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const title = urlParams.get('title');
+
+  if (!title) {
+    console.error('No title provided');
+    return;
+  }
+
+  fetch(`/api/leaflet_showdetail?title=${encodeURIComponent(title)}`)
+    .then(response => response.json())
+    .then(leaflet_detail => {
+//       // 顯示衛教單張的詳細資料
+      const container = document.getElementById('leafletDetailContainer');
+      container.innerHTML = `
+        <h2>${leaflet_detail.leaflet_title}</h2>
+        <img src="${leaflet_detail.leaflet_img}" alt="${leaflet_detail.leaflet_title}" width="400" height="300"/>
+        <p>${leaflet_detail.leaflet_txt}</p>
+      `;
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+
+    // 檢查user是否登入
+    const admin = localStorage.getItem('admin'); // 直接获取字符串
+    const user = JSON.parse(localStorage.getItem('user'));
+    
+    if(admin){
+      // admin登入，顯示登入按鈕
+      document.getElementById('login-button').style.display = 'none';
+      document.getElementById('signup-button').style.display = 'none';
+      document.getElementById('logout-button').style.display = 'inline-block';
+      document.getElementById('userinfo_change').style.display = 'none';
+      document.getElementById('personal_medicalcare').style.display = 'none';
+      document.getElementById('medical_form').style.display = 'none';
+    
+    }else if (user) {
+      // user登入，顯示登入按鈕
+      document.getElementById('login-button').style.display = 'none';
+      document.getElementById('signup-button').style.display = 'none';
+      document.getElementById('logout-button').style.display = 'inline-block';
+      document.getElementById('leaflets_change').style.display = 'none';
+    
+    }else {
+      // user未登入，顯示登入及註冊按鈕
+      document.getElementById('login-button').style.display = 'inline-block';
+      document.getElementById('signup-button').style.display = 'inline-block';
+      document.getElementById('logout-button').style.display = 'none';
+      document.getElementById('userinfo_change').style.display = 'none';
+      document.getElementById('leaflets_change').style.display = 'none';
+      document.getElementById('medical_form').style.display = 'none';
+      document.getElementById('personal_medicalcare').style.display = 'none';
+      document.getElementById('response').style.display = 'none';
+    }
+    
+    
+    const logoutButton = document.getElementById('logout-button');
+    
+    logoutButton.addEventListener('click', function() {
+      // 检查localStorage中是否有admin信息
+      if (localStorage.getItem('admin')) {
+        localStorage.removeItem('admin'); // 移除管理员信息
+        window.location.href = 'manager_login.html'; // 跳转到管理员登录页面
+      } else if (localStorage.getItem('user')) {
+        localStorage.removeItem('user'); // 移除用户信息
+        window.location.href = 'user_login.html'; // 跳转到用户登录页面
+      }
+    });
+    
+    
+    </script>

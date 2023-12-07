@@ -179,7 +179,7 @@ app.get('/api/inspection_records', (req, res) => {
  }
 
  // 修改 SQL 查詢以包含 userId 條件
- const query = 'SELECT * FROM inspection_appointment WHERE user_id = ?';
+ const query = 'SELECT * FROM inspection_records WHERE user_id = ?';
  
  // 執行帶有 userId 條件的查詢
  connection.query(query, [userId], (error, results, fields) => {
@@ -546,7 +546,33 @@ app.delete('/api/delete_leaflet', (req, res) => {
     });
 });
 
+app.get('/api/leaflet_showdetail', (req, res) => {
+    // 從查詢參數中獲取標題
+    const title = req.query.title;
+    if (!title) {
+        return res.status(400).send('Title is required.');
+    }
 
+    // 執行查詢來找到對應的衛教單
+    const query = 'SELECT * FROM leaflet WHERE leaflet_title = ?';
+    connection.query(query, [title], (error, results) => {
+        if (error) {
+            return res.status(500).send('Database query failed.');
+        }
+        if (results.length === 0) {
+            return res.status(404).send('Leaflet not found.');
+        }
+
+        // 修改圖片路徑
+        const leaflet = results[0];
+        if (leaflet && leaflet.leaflet_img) {
+            const filename = path.basename(leaflet.leaflet_img);
+            leaflet.leaflet_img = '/uploads/' + filename;
+        }
+
+        res.json(leaflet);
+    });
+});
 
 // 啟動伺服器
 const port = 3000;
