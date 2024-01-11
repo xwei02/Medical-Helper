@@ -56,63 +56,80 @@
             <li class="nav-item">
                 <a class="nav-link" href="user_feedback.html" style="font-weight: bold">
                   <img src="reply2.png" alt="Logo" width="30" height="30"> 回饋</a>
-            </li> 
+            </li>  
             <li class="nav-item">
-              <a class="nav-link" id="sdm" href="sdm.html" style="font-weight: bold">
-                <img src="reply2.png" alt="Logo" width="30" height="30"> 醫病共享決策</a>
-          </li> 
+                <a class="nav-link" id="sdm" href="sdm.html" style="font-weight: bold">
+                  <img src="reply2.png" alt="Logo" width="30" height="30"> 醫病共享決策</a>
+            </li> 
           </ul>
           <div class="ms-auto">
             <a class="btn btn-light" id="logout-button">登出</a>
           </div>
           <div id="userNameDisplay" class="user-name-display"></div>
+
         </div>
     </nav>
-    <div class="d-flex gap-2 justify-content-center py-5">
-        <a class="btn btn-secondary rounded-pill px-3" type="button" href="newest_reservation.html">最近就診預約</a>
-        <a class="btn btn-primary rounded-pill px-3" type="button" href="newest_record.html">最近就診紀錄</a>
-        <a class="btn btn-secondary rounded-pill px-3" type="button" href="newest_testrev.html">最近檢查/檢驗預約</a>
-        <a class="btn btn-secondary rounded-pill px-3" type="button" href="newest_testrec.html">最近檢查/檢驗紀錄</a>
-    </div>
-    <table class="container table table-striped">
-      <tbody id="tableBody">
-        <tr>
-          <th scope="col">就診科系</th>
-          <th scope="col">就診科別</th>
-          <th scope="col">醫師名稱</th>
-          <th scope="col">就診日期</th>
-          <th scope="col">是否需要回診</th>
-      </tr>
-      </tbody> 
-  </table>
-   </body>
+    <style>
+    /* 調整邊距，避免重疊*/
+        .dropdown {
+            margin: 20px; 
+        }
+        .table{
+            width: 97%;
+            border-collapse: collapse;
+            margin: 20px; 
+        }
+    </style>
+    
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            疾病分類
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">神經內科</a></li>
+          <li><a class="dropdown-item" href="#">神經外科</a></li>
+          <li><a class="dropdown-item" href="#">精神病</a></li>
+          <li><a class="dropdown-item" href="#">心臟內科</a></li>
+          <li><a class="dropdown-item" href="#">骨科</a></li>
+          <li><a class="dropdown-item" href="#">胸腔外科</a></li>
+        </ul>
+      </div>
+      <table class="table table-light table-hover">
+        <thead class="table-info">
+          <tr>
+            <th scope="col">決策輔助工具</th>
+            <th scope="col">建置日期</th>
+            <th scope="col">疾病分類</th>
+            <th scope="col">衛教資訊</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row"><a href="user_feedback.html" >問卷1</a></th>
+            <td>2023-01-11</td>
+            <td>疾病分類</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="user_feedback.html" ></a>2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="user_feedback.html" ></a>2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+  </body>
 </html>
 
 <script>
-  const userId = JSON.parse(localStorage.getItem('user'));
-
-  fetch(`/api/medical_record?userId=${userId}`) 
-  .then(response => response.json())
-  .then(user => {
-    const tableBody = document.getElementById('tableBody');
-    user.forEach(medical_record => {
-      // 解析日期並轉換格式
-      const date = new Date(medical_record.appointment_date);
-      const formattedDate = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
-
-      const row = document.createElement('tr');
-      row.innerHTML = `
-          <td>${medical_record.medical_department}</td>
-          <td>${medical_record.medical_division}</td>
-          <td>${medical_record.doctor_name}</td>
-          <td>${formattedDate}</td>
-          <td>${medical_record.return_appointment}</td>
-      `;
-      tableBody.appendChild(row);
-    });
-  })
 // 在頁面顯示user名字
-  document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
   const userId = JSON.parse(localStorage.getItem('user')); 
   fetch(`/api/user_name?userId=${userId}`) 
   .then(response => response.json())
@@ -124,20 +141,19 @@
     })
   })
   .catch(error => console.error('Error:', error));
-  });
+});
 
-  const admin = localStorage.getItem('admin'); // 去得lacalStorage裡的admin資訊
-  const user = JSON.parse(localStorage.getItem('user')); // 去得lacalStorage裡的user資訊
-  const logoutButton = document.getElementById('logout-button');
-  logoutButton.addEventListener('click', function() {
-    // 檢查localStorage中是否有admin資訊
-    if (localStorage.getItem('admin')) {
-      localStorage.removeItem('admin'); // 移除管理員資訊
-      window.location.href = 'manager_login.html'; // 跳轉到管理員登入頁面
-    } else if (localStorage.getItem('user')) {     // 檢查localStorage中是否有user資訊
-      localStorage.removeItem('user'); // 移除使用者資訊
-      window.location.href = 'user_login.html'; // 跳轉到使用者登入頁面
-    }
-  });
+const admin = localStorage.getItem('admin'); // 去得lacalStorage裡的admin資訊
+const user = JSON.parse(localStorage.getItem('user')); // 去得lacalStorage裡的user資訊
+const logoutButton = document.getElementById('logout-button');
+logoutButton.addEventListener('click', function() {
+  // 檢查localStorage中是否有admin資訊
+  if (localStorage.getItem('admin')) {
+    localStorage.removeItem('admin'); // 移除管理員資訊
+    window.location.href = 'manager_login.html'; // 跳轉到管理員登入頁面
+  } else if (localStorage.getItem('user')) {     // 檢查localStorage中是否有user資訊
+    localStorage.removeItem('user'); // 移除使用者資訊
+    window.location.href = 'user_login.html'; // 跳轉到使用者登入頁面
+  }
+});
 </script>
-
