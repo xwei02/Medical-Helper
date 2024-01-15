@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/modal.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg " id="nav-color">
+        <a class="navbar-brand" href="test.html" style="font-weight: bold">
+          <img src="medical_icon.png" alt="Logo" width="40" height="40"> 醫療小幫手</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="test.html" style="font-weight: bold">
+                <img src="home_icon.png" alt="Logo" width="25" height="25"> 首頁</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="medical_form.html" style="font-weight: bold">
+                <img src="leaflet.png" alt="Logo" width="25" height="25"> 手術問卷</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="personal_medicalcare.html" style="font-weight: bold">
+                <img src="personal_medical.png" alt="Logo" width="30" height="30"> 個人醫療</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="user_info_modifiy.html" style="font-weight: bold">
+                  <img src="modify.png" alt="Logo" width="28" height="28"> 用戶基本資料修改</a>
+              </li>
+            <li class="nav-item">
+                <a class="nav-link" href="user_feedback.html" style="font-weight: bold">
+                  <img src="reply2.png" alt="Logo" width="30" height="30"> 回饋</a>
+            </li>  
+            <li class="nav-item">
+                <a class="nav-link" id="sdm" href="sdm.html" style="font-weight: bold">
+                  <img src="sdmicon.png" alt="Logo" width="25" height="27"> 醫病共享決策</a>
+            </li> 
+          </ul>
+          <div class="ms-auto">
+            <a class="btn btn-light" id="logout-button">登出</a>
+          </div>
+          <div id="userNameDisplay" class="user-name-display"></div>
+
+        </div>
+    </nav>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .content {
+                display: none; /* 默認隱藏內容 */
+            }
+    
+            .active {
+                display: block; /* 顯示選擇內容 */
+            }
+        </style>
+        <title>Dynamic Content Example</title>
+    </head>
+    <style>
+     .btn-outline-secondary {
+        margin-top: 20px; 
+        
+    }
+    .content{
+        margin: 50px;
+    }
+    .center-image{
+        margin:auto;
+        margin-top: 50px;
+        display: block;
+    }
+    </style>
+    <body>
+    
+    <button onclick="showContent('content1')" type="button" class="btn btn-outline-secondary btn-lg">前言</button>
+    <button onclick="showContent('content2')" type="button" class="btn btn-outline-secondary btn-lg">適用對象/狀況</button>
+    <button onclick="showContent('content3')" type="button" class="btn btn-outline-secondary btn-lg">疾病或健康議題介紹</button>
+    <button onclick="showContent('content4')" type="button" class="btn btn-outline-secondary btn-lg">醫療選項介紹</button>
+    <button onclick="showContent('content5')" type="button" class="btn btn-outline-secondary btn-lg">醫療選項比較</button>
+    <button onclick="showContent('content6')" type="button" class="btn btn-outline-secondary btn-lg">醫療方式的考量</button>
+    <button onclick="showContent('content7')" type="button" class="btn btn-outline-secondary btn-lg">醫療資訊的認知</button>
+    <button onclick="showContent('content8')" type="button" class="btn btn-outline-secondary btn-lg">醫療方式的確認</button>
+
+
+    <div id="content1" class="content">
+        <!-- Content for button 1 -->
+        <h4>當醫師診斷，確定您患有「退化性膝關節炎」，本表單將幫助您瞭解相關病因及有哪些治療方式。
+
+            若您已經接受過藥物治療、復健運動或其他治療方式，但關節疼痛問題仍造成您生活上很大的困擾，人工膝關節置換手術有可能改善您的生活，也有可能產生一些風險，接下來請跟著我們的步驟，一步步探索自己的需求以及在意的事情，希望這樣能幫助您做出適合自己的治療選擇。</h4>
+            <img width=18% src="kneebone.png" class = "center-image" style="box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);" />
+        </div>
+    
+    <div id="content2" class="content">
+        <!-- Content for button 2 -->
+        <h4>當醫師診斷您確定患有「退化性膝關節炎」，已經接受過藥物治療、復健運動或其他治療方法仍無法有效改善嚴重疼痛問題之病人。</h4>
+    </div>
+    
+    <div id="content3" class="content">
+        <!-- Content for button 3 -->
+        <h4>關節炎的成因是關節內的軟骨損壞，關節軟骨就像是一個軟墊，可以緩和體重及平常活動對骨頭的衝擊，當軟骨退化並無法減輕活動對骨頭的衝擊時，就是膝關節炎，症狀通常發生的很慢，會隨著時間逐漸惡化，造成關節疼痛、僵硬、腫脹，活動受到限制，它並沒有完全治癒的方式，但可以透過適當的醫療，獲得良好的症狀控制及維持關節功能。</h4>
+            <img width=18% src="kneebone.png" class = "center-image" style="box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);" />
+        </div>
+    
+    <div id="content4" class="content">
+        <!-- Content for button 4 -->
+        <h4><b>人工膝關節置換手術:</b><br>
+            大多數會接受人工膝關節置換手術的病人，是因為疼痛已經無法使用藥物或其他治療來緩解，而且嚴重影響到生活品質，手術有「全人工」或「部份」置換膝關節兩種選擇，醫生會提供專業的判斷及建議您適合哪一種治療，手術進行中醫生會移除受損的關節軟骨，並使用人工材質來取代，手術後通常很快就可以下床活動，但仍需配合醫師建議的復健運動，來增加肌肉力量及加強膝關節活動角度。<br>
+            <br>
+        
+            <b>不接受人工膝關節置換手術:</b><br>
+            若您不接受人工膝關節置換手術可透過以下方式暫時緩減疼痛:<br>
+            
+            藥物：如果症狀輕微，可以使用藥物止痛。包括消炎藥、嗎啡類止痛藥、關節內注射藥物等。<br>
+            
+            冰（熱）敷：在活動前熱敷可以放鬆關節，活動後冰敷可以減緩疼痛。<br>
+            
+            復健運動：復健運動可以增加肌力，減少關節受力。請事先和您的醫生討論什麼樣的復健運動比較適合您。<br>
+            
+            輔具：許多類型的輔具可以幫助減緩膝關節的壓力，包括拐杖、助行器、護具，穿著舒適的鞋子或鞋墊。<br>
+            <br>
+            ※其他如關節鏡手術、截骨矯正手術等治療方式，請進一步與醫療人員討論!</h4>
+        </div>
+
+    <div id="content5" class="content">
+        <!-- Content for button 5 -->
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">人工膝關節置換手術</th>
+                <th scope="col">不接受人工膝關節置換手術</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">治療方式</th>
+                <td>手術方式：「全人工」或「部份」膝關節置換手術。<br>
+
+                    材質選擇：目前膝關節主要材質為金屬或陶瓷。<br>
+                    
+                    麻醉方式：一般以半身麻醉為主，除非特殊狀況才採用全身麻醉<br>
+                    
+                    復健治療：需配合術後短期復健計畫，是否需長期復健需由醫師評估。</td>
+                <td>利用下列方式可以減緩疼痛:<br>
+
+                    1.藥物治療<br>
+                    
+                    2.冰敷、熱敷<br>
+                    
+                    3.輔具<br>
+                    
+                    4.復健運動</td>
+              </tr>
+              <tr>
+                <th scope="row">優點</th>
+                <td>	
+                    1.100個病人裡面有80個病人術後疼痛改善或消失，而且可以恢復日常生活的活動。<br>
+                    2.追蹤100個接受手術的人，追蹤2至17年，有82人感到滿意。
+                    <img width=40% src="satisfaction.png" class = "center-image" style="box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);" />
+                </td>
+                
+                <td>1.能部分減輕膝關節的不舒服。<br>
+                    2.可以避免人工膝關節置換手術可能產生的風險及併發症。</td>
+              </tr>
+              <tr>
+                <th scope="row">缺點</th>
+                <td>1.可能需再次手術：大多數的人工關節可以使用超過一、二十年，但有些人可能需要再次接受人工關節置換手術，追蹤100個接受手術的人，追蹤15年，有12個人需要再次手術。<br>
+
+                    2.膝關節活動角度受限：可能不如過去活動順暢，關節不建議過度彎曲。</td>
+                <td>藥物治療、復健運動或輔具的治療效果較為短暫，無法長時間緩解症狀。</td>
+              </tr>
+              <tr>
+                <th scope="row">風險/副作用</th>
+                <td>	
+                    1.麻醉風險：對健康的人來說麻醉發生併發症並不常見，但所有麻醉都是有風險的。<br>
+                    
+                    2.其他風險：<br>
+                    
+                    (1)手術部位感染，例如傷口感染1%、嚴重感染1%，若發生嚴重感染可能須重新置換人工膝關節<br>
+                    
+                    (2)傷口癒合不良(約1%)<br>
+                    
+                    (3)血栓(約1%)<br>
+                    
+                    (4)膝關節不穩定(約10-20%)。<br>
+                    
+                    3.約有10%手術後的病人有程度不一的關節僵硬或攣縮，適度的運動有助於降低此狀況的發生。</td>
+                <td>1.如果拖延太久才接受手術，您的肌肉力量、膝關節活動角度可能會大幅下降，而影響手術效果。<br>
+
+                    2.止痛消炎藥的副作用：<br>消化性潰瘍、腎功能下降及藥物過敏。<br>
+                    
+                    3.關節注射藥物的可能副作用：<br>感染、注射後腫痛、注射部位出血。</td>
+              </tr>
+
+            </div>
+        </tbody>
+      </table>
+    </div>
+        <div id="content6" class="content">
+            <!-- Content for button 6 -->
+            <table class="table table-striped-columns">
+                <thead>
+                  <tr>
+                    <th scope="col">不接受人工膝關節置換手術</th>
+                    <th scope="col">程度(自身狀況越接近哪種，就選擇越靠近該敘述的選項)</th>
+                    <th scope="col">接受人工膝關節置換手術</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td scope="row" id="N-ch1-1">關節疼痛不會影響我的日常活動</td>
+                    <td>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-1-1" value="ch1-1-1">
+                            <label class="form-check-label" for="ch1-1-1">-4 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-1-2" value=ch1-1-2">
+                            <label class="form-check-label" for="ch1-1-2">-3 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-1-3" value="ch1-1-3">
+                            <label class="form-check-label" for="ch1-1-3">-2 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-1-4" value="ch1-1-4">
+                            <label class="form-check-label" for="ch1-option1-4">-1 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-1-5" value="ch1-1-5">
+                            <label class="form-check-label" for="ch1-1-5">1 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-1-6" value="ch1-1-6">
+                            <label class="form-check-label" for="ch1-1-6">2 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-1-7" value="ch1-1-7">
+                            <label class="form-check-label" for="ch1-1-7">3 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-1-8" value="ch1-1-8">
+                            <label class="form-check-label" for="ch1-1-8">4 </label>
+                        </div>
+                    </td>
+                    <td id="Y-ch1-1">我想要能做一些簡單的活動，像是爬樓梯、做家事或游泳</td>
+                  </tr>
+                  <tr>
+                    <td scope="row" id="N-ch1-2">現在大多數的日子我都覺得狀況還不錯</td>
+                    <td>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-2-1" value="ch1-2-1">
+                            <label class="form-check-label" for="ch1-2-1">-4 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-2-2" value="ch1-2-2">
+                            <label class="form-check-label" for="ch1-2-2">-3 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-2-3" value="ch1-2-3">
+                            <label class="form-check-label" for="ch1-2-3">-2 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-2-4" value="ch1-2-4">
+                            <label class="form-check-label" for="ch1-2-4">-1 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-2-5" value="ch1-2-5">
+                            <label class="form-check-label" for="ch1-2-5">1 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-2-6" value="ch1-2-6">
+                            <label class="form-check-label" for="ch1-2-6">2 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-2-7" value="ch1-2-7">
+                            <label class="form-check-label" for="ch1-2-7">3 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-2-8" value="ch1-2-8">
+                            <label class="form-check-label" for="ch1-2-8">4 </label>
+                        </div>
+                    </td>
+                    <td id="Y-ch1-2">現在大多數的日子我常常感覺很疼痛，過得不好	</td>
+                  </tr>
+                  <tr>
+                    <td scope="row" id="N-ch1-3">我擔心10或20年後可能要再次進行手術</td>
+                    <td>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-3-1" value="ch1-3-1">
+                            <label class="form-check-label" for="ch1-3-1">-4 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="q3-2" value="ch1-3-2">
+                            <label class="form-check-label" for="ch1-3-2">-3 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-3-3" value="ch1-3-3">
+                            <label class="form-check-label" for="ch1-3-3">-2 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-3-4" value="ch1-3-4">
+                            <label class="form-check-label" for="ch1-3-4">-1 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-3-5" value="ch1-3-5">
+                            <label class="form-check-label" for="ch1-3-5">1 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-3-6" value="ch1-3-6">
+                            <label class="form-check-label" for="ch1-3-6">2 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-3-7" value="ch1-3-7">
+                            <label class="form-check-label" for="ch1-3-7">3 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-3-8" value="ch1-3-8">
+                            <label class="form-check-label" for="ch1-3-8">4 </label>
+                        </div>
+                    </td>
+                    <td id="Y-ch1-3">我了解且接受日後有可能需要再一次進行手術</td>
+                  </tr>
+                  <tr>
+                    <td scope="row" id="ch1-4">我無法配合手術後花幾個禮拜的時間做復健運動</td>
+                    <td>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-4-1" value="ch1-4-1">
+                            <label class="form-check-label" for="ch1-4-1">-4 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-4-2" value="ch1-4-2">
+                            <label class="form-check-label" for="ch1-4-2">-3 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-4-3" value="ch1-4-3">
+                            <label class="form-check-label" for="ch1-4-3">-2 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-4-4" value="ch1-4-4">
+                            <label class="form-check-label" for="ch1-4-4">-1 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-4-5" value="ch1-4-5">
+                            <label class="form-check-label" for="ch1-4-5">1 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-4-6" value="ch1-4-6">
+                            <label class="form-check-label" for="ch1-4-6">2 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-4-7" value="ch1-4-7">
+                            <label class="form-check-label" for="ch1-4-7">3 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ch1-4-8" value="ch1-4-8">
+                            <label class="form-check-label" for="ch1-4-8">4 </label>
+                        </div>
+                    </td>
+                    <td id="Y-ch1-4">我願意手術後花幾個禮拜的時間做復健運動</td>
+                  </tr>
+                  <tr>
+                    <td scope="row">我非常害怕手術可能會有的風險</td>
+                    <td>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="q5-1" value="option5-1">
+                            <label class="form-check-label" for="q5-1">-4 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="q5-2" value="option5-2">
+                            <label class="form-check-label" for="5-2">-3 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="q5-3" value="option5-3">
+                            <label class="form-check-label" for="q5-3">-2 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="q2-4" value="option2-4">
+                            <label class="form-check-label" for="q5-4">-1 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="q5-5" value="option5-5">
+                            <label class="form-check-label" for="q5-5">1 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="q5-6" value="option5-6">
+                            <label class="form-check-label" for="q5-6">2 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="q5-7" value="option5-7">
+                            <label class="form-check-label" for="q5-7">3 </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="q5-8" value="option5-8">
+                            <label class="form-check-label" for="q5-8">4 </label>
+                        </div>
+                    </td>
+                    <td>為了減輕關節疼痛，我願意承擔手術的風險</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+        <div id="content7" class="content">
+                <!-- Content for button 7 -->
+                <h4>對於以上提供的資訊，您是否已經了解了呢</h4>
+                <p id="ch3-1">人工膝關節置換手術較能改善嚴重退化性膝關節炎造成的疼痛及關節功能</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="ch3-1-1" value="ch3-1-1" checked>
+                    <label class="form-check-label" for="ch3-1-1">
+                      是
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="ch3-1-2" value="ch3-1-2">
+                    <label class="form-check-label" for="ch3-1-2">
+                      不是
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="ch3-1-3" value="ch3-1-3">
+                    <label class="form-check-label" for="ch3-1-3">
+                      不知道
+                    </label>
+                  </div>
+
+                  <p id="ch3-2">人工膝關節置換手術能夠百分之百改善退化性膝關節炎造成的疼痛</p>
+                  <div class="form-check">
+                      <input class="form-check-input" type="radio" name="exampleRadios" id="ch3-2-1" value="ch3-2-1" checked>
+                      <label class="form-check-label" for="ch3-2-1">
+                        是
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="exampleRadios" id="ch3-2-2" value="ch3-2-2">
+                      <label class="form-check-label" for="ch3-2-2">
+                        不是
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="exampleRadios" id="ch3-2-3" value="ch3-2-3">
+                      <label class="form-check-label" for="ch3-2-3">
+                        不知道
+                      </label>
+                    </div>
+
+                    <p id="ch3-3">在接受人工膝關節置換手術後，我仍然需要配合醫師做復健運動</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="ch3-3-1" value="ch3-3-1" checked>
+                        <label class="form-check-label" for="ch3-3-1">
+                          是
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="ch3-3-2" value="ch3-3-2">
+                        <label class="form-check-label" for="ch3-3-2">
+                          不是
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="ch3-3-3" value="ch3-3-3">
+                        <label class="form-check-label" for="ch3-3-3">
+                          不知道
+                        </label>
+                      </div>
+
+                      <p id="ch3-4">雖然統計上人工膝關節可以用上15年，但仍有可能需要再次手術</p>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="exampleRadios" id="ch3-4-1" value="ch3-4-1" checked>
+                          <label class="form-check-label" for="ch3-4-1">
+                            是
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="exampleRadios" id="ch3-4-2" value="ch3-4-2">
+                          <label class="form-check-label" for="ch3-4-2">
+                            不是
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="exampleRadios" id="ch3-4-3" value="ch3-4-3">
+                          <label class="form-check-label" for="ch3-4-3">
+                            不知道
+                          </label>
+                        </div>
+        </div>
+
+        <div id="content8" class="content">
+            <!-- Content for button 8 -->
+            <h4>您現在確認好治療方式了嗎</h4>
+            <p id="ch4-1">我已經確認好想要的治療方式，我決定選擇：（下列擇一）</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="ch4-1-1" value="ch4-1-1" checked>
+                    <label class="form-check-label" for="ch4-1-1">
+                        人工膝關節置換手術
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="ch4-1-2" value="ch4-1-2">
+                    <label class="form-check-label" for="ch4-1-2">
+                        其他治療方式
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="ch4-1-3" value="ch4-1-3">
+                    <label class="form-check-label" for="ch4-1-3">
+                        目前還無法做決定，原因(下一題)
+                    </label>
+                  </div>
+
+                  <p id="ch3-2">我目前還無法決定</p>
+                  <div class="form-check">
+                      <input class="form-check-input" type="radio" name="exampleRadios" id="ch4-2-1" value="ch4-2-1" checked>
+                      <label class="form-check-label" for="ch4-2-1">
+                        我想要再與我的主治醫師討論我的決定。
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="exampleRadios" id="ch4-2-2" value="ch4-2-2">
+                      <label class="form-check-label" for="ch4-2-2">
+                        我想要再與其他人（包含配偶、家人、朋友或第二意見提供者…）討論我的決定。
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="exampleRadios" id="ch4-2-3" value="ch4-2-3">
+                      <label class="form-check-label" for="ch4-2-3">
+                        對於以上治療方式，我想要再瞭解更多，我的問題有：
+                      </label>
+                      <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">問題</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                      </div>
+                    </div>
+        </div>
+    <script>
+        function showContent(contentId) {
+            // 隐藏所有内容
+            var contents = document.querySelectorAll('.content');
+            contents.forEach(function (content) {
+                content.style.display = 'none';
+            });
+    
+            // 显示点击的按钮对应的内容
+            var selectedContent = document.getElementById(contentId);
+            if (selectedContent) {
+                selectedContent.style.display = 'block';
+            }
+        }
+    </script>
+    
+    </body>
+    </html>
+    
+
+<script>
+// 在頁面顯示user名字
+document.addEventListener('DOMContentLoaded', function() {
+  const userId = JSON.parse(localStorage.getItem('user')); 
+  fetch(`/api/user_name?userId=${userId}`) 
+  .then(response => response.json())
+  .then(user => {
+    const userNameDisplay = document.getElementById('userNameDisplay');
+    user.forEach(user_name => {
+      userNameDisplay.textContent = 'Hello, ' + user_name.user_name; 
+
+    })
+  })
+  .catch(error => console.error('Error:', error));
+});
+
+const admin = localStorage.getItem('admin'); // 去得lacalStorage裡的admin資訊
+const user = JSON.parse(localStorage.getItem('user')); // 去得lacalStorage裡的user資訊
+const logoutButton = document.getElementById('logout-button');
+logoutButton.addEventListener('click', function() {
+  // 檢查localStorage中是否有admin資訊
+  if (localStorage.getItem('admin')) {
+    localStorage.removeItem('admin'); // 移除管理員資訊
+    window.location.href = 'manager_login.html'; // 跳轉到管理員登入頁面
+  } else if (localStorage.getItem('user')) {     // 檢查localStorage中是否有user資訊
+    localStorage.removeItem('user'); // 移除使用者資訊
+    window.location.href = 'user_login.html'; // 跳轉到使用者登入頁面
+  }
+});
+</script>
