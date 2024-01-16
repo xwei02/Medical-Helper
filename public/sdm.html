@@ -56,11 +56,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="user_feedback.html" style="font-weight: bold">
                   <img src="reply2.png" alt="Logo" width="30" height="30"> 回饋</a>
-            </li> 
+            </li>  
             <li class="nav-item">
-              <a class="nav-link" id="sdm" href="sdm.html" style="font-weight: bold">
-                <img src="sdmicon.png" alt="Logo" width="25" height="27"> 醫病共享決策</a>
-          </li> 
+                <a class="nav-link" id="sdm" href="sdm.html" style="font-weight: bold">
+                  <img src="sdmicon.png" alt="Logo" width="25" height="27"> 醫病共享決策</a>
+            </li> 
           </ul>
           <div class="ms-auto">
             <a class="btn btn-light" id="logout-button">登出</a>
@@ -69,12 +69,61 @@
 
         </div>
     </nav>
-    <div class="d-flex gap-2 justify-content-center py-5">
-        <a class="btn btn-secondary rounded-pill px-3" type="button" href="newest_reservation.html">最近就診預約</a>
-        <a class="btn btn-secondary rounded-pill px-3" type="button" href="newest_record.html">最近就診紀錄</a>
-        <a class="btn btn-secondary rounded-pill px-3" type="button" href="newest_testrev.html">最近檢查/檢驗預約</a>
-        <a class="btn btn-secondary rounded-pill px-3" type="button" href="newest_testrec.html">最近檢查/檢驗紀錄</a>
-    </div>
+    <style>
+    /* 調整邊距，避免重疊*/
+        .dropdown {
+            margin: 20px; 
+        }
+        .table{
+            width: 97%;
+            border-collapse: collapse;
+            margin: 20px; 
+        }
+    </style>
+    
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            疾病分類
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">神經內科</a></li>
+          <li><a class="dropdown-item" href="#">神經外科</a></li>
+          <li><a class="dropdown-item" href="#">精神病</a></li>
+          <li><a class="dropdown-item" href="#">心臟內科</a></li>
+          <li><a class="dropdown-item" href="#">骨科</a></li>
+          <li><a class="dropdown-item" href="#">胸腔外科</a></li>
+        </ul>
+      </div>
+      <table class="table table-light table-hover">
+        <thead class="table-info">
+          <tr>
+            <th scope="col">決策輔助工具</th>
+            <th scope="col">建置日期</th>
+            <th scope="col">疾病分類</th>
+            <th scope="col">衛教資訊</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row"><a href="sdm_question1.html" >我該接受全人工膝關節置換術嗎?</a></th>
+            <td>2023-01-11</td>
+            <td>骨科</td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="sdm_question2.html" >我有心房顫動﹐應該服用抗凝血劑預防中風嗎?</a></th>
+            <td>2023-01-15</td>
+            <td>心臟內外科</td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="sdm_questione3.html" >乙型主動脈剝離手術治療我該選擇微創手術還是傳統手術比較適合?</a></th>
+            <td>2023-01-15</td>
+            <td>心臟內外科</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
   </body>
 </html>
 
