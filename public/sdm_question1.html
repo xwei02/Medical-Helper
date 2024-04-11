@@ -102,9 +102,33 @@
         margin:auto;
         display: block;
     }
+    .btn-large {
+        border-radius: 50%; /* 將按鈕設置為圓形 */
+        font-size: 20px;
+        padding: 10px 15px;
+    }
+  .btn-circle {
+        border-radius: 50%; /* 將按鈕設置為圓形 */
+        font-size: 20px; /* 調整按鈕內字體大小 */
+    }
     </style>
     <body>
-    
+      <nav aria-label="breadcrumb" class="navbar">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="sdm.html">醫病共享決策</a></li>
+            <li class="breadcrumb-item"><a href="sdm_questione3.html">乙型主動脈剝離手術治療我該選擇微創手術還是傳統手術比較適合?</a></li>
+            <li class="breadcrumb-item active" aria-current="page">目前位置</li>
+        </ol>
+
+        <!-- 字體調整功能 -->
+        <div class="font-size-adjustment">
+          <button onclick="resetFontSize()">恢復</button>
+            <label for="font-size">字體大小：</label>
+            <button onclick="decreaseFontSize()" class="btn-circle">小</button>
+            <input type="range" id="font-size" min="10" max="30" value="16" onchange="changeFontSize(this.value)">
+            <button onclick="increaseFontSize()" class="btn-large">大</button>
+          </div>
+      </nav>
     <button onclick="showContent('content1')" type="button" class="btn btn-outline-secondary btn-lg">前言</button>
     <button onclick="showContent('content2')" type="button" class="btn btn-outline-secondary btn-lg">適用對象/狀況</button>
     <button onclick="showContent('content3')" type="button" class="btn btn-outline-secondary btn-lg">疾病或健康議題介紹</button>
@@ -241,335 +265,376 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td scope="row" id="N-ch1-1">關節疼痛不會影響我的日常活動</td>
+                    <td scope="row" id="ch2_1-N">關節疼痛不會影響我的日常活動</td>
                     <td>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-1" id="ch1-1-1" value="ch1-1-1">
-                            <label class="form-check-label" for="ch1-1-1">-4 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1" value="1">
+                            <label class="form-check-label" for="ch2_1_1">1</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-1" id="ch1-1-2" value=ch1-1-2">
-                            <label class="form-check-label" for="ch1-1-2">-3 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1" value="2">
+                            <label class="form-check-label" for="ch2_1_2">2</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-1" id="ch1-1-3" value="ch1-1-3">
-                            <label class="form-check-label" for="ch1-1-3">-2 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1" value="3">
+                            <label class="form-check-label" for="ch2_1_3">3</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-1" id="ch1-1-4" value="ch1-1-4">
-                            <label class="form-check-label" for="ch1-option1-4">-1 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1" value="4">
+                            <label class="form-check-label" for="ch2_1_4">4</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-1" id="ch1-1-5" value="ch1-1-5">
-                            <label class="form-check-label" for="ch1-1-5">1 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1" value="5">
+                            <label class="form-check-label" for="ch2_1_5">5</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-1" id="ch1-1-6" value="ch1-1-6">
-                            <label class="form-check-label" for="ch1-1-6">2 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1"value="6">
+                            <label class="form-check-label" for="ch2_1_6">6</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-1" id="ch1-1-7" value="ch1-1-7">
-                            <label class="form-check-label" for="ch1-1-7">3 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1" value="7">
+                            <label class="form-check-label" for="ch2_1_7">7</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-1" id="ch1-1-8" value="ch1-1-8">
-                            <label class="form-check-label" for="ch1-1-8">4 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1" value="8">
+                            <label class="form-check-label" for="ch2_1_8">8</label>
                         </div>
                     </td>
-                    <td id="Y-ch1-1">我想要能做一些簡單的活動，像是爬樓梯、做家事或游泳</td>
+                    <td id="ch2_1-Y">我想要能做一些簡單的活動，像是爬樓梯、做家事或游泳</td>
                   </tr>
                   <tr>
-                    <td scope="row" id="N-ch1-2">現在大多數的日子我都覺得狀況還不錯</td>
+                    <td scope="row" id="Ch2-2-N">現在大多數的日子我都覺得狀況還不錯</td>
                     <td>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-2" id="ch1-2-1" value="ch1-2-1">
-                            <label class="form-check-label" for="ch1-2-1">-4 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_1" value="1">
+                            <label class="form-check-label" for="ch2_2_1">1</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-2" id="ch1-2-2" value="ch1-2-2">
-                            <label class="form-check-label" for="ch1-2-2">-3 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_2" value="2">
+                            <label class="form-check-label" for="ch2_2_2">2</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-2" id="ch1-2-3" value="ch1-2-3">
-                            <label class="form-check-label" for="ch1-2-3">-2 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_3" value="3">
+                            <label class="form-check-label" for="ch2_2_3">3</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-2" id="ch1-2-4" value="ch1-2-4">
-                            <label class="form-check-label" for="ch1-2-4">-1 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_4" value="4">
+                            <label class="form-check-label" for="ch2_2_4">4</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-2" id="ch1-2-5" value="ch1-2-5">
-                            <label class="form-check-label" for="ch1-2-5">1 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_5" value="5">
+                            <label class="form-check-label" for="ch2_2_5">5</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-2" id="ch1-2-6" value="ch1-2-6">
-                            <label class="form-check-label" for="ch1-2-6">2 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_6" value="6">
+                            <label class="form-check-label" for="ch2_2_6">6</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-2" id="ch1-2-7" value="ch1-2-7">
-                            <label class="form-check-label" for="ch1-2-7">3 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_7" value="7">
+                            <label class="form-check-label" for="ch2_2_7">7</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-2" id="ch1-2-8" value="ch1-2-8">
-                            <label class="form-check-label" for="ch1-2-8">4 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_8" value="8">
+                            <label class="form-check-label" for="ch2_2_8">8</label>
                         </div>
                     </td>
-                    <td id="Y-ch1-2">現在大多數的日子我常常感覺很疼痛，過得不好	</td>
+                    <td id="ch2_2_Y">現在大多數的日子我常常感覺很疼痛，過得不好	</td>
                   </tr>
                   <tr>
-                    <td scope="row" id="N-ch1-3">我擔心10或20年後可能要再次進行手術</td>
+                    <td scope="row" id="ch2_3_N">我擔心10或20年後可能要再次進行手術</td>
                     <td>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-3" id="ch1-3-1" value="ch1-3-1">
-                            <label class="form-check-label" for="ch1-3-1">-4 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_1" value="1">
+                            <label class="form-check-label" for="ch2_3_1">1</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-3" id="q3-2" value="ch1-3-2">
-                            <label class="form-check-label" for="ch1-3-2">-3 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_2" value="2">
+                            <label class="form-check-label" for="ch2_3_2">2</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-3" id="ch1-3-3" value="ch1-3-3">
-                            <label class="form-check-label" for="ch1-3-3">-2 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_3" value="3">
+                            <label class="form-check-label" for="ch2_3_3">3</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-3" id="ch1-3-4" value="ch1-3-4">
-                            <label class="form-check-label" for="ch1-3-4">-1 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_4" value="4">
+                            <label class="form-check-label" for="ch2_3_4">4</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-3" id="ch1-3-5" value="ch1-3-5">
-                            <label class="form-check-label" for="ch1-3-5">1 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_5" value="5">
+                            <label class="form-check-label" for="ch2_3_5">5</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-3" id="ch1-3-6" value="ch1-3-6">
-                            <label class="form-check-label" for="ch1-3-6">2 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_6" value="6">
+                            <label class="form-check-label" for="ch2_3_6">6</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-3" id="ch1-3-7" value="ch1-3-7">
-                            <label class="form-check-label" for="ch1-3-7">3 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_7" value="7">
+                            <label class="form-check-label" for="ch2_3_7">7</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-3" id="ch1-3-8" value="ch1-3-8">
-                            <label class="form-check-label" for="ch1-3-8">4 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_8" value="8">
+                            <label class="form-check-label" for="ch2_3_8">8</label>
                         </div>
                     </td>
-                    <td id="Y-ch1-3">我了解且接受日後有可能需要再一次進行手術</td>
+                    <td id="ch2_3_Y">我了解且接受日後有可能需要再一次進行手術</td>
                   </tr>
                   <tr>
-                    <td scope="row" id="ch1-4">我無法配合手術後花幾個禮拜的時間做復健運動</td>
+                    <td scope="row" id="ch2_4_N">我無法配合手術後花幾個禮拜的時間做復健運動</td>
                     <td>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-4" id="ch1-4-1" value="ch1-4-1">
-                            <label class="form-check-label" for="ch1-4-1">-4 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_4" id="ch2_4_1" value="1">
+                            <label class="form-check-label" for="ch2_4_1">1</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-4" id="ch1-4-2" value="ch1-4-2">
-                            <label class="form-check-label" for="ch1-4-2">-3 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_4" id="ch2_4_2" value="2">
+                            <label class="form-check-label" for="ch2_4_2">2</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-4" id="ch1-4-3" value="ch1-4-3">
-                            <label class="form-check-label" for="ch1-4-3">-2 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_4" id="ch2_4_3" value="3">
+                            <label class="form-check-label" for="ch2_4_3">3</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-4" id="ch1-4-4" value="ch1-4-4">
-                            <label class="form-check-label" for="ch1-4-4">-1 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_4" id="ch2_4_4" value="4">
+                            <label class="form-check-label" for="ch2_4_4">4</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-4" id="ch1-4-5" value="ch1-4-5">
-                            <label class="form-check-label" for="ch1-4-5">1 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_4" id="ch2_4_5" value="5">
+                            <label class="form-check-label" for="ch2_4_5">5</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-4" id="ch1-4-6" value="ch1-4-6">
-                            <label class="form-check-label" for="ch1-4-6">2 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_4" id="ch2_4_6" value="6">
+                            <label class="form-check-label" for="ch2_4_6">6</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-4" id="ch1-4-7" value="ch1-4-7">
-                            <label class="form-check-label" for="ch1-4-7">3 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_4" id="ch2_4_7" value="7">
+                            <label class="form-check-label" for="ch2_4_7">7</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-4" id="ch1-4-8" value="ch1-4-8">
-                            <label class="form-check-label" for="ch1-4-8">4 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_4" id="ch2_4_8" value="8">
+                            <label class="form-check-label" for="ch2_4_8">8</label>
                         </div>
                     </td>
-                    <td id="Y-ch1-4">我願意手術後花幾個禮拜的時間做復健運動</td>
+                    <td id="ch2_4_Y">我願意手術後花幾個禮拜的時間做復健運動</td>
                   </tr>
                   <tr>
-                    <td scope="row">我非常害怕手術可能會有的風險</td>
+                    <td scope="row" id="ch2_5_N">我非常害怕手術可能會有的風險</td>
                     <td>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-5" id="q5-1" value="option5-1">
-                            <label class="form-check-label" for="q5-1">-4 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_5" id="ch2_5_1" value="1">
+                            <label class="form-check-label" for="ch2_5_1">1</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-5" id="q5-2" value="option5-2">
-                            <label class="form-check-label" for="5-2">-3 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_5" id="ch2_5_2" value="2">
+                            <label class="form-check-label" for="ch2_5_2">2</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-5" id="q5-3" value="option5-3">
-                            <label class="form-check-label" for="q5-3">-2 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_5" id="ch2_5_3" value="3">
+                            <label class="form-check-label" for="ch2_5_3">3</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-5" id="q2-4" value="option2-4">
-                            <label class="form-check-label" for="q5-4">-1 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_5" id="ch2_5_4" value="4">
+                            <label class="form-check-label" for="ch2_5_4">4</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-5" id="q5-5" value="option5-5">
-                            <label class="form-check-label" for="q5-5">1 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_5" id="ch2_5_5" value="5">
+                            <label class="form-check-label" for="ch2_5_5">5</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-5" id="q5-6" value="option5-6">
-                            <label class="form-check-label" for="q5-6">2 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_5" id="ch2_5_6" value="6">
+                            <label class="form-check-label" for="ch2_5_6">6</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-5" id="q5-7" value="option5-7">
-                            <label class="form-check-label" for="q5-7">3 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_5" id="ch2_5_7" value="7">
+                            <label class="form-check-label" for="ch2_5_7">7</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch1-5" id="q5-8" value="option5-8">
-                            <label class="form-check-label" for="q5-8">4 </label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_5" id="ch2_5_8" value="8">
+                            <label class="form-check-label" for="ch2_5_8">8</label>
                         </div>
                     </td>
-                    <td>為了減輕關節疼痛，我願意承擔手術的風險</td>
+                    <td id="ch2_5_Y">為了減輕關節疼痛，我願意承擔手術的風險</td>
                   </tr>
                 </tbody>
               </table>
-              <button class="btn btn-primary" type="submit">提交</button>
+              <button class="btn btn-primary" type="submit" id="submitForm1">提交</button>
         </div>
         <div id="content7" class="content">
                 <!-- Content for button 7 -->
                 <h4>對於以上提供的資訊，您是否已經了解了呢</h4>
                 <p id="ch3-1">人工膝關節置換手術較能改善嚴重退化性膝關節炎造成的疼痛及關節功能</p>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios-ch2-1" id="ch3-1-1" value="ch3-1-1" >
-                    <label class="form-check-label" for="ch3-1-1">
-                      是
+                    <input class="form-check-input" type="radio" name="exampleRadios-ch3-1" id="Ch3_1_A1" value="1" >
+                    <label class="form-check-label" for="Ch3_1_A1">
+                      對
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios-ch2-1" id="ch3-1-2" value="ch3-1-2">
-                    <label class="form-check-label" for="ch3-1-2">
-                      不是
+                    <input class="form-check-input" type="radio" name="exampleRadios-ch3-1" id="Ch3_1_A2" value="0">
+                    <label class="form-check-label" for="Ch3_1_A2">
+                      不對
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios-ch2-1" id="ch3-1-3" value="ch3-1-3">
-                    <label class="form-check-label" for="ch3-1-3">
+                    <input class="form-check-input" type="radio" name="exampleRadios-ch3-1" id="Ch3_1_A3" value="-1">
+                    <label class="form-check-label" for="Ch3_1_A3">
                       不知道
                     </label>
                   </div>
 
                   <p id="ch3-2">人工膝關節置換手術能夠百分之百改善退化性膝關節炎造成的疼痛</p>
                   <div class="form-check">
-                      <input class="form-check-input" type="radio" name="exampleRadios-ch2-2" id="ch3-2-1" value="ch3-2-1" >
-                      <label class="form-check-label" for="ch3-2-1">
-                        是
+                      <input class="form-check-input" type="radio" name="exampleRadios-ch3-2" id="Ch3_2_A1" value="1" >
+                      <label class="form-check-label" for="Ch3_2_A1">
+                        對
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="exampleRadios-ch2-2" id="ch3-2-2" value="ch3-2-2">
-                      <label class="form-check-label" for="ch3-2-2">
-                        不是
+                      <input class="form-check-input" type="radio" name="exampleRadios-ch3-2" id="Ch3_2_A2" value="0">
+                      <label class="form-check-label" for="Ch3_2_A2">
+                        不對
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="exampleRadios-ch2-2" id="ch3-2-3" value="ch3-2-3">
-                      <label class="form-check-label" for="ch3-2-3">
+                      <input class="form-check-input" type="radio" name="exampleRadios-ch3-2" id="Ch3_2_A3" value="-1">
+                      <label class="form-check-label" for="Ch3_2_A3">
                         不知道
                       </label>
                     </div>
 
                     <p id="ch3-3">在接受人工膝關節置換手術後，我仍然需要配合醫師做復健運動</p>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios-ch3-1" id="ch3-3-1" value="ch3-3-1" >
-                        <label class="form-check-label" for="ch3-3-1">
-                          是
+                        <input class="form-check-input" type="radio" name="exampleRadios-ch3-3" id="Ch3_3_A1" value="1" >
+                        <label class="form-check-label" for="Ch3_3_A1">
+                          對
                         </label>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios-ch3-1" id="ch3-3-2" value="ch3-3-2">
-                        <label class="form-check-label" for="ch3-3-2">
-                          不是
+                        <input class="form-check-input" type="radio" name="exampleRadios-ch3-3" id="Ch3_3_A2" value="0">
+                        <label class="form-check-label" for="Ch3_3_A2">
+                          不對
                         </label>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios-ch3-1" id="ch3-3-3" value="ch3-3-3">
-                        <label class="form-check-label" for="ch3-3-3">
+                        <input class="form-check-input" type="radio" name="exampleRadios-ch3-3" id="Ch3_3_A3" value="-1">
+                        <label class="form-check-label" for="Ch3_3_A3">
                           不知道
                         </label>
                       </div>
 
                       <p id="ch3-4">雖然統計上人工膝關節可以用上15年，但仍有可能需要再次手術</p>
                       <div class="form-check">
-                          <input class="form-check-input" type="radio" name="exampleRadios-ch3-2" id="ch3-4-1" value="ch3-4-1" >
-                          <label class="form-check-label" for="ch3-4-1">
-                            是
+                          <input class="form-check-input" type="radio" name="exampleRadios-ch3-4" id="Ch3_4_A1" value="1" >
+                          <label class="form-check-label" for="Ch3_4_A1">
+                            對
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="exampleRadios-ch3-2" id="ch3-4-2" value="ch3-4-2">
-                          <label class="form-check-label" for="ch3-4-2">
-                            不是
+                          <input class="form-check-input" type="radio" name="exampleRadios-ch3-4" id="Ch3_4_A2" value="0">
+                          <label class="form-check-label" for="Ch3_4_A2">
+                            不對
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="exampleRadios-ch3-2" id="ch3-4-3" value="ch3-4-3">
-                          <label class="form-check-label" for="ch3-4-3">
+                          <input class="form-check-input" type="radio" name="exampleRadios-ch3-4" id="Ch3_4_A3" value="-1">
+                          <label class="form-check-label" for="Ch3_4_A3">
                             不知道
                           </label>
                         </div>
-                        <button class="btn btn-primary" type="submit">提交</button>
-        </div>
+                        <button class="btn btn-primary" type="submit" id="submitForm2">提交</button>
+                      </div>
 
 
         <div id="content8" class="content">
             <!-- Content for button 8 -->
-            <h4>您現在確認好治療方式了嗎</h4>
-            <p id="ch4-1">我已經確認好想要的治療方式，我決定選擇：（下列擇一）</p>
+            <h4>經過以上分析與判斷，您決定好是否接受人工膝關節置換手術了嗎?</h4>
+            <p id="ch4-1"><h5>我已經確認好想要的治療方式，我決定選擇：（下列擇一）</h5></p>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios-ch4-1" id="ch4-1-1" value="ch4-1-1" >
-                    <label class="form-check-label" for="ch4-1-1">
+                    <input class="form-check-input" type="radio" name="exampleRadios-Ch4_1_A" id="Ch4_1_A_1" value="1" >
+                    <label class="form-check-label" for="Ch4_1_A_1">
                         人工膝關節置換手術
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios-ch4-1" id="ch4-1-2" value="ch4-1-2">
-                    <label class="form-check-label" for="ch4-1-2">
-                        其他治療方式
+                    <input class="form-check-input" type="radio" name="exampleRadios-Ch4_1_A" id="Ch4_1_A_2" value="2">
+                    <label class="form-check-label" for="Ch4_1_A_2">
+                      其他治療方式
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios-ch4-1" id="ch4-1-3" value="ch4-1-3">
-                    <label class="form-check-label" for="ch4-1-3">
-                        目前還無法做決定，原因(下一題)
+                    <input class="form-check-input" type="radio" name="exampleRadios-Ch4_1_A" id="Ch4_1_A_3" value="3">
+                    <label class="form-check-label" for="Ch4_1_A_3">
+                      目前還無法做決定
                     </label>
                   </div>
-
-                  <p id="ch3-2">我目前還無法決定</p>
-                  <div class="form-check">
-                      <input class="form-check-input" type="radio" name="exampleRadios-ch4-2" id="ch4-2-1" value="ch4-2-1" >
-                      <label class="form-check-label" for="ch4-2-1">
-                        我想要再與我的主治醫師討論我的決定。
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="exampleRadios-ch4-2" id="ch4-2-2" value="ch4-2-2">
-                      <label class="form-check-label" for="ch4-2-2">
-                        我想要再與其他人（包含配偶、家人、朋友或第二意見提供者…）討論我的決定。
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="exampleRadios-ch4-2" id="ch4-2-3" value="ch4-2-3">
-                      <label class="form-check-label" for="ch4-2-3">
-                        對於以上治療方式，我想要再瞭解更多，我的問題有：
-                      </label>
-                      <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">問題</span>
-                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                  <tr>
+                    <td scope="row" id="Ch4_2_Q"><h5><br>請問您對於做這個決定，您信心指數為多少？請勾選出您心中的分數</h5></td>
+                    <td>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-Ch4_2_A" id="Ch4_2_A_1" value="1">
+                            <label class="form-check-label" for="Ch4_2_A_1">1(非常沒信心) </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-Ch4_2_A" id="Ch4_2_A_2" value="2">
+                            <label class="form-check-label" for="Ch4_2_A_2">2(有點沒信心) </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-Ch4_2_A" id="Ch4_2_A_3" value="3">
+                            <label class="form-check-label" for="Ch4_2_A_3">3(普通) </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions-Ch4_2_A" id="Ch4_2_A_4" value="4">
+                            <label class="form-check-label" for="Ch4_2_A_4">4(有信心) </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions-Ch4_2_A" id="Ch4_2_A_5" value="4">
+                          <label class="form-check-label" for="Ch4_2_A_5">5(非常有信心) </label>
                       </div>
-                    </div>
-                    <button class="btn btn-primary" type="submit">提交</button>
+                    </td>
+                  </tr>
+                      <button class="btn btn-primary" type="submit" id="submitForm3">提交</button>
         </div>
-        
     <script>
+      function changeFontSize(size) {
+            var elements = document.querySelectorAll("*"); // 選擇所有元素
+            elements.forEach(function(element) {
+              document.documentElement.style.fontSize = size + "px"; // 設置每個元素的字體大小
+            });
+        }
+        //加大字體
+        function increaseFontSize() {
+        var fontSizeSlider = document.getElementById('font-size');
+        var newSize = parseInt(fontSizeSlider.value) + 1;
+        if (newSize <= parseInt(fontSizeSlider.max)) {
+            fontSizeSlider.value = newSize;
+            changeFontSize(newSize);
+        }
+    }
+
+    // 减小字體
+    function decreaseFontSize() {
+        var fontSizeSlider = document.getElementById('font-size');
+        var newSize = parseInt(fontSizeSlider.value) - 1;
+        if (newSize >= parseInt(fontSizeSlider.min)) {
+            fontSizeSlider.value = newSize;
+            changeFontSize(newSize);
+        }
+    }
+        // 恢復預設字體大小函數
+        function resetFontSize() {
+            var elements = document.querySelectorAll("*"); // 選擇所有元素
+            elements.forEach(function(element) {
+                element.style.fontSize = ""; // 清除直接設定的字體大小，使其回復到預設值
+            });
+
+            // 重置滑動桿的值為預設值
+            var fontSizeSlider = document.getElementById('font-size');
+            fontSizeSlider.value = 16;
+
+            // 重置導航條樣式
+            var breadcrumb = document.querySelector(".breadcrumb");
+            breadcrumb.classList.remove("active");
+        }
+
         function showContent(contentId) {
             // 隐藏所有内容
             var contents = document.querySelectorAll('.content');
@@ -583,27 +648,158 @@
                 selectedContent.style.display = 'block';
             }
         }
-    </script>
+        function getUserData() {
+          const user = JSON.parse(localStorage.getItem('user')); 
+          const user_name = user.user_name;
+          const user_idNumber = user.user_idNumber;
+          const sdm_title = '我該接受全人工膝關節置換術嗎?';
+          const sdm_id = 3;
     
-    </body>
-    </html>
-    
-
-<script>
+          return { user, user_name, user_idNumber, sdm_title, sdm_id };
+}
 // 在頁面顯示user名字
 document.addEventListener('DOMContentLoaded', function() {
-  const userId = JSON.parse(localStorage.getItem('user')); 
-  fetch(`/api/user_name?userId=${userId}`) 
-  .then(response => response.json())
-  .then(user => {
-    const userNameDisplay = document.getElementById('userNameDisplay');
-    user.forEach(user_name => {
-      userNameDisplay.textContent = 'Hello, ' + user_name.user_name; 
-
+    const userId = JSON.parse(localStorage.getItem('user')); 
+    fetch(`/api/user_name?userId=${userId}`) 
+    .then(response => response.json())
+    .then(user => {
+        const userNameDisplay = document.getElementById('userNameDisplay');
+        user.forEach(user_name => {
+            userNameDisplay.textContent = 'Hello, ' + user_name.user_name; 
+        })
     })
-  })
-  .catch(error => console.error('Error:', error));
+    .catch(error => console.error('Error:', error));
+  
+    const submitButton1 = document.getElementById('submitForm1');
+submitButton1.addEventListener('click', function() {
+    // 获取用户的答案
+    const selectedOption1 = document.querySelector('input[name="inlineRadioOptions-ch2_1"]:checked');
+    const selectedOption2 = document.querySelector('input[name="inlineRadioOptions-ch2_2"]:checked');
+    const selectedOption3 = document.querySelector('input[name="inlineRadioOptions-ch2_3"]:checked');
+    const selectedOption4 = document.querySelector('input[name="inlineRadioOptions-ch2_4"]:checked');
+    const selectedOption5 = document.querySelector('input[name="inlineRadioOptions-ch2_5"]:checked');
+
+    // 检查是否有选中的选项
+    if (!selectedOption1 || !selectedOption2 || !selectedOption3 || !selectedOption4 || !selectedOption5) {
+        alert('请确保所有问题都已回答');
+        return;
+    }
+    const { user, user_name, user_idNumber, sdm_title, sdm_id } = getUserData();
+
+    const answers = {
+        Ch2_1_A: selectedOption1.value,
+        Ch2_2_A: selectedOption2.value,
+        Ch2_3_A: selectedOption3.value,
+        Ch2_4_A: selectedOption4.value,
+        Ch2_5_A: selectedOption5.value,
+        // 添加其他问题的答案字段...
+    };
+
+    // 发送答案到服务器
+    fetch('/save-answers-1', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user, user_name, user_idNumber, sdm_title, sdm_id, ...answers }), // 使用解构和扩展运算符合并对象
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Response from server:', data);
+        // 更新用户界面，例如显示成功消息
+        showSuccessMessage('回答已保存！');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // 更新用户界面，例如显示错误消息
+        showErrorMessage('保存答案时出错，请稍后再试。');
+    });
 });
+
+const submitButton2 = document.getElementById('submitForm2');
+submitButton2.addEventListener('click', function() {
+    // 获取用户的答案
+    const selectedOption1 = document.querySelector('input[name="exampleRadios-ch3-1"]:checked');
+    const selectedOption2 = document.querySelector('input[name="exampleRadios-ch3-2"]:checked');
+    const selectedOption3 = document.querySelector('input[name="exampleRadios-ch3-3"]:checked');
+    const selectedOption4 = document.querySelector('input[name="exampleRadios-ch3-4"]:checked');
+
+    // 检查是否有选中的选项
+    if (!selectedOption1 || !selectedOption2 || !selectedOption3 || !selectedOption4 ) {
+        alert('请确保所有问题都已回答');
+        return;
+    }
+    const { user, user_name, user_idNumber, sdm_title, sdm_id } = getUserData();
+
+    const answers = {
+        Ch3_1_A: selectedOption1.value,
+        Ch3_2_A: selectedOption2.value,
+        Ch3_3_A: selectedOption3.value,
+        Ch3_4_A: selectedOption4.value,
+        // 添加其他问题的答案字段...
+    };
+
+    // 发送答案到服务器
+    fetch('/save-answers-2', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user, user_name, user_idNumber, sdm_title, sdm_id, ...answers }), // 使用解构和扩展运算符合并对象
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Response from server:', data);
+        // 更新用户界面，例如显示成功消息
+        showSuccessMessage('回答已保存！');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // 更新用户界面，例如显示错误消息
+        showErrorMessage('保存答案时出错，请稍后再试。');
+    });
+});
+const submitButton3 = document.getElementById('submitForm3');
+submitButton3.addEventListener('click', function() {
+    // 获取用户的答案
+    const selectedOption1 = document.querySelector('input[name="exampleRadios-Ch4_1_A"]:checked');
+    const selectedOption2 = document.querySelector('input[name="inlineRadioOptions-Ch4_2_A"]:checked');
+
+    // 检查是否有选中的选项
+    if (!selectedOption1 || !selectedOption2 ) {
+        alert('请确保所有问题都已回答');
+        return;
+    }
+    const { user, user_name, user_idNumber, sdm_title, sdm_id } = getUserData();
+
+    const answers = {
+        Ch4_1_A: selectedOption1.value,
+        Ch4_2_A: selectedOption2.value,
+        // 添加其他问题的答案字段...
+    };
+
+    // 发送答案到服务器
+    fetch('/save-answers-3', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user, user_name, user_idNumber, sdm_title, sdm_id, ...answers }), // 使用解构和扩展运算符合并对象
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Response from server:', data);
+        // 更新用户界面，例如显示成功消息
+        showSuccessMessage('回答已保存！');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // 更新用户界面，例如显示错误消息
+        showErrorMessage('保存答案时出错，请稍后再试。');
+    });
+});    
+});
+  
 
 const admin = localStorage.getItem('admin'); // 去得lacalStorage裡的admin資訊
 const user = JSON.parse(localStorage.getItem('user')); // 去得lacalStorage裡的user資訊
@@ -618,4 +814,8 @@ logoutButton.addEventListener('click', function() {
     window.location.href = 'user_login.html'; // 跳轉到使用者登入頁面
   }
 });
+
+
 </script>
+</body>
+</html>
