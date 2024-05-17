@@ -638,8 +638,8 @@ app.post('/save-answers-2', (req, res) => {
 
         // 执行数据库查询
         connection.query(
-            'INSERT INTO sdm_patientreplych3 ( user_id, sdm_tittle, sdm_id, Ch3_1_A, Ch3_2_A, Ch3_3_A, Ch3_4_A) VALUES ( ?, ?, ?, ?, ?, ?, ?)',
-            [userId, sdmTitle, sdmId, answers.Ch3_1_A, answers.Ch3_2_A, answers.Ch3_3_A, answers.Ch3_4_A],
+            'INSERT INTO sdm_patientreplych3 ( user_id, sdm_tittle, sdm_id, Ch3_1_A, Ch3_2_A, Ch3_3_A, Ch3_4_A, Ch3_5_A) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)',
+            [userId, sdmTitle, sdmId, answers.Ch3_1_A, answers.Ch3_2_A, answers.Ch3_3_A, answers.Ch3_4_A, answers.Ch3_5_A],
             (error, results) => {
                 connection.release(); // 释放连接
 

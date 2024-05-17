@@ -136,13 +136,39 @@
         border-radius: 50%; /* 將按鈕設置為圓形 */
         font-size: 20px; /* 調整按鈕內字體大小 */
     }
+  .btn-group {
+  margin-bottom: 20px;
+}
+  .tag-btn {
+  margin-right: 10px;
+  border-radius: 20px; /* 圆角按钮 */
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.tag-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+/* 按钮悬停时的效果 */
+.tag-btn:hover {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+/* 按钮激活（被选中）时的效果 */
+.tag-btn.active {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+}
     </style>
     <body>
       <nav aria-label="breadcrumb" class="navbar">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="sdm.html">醫病共享決策</a></li>
-            <li class="breadcrumb-item"><a href="sdm_questione3.html">乙型主動脈剝離手術治療我該選擇微創手術還是傳統手術比較適合?</a></li>
-            <li id="navItem" class="breadcrumb-item active" aria-current="page">適用對象/狀況</li>
+            <li class="breadcrumb-item"><a href="sdm_question4.html">急性骨髓性白血病經治療達到完全緩解後需要骨髓移植嗎?</a></li>
+            <li id="navItem" class="breadcrumb-item active" aria-current="page">目前位置</li>
         </ol>
 
         <!-- 字體調整功能 -->
@@ -156,162 +182,252 @@
     </nav>
 
     <button onclick="showContent('content1')" type="button" id="btn1" class="btn btn-outline-secondary btn-lg">前言</button>
-    <button onclick="showContent('content2')" type="button" id="btn2" class="btn btn-outline-secondary btn-lg">疾病或健康議題介紹</button>
-    <button onclick="showContent('content3')" type="button" id="btn3" class="btn btn-outline-secondary btn-lg">醫療選項介紹</button>
-    <button onclick="showContent('content4')" type="button" id="btn4" class="btn btn-outline-secondary btn-lg">醫療選項比較</button>
-    <button onclick="showContent('content5')" type="button" id="btn5" class="btn btn-outline-secondary btn-lg">醫療方式的考量</button>
-    <button onclick="showContent('content6')" type="button" id="btn6" class="btn btn-outline-secondary btn-lg">醫療資訊的認知</button>
-    <button onclick="showContent('content7')" type="button" id="btn7" class="btn btn-outline-secondary btn-lg">醫療方式的確認</button>
-    <button onclick="showContent('content8')" type="button" id="btn8" class="btn btn-outline-secondary btn-lg">其他問題</button>
-    
-    <h4 id="introText">乙型胸主動脈剝離是一種極易致命的疾病，需緊急手術治療，否則隨時造成死亡。
-      <br>當降主動脈直徑>6cm，或產生無法藥物控制的高血壓、休克、低血壓、內臟或肢體缺血、撕裂性疼痛、及剝離程度加劇等情況時，應馬上手術治療以搶救患者性命。
-      <br>乙型主動脈剝離疾病複雜度高，一般民眾對此疾病及相關治療較不清楚，有鑑於此，提升乙型主動脈剝離手術治療相關認知相當重要，因此在心臟血管外科主任的支持下，我們運用團隊合作積極推行本次活動。</h4>
-
-
+    <button onclick="showContent('content2')" type="button" id="btn2" class="btn btn-outline-secondary btn-lg">適用對象/狀況</button>
+    <button onclick="showContent('content3')" type="button" id="btn3" class="btn btn-outline-secondary btn-lg">疾病或健康議題介紹</button>
+    <button onclick="showContent('content4')" type="button" id="btn4" class="btn btn-outline-secondary btn-lg">醫療選項介紹</button>
+    <button onclick="showContent('content5')" type="button" id="btn5" class="btn btn-outline-secondary btn-lg">醫療選項比較</button>
+    <button onclick="showContent('content6')" type="button" id="btn6" class="btn btn-outline-secondary btn-lg">醫療方式的考量</button>
+    <button onclick="showContent('content7')" type="button" id="btn7" class="btn btn-outline-secondary btn-lg">醫療資訊的認知</button>
+    <button onclick="showContent('content8')" type="button" id="btn8" class="btn btn-outline-secondary btn-lg">醫療方式的確認</button>
 
     <div id="content1" class="content">
         <!-- Content for button 1 -->
-        <h4>當醫師告訴您有乙型主動脈剝離，且需要執行手術治療，否則可能有生命危險時，選擇一個適合您處理乙型主動脈剝離的術式是主要的目標，本表單將幫助您了解有那些術式可以選擇，幫助您思考並選擇您最期待的治療方式，請您依據我們的步驟，循序漸進檢視自己的需求及在意的事項，希望能幫助您做出最適合的抉擇。</h4>
+        <h4>急性骨髓性白血病的治療成效(預後)，由許多因素共同決定。主要可以由以下幾點因素決定:<br>
+            <br>
+            1. 疾病特徵<br>
+            2. 癌細胞的染色體變異<br>
+            3. 癌細胞帶有影響預後的基因突變<br>
+            4. 治療後的療效<br>
+              <br>病人接受首次誘導性化學治療後，首要目標是希望疾病達到完全緩解，接下來是希望疾病控制穩定能達到長期緩解。<br>
+                 目前急性骨髓性白血病的病人可以預後好壞可分成三個不同風險族群：低、中、高風險。<br>
+                 對於中、高風險病人，在首次達到疾病完全緩解後，接受異體造血幹細胞移植後，利用捐贈者植入的免疫細胞，可對抗可能存在或再出現的微量癌細胞，期望能改善中、高風險病患的預後；<br>
+                 然而異體造血幹細胞移植也有其相關的可能併發症，包含移植物對抗宿主疾病等，藉由醫病共享決策(Shared Decision Making，SDM)過程，醫護團隊將與您和家人共同了解異體造血幹細胞移植，希望能協助您面對後續的治療。</h4>
         </div>
     
     <div id="content2" class="content">
         <!-- Content for button 2 -->
-        <h4>主動脈直徑為2-3公分，當您降主動脈直徑擴大至6公分，或急性發作、經過藥物治療仍無法控制血壓、持續感到有撕裂性疼痛、血流灌注不足，表示您主動脈剝離程度加劇並有破裂風險，需選擇手術治療。        </h4>
+        <h4>急性骨髓性白血病接受誘導性化學治療後，達到第一次緩解的所有病人。</h4>
     </div>
     
     <div id="content3" class="content">
         <!-- Content for button 3 -->
-        <h4><b>主動脈剝離簡介:</b><br>
-
-          主動脈剝離是一種極易致命的疾病，好發部位在胸主動脈，根據剝離位置分類，以升、降主動脈做為區別，分為甲型及乙型主動脈剝離，甲型主動脈剝離發生於升主動脈，因緊鄰心臟，一旦發生剝離，48小時內死亡率為50%，需立即執行開胸手術治療。<br>
-          乙型主動脈剝離則發生在降主動脈，臨床治療需先以藥物控制血壓，當血壓無法有效控制、血流灌注不足或剝離加劇時，需立即進行手術治療，否則會有血管破裂及大出血風險，甚至危及生命。<br>
-   
-          乙型主動脈剝離起因於降主動脈壁因動脈硬化、血壓過高等因素影響，形成血管內膜裂口，使主動脈的內膜和中層分離，血液從裂口灌注入主動脈的中層，使得內膜和周遭的中層、外層分開而形成假腔。<br>
-          由於血液堆積、壓力升高，導致破裂口主動脈擴張，血管壁變薄，而有隨時破裂、導致患者大量出血，迅速死亡的危險。<br>
-   
-          造成乙型主動脈剝離最常見的危險因子是高血壓，近年來各國高血壓患者持續增加，國健署最新「國民營養健康狀況變遷調查」顯示：<br>
-          18歲以上國人高血壓盛行率達25.2%；40歲以後，盛行率更高達37.5%，平均每三人就有一人罹患高血壓，推算全國高血壓患者逼近500萬人。<br>
-          隨著高血壓人口增加，主動脈剝離個案也有增加趨勢，故此健康議題不可忽視。
-        </h4></div>
+        <h4>急性骨髓性白血病的診斷，骨髓抽吸及切片檢查可以確定診斷，是必要檢查項目，也能依據檢查結果將疾病的預後好壞做風險分類。</h4>
+        <img width=40% src="risk.png" class = "center-image" style="box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);" />
+        <h4>2022歐洲白血病照護網更新風險分級如下</h4>
+        <img width=40% src="risk level.png" class = "center-image" style="box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);" />
+    </div>
     
     <div id="content4" class="content">
         <!-- Content for button 4 -->
-        <h4>乙型主動脈剝離手術分為傳統及微創手術，分別敘述如下:<br>
-          <br><b>傳統手術:</b><br>
-          手術採左側開胸，傷口長度約20至22公分，手術過程需進行低溫體外循環，將剝離的胸主動脈病變處切除，手術視野清楚，可完整檢視病變部位，並以人工血管進行置換。<br>
-          手術後ㄧ年死亡率為24.3％，五年死亡率為46.7％，術後五年內，大約有三分之一的病人，會因其他部位的主動脈剝離或破裂，需再行一次手術。<br>
-          手術常見的早期併發症是中風、暫時或永久性的神經損傷、呼吸功能不全、腎功能不全、心肌梗塞、左側聲帶麻痺、傷口感染、癱瘓等。<br>
-          長期併發症包括新的剝離形成，或沿血管往上裂，形成甲型主動脈剝離。<br>
-          <br>
-          <img width=10% src="trauma.png"style="box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);" />
-          <br>傷口長度20-22公分<br>
-          <img width=10% src="bloodVessel.png"  style="box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);" />
-          <br>人工血管<br>
-          <br><b>微創手術:</b><br>
-          微創手術較不具侵襲性，手術方式為將特殊導管經由病人兩側大腿動脈血管逆行送至降主動脈，經X光定位後，再將裝有金屬支架的人工血管，由股動脈運送至主動脈剝離部位，支架便會展開、固定，以強化主動脈壁較脆弱的部位，如此一來，血流便會流進套膜人工血管中，避免血流持續衝擊已膨大且變薄之動脈血管內壁，而造成破裂。手術後ㄧ年死亡率為14.3％，五年死亡率為49.7％，術後早期併發症包括血液灌流不良、形成甲型主動脈剝離、下肢癱瘓。<br>
-          長期倂發症包含血管破裂、支架移位、滲漏，或形成甲型主動脈剝離。<br>
-          微創手術後若發生滲漏或移位，應再行微創手術治療，若血管破裂，則需行傳統手術治療。<br>
-          <br>
-          <img width=10% src="cut.png"  style="box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);" />
-          <br>傷口長度2-3公分<br>
-          <img width=10% src="support.png"  style="box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);" />
-          <br>支架<br>
-        </h4>
+        <h4>依照您的疾病風險分類，急性骨髓性白血病在接受首次化學治療（誘導性化學治療）達到完全緩解後，後續有接受鞏固性化學治療及接受異體周邊造血幹細胞移植兩個主要治療選項。</h4>
+        <img width=50% src="treatway.png" class = "center-image" style="box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);" />
         </div>
 
     <div id="content5" class="content">
         <!-- Content for button 5 -->
-        <table class="table">
+        <div class="btn-group">
+          <button id="treatmentBtn" class="btn btn-primary tag-btn">治療方式比較</button>
+          <button id="riskBtn" class="btn btn-primary tag-btn">風險比較</button>
+        </div>
+        <table id="treatmentTable" class="table">
             <thead>
               <tr>
                 <th scope="col"></th>
-                <th scope="col">傳統手術</th>
-                <th scope="col">微創手術</th>
+                <th scope="col">移植</th>
+                <th scope="col">不移植</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th scope="row">手術方式</th>
-                <td>左側開胸，手術過程需進行低溫體外循環，將剝離的胸主動脈病灶切除，以人工血管進行更換。<br>
-                <img width=15% src="bloodVessel.png" />
-                <br>人工血管<br></td>
-                <td>將特殊導管經由病人兩側大腿動脈血管逆行輸送至降主動脈，經X光定位後，將金屬支架的人工血管，在膨大的血管前後架接一段管道讓血流通過，避免血流持續衝擊已膨大且變薄之動脈血管內壁造成破裂。<br>
-                <img width=15% src="support.png" />
-                <br>支架<br>   
+                <th scope="row">治療方式</th>
+                <td>進行異體造血幹細胞移植需經過3個步驟：<br>
+
+                  第一步：移植前接受調理化療，作用是將患者可能仍帶有癌細胞的骨髓清空以利幹細胞植入。
+                  
+                  <br>第二步：為輸注幹細胞。
+                  
+                  <br>第三步：為等待幹細胞生長。一般來說異體移植從輸注幹細胞到骨髓成功植入約需2-3週，期間可能發生的併發症如感染、排斥等現象將可能延後新生骨髓造血幹細胞長回之時間，而多數的併發症都是發生在第三步驟時候。
+                </td>
+                <td>目前常用的標的鞏固治療配方為高劑量賽德薩(Cytarabine)，需進行3-4個循環的鞏固治療，每個循環須接受早晚一次隔日注射的賽德薩(Cytarabine)化學治療共5天，即第1, 3, 5天接受化學治療，每日兩劑共6劑，這樣就完成一個循環的治療，而下一個循環約間隔28天等待血球與體力恢復，間隔時間因恢復狀況而異。   
                 </td>
               </tr>
               <tr>
-                <th scope="row">傷口大小</th>
+                <th scope="row">治療地點</th>
                 <td>	
-                  手術採左側開胸，傷口長度大約20~22公分。
-                  <img width=15% src="trauma.png" />
+                  長青樓十樓骨髓移植中心<br>
+                  <img width=40% class="center-image" src="tenfloor_center.png" />
                 </td>
-                <td>手術由腹股溝劃開，傷口長度約2~3公分，將特殊導管由此置入。若使用血管縫合器，則術後腹股溝穿刺傷口只有0.5公分。<br>
-                  <img width=15% src="cut.png" />
+                <td>一般病房<br>
+                  <img width=28% class="center-image" src="Ward.png" />
                 </td>
               </tr>
               <tr>
-                <th scope="row">費用</th>
-                <td>1.手術費用約73,000元。<br>
-                    2.可自費購買組織止血修復凝合劑(每劑4ml)用於手術傷口，一般傷口約需使用1~2支，每支單價25,000元，總價約50,000元。
+                <th scope="row">住院天數</th>
+                <td>如上述，移植前化療端看使用的配方，一般來說約需要一週左右，<br>
+                  輸注捐贈者幹細胞童常只需要一天，若您的捐贈者為全相合親屬移植（如兄弟姊妹），視需要可能會連續輸注二至三天，<br>
+                  而後續等待幹細胞植入骨髓併且身體狀況恢復則需要2-3週，此時期病況變化較大，平均來說整個療程的總住院天數會需要1-1.5個月。
                   </td>
-                <td>1.手術費用約47,000元。<br>
-                    2.可自費購買血管縫合器縫合手術傷口，一般傷口約需3~4支，每支單價13,300元，總價約53,000元。
-                  </td>
-              </tr>
-              <tr>
-                <th scope="row" rowspan="2">住院天數</th>
-                <td>	
-                  病人平均住院天數為19.6天<br>
-                  住加護中心平均住院天數為6天<br></td>
-                <td>	
-                  病人平均住院天數為14.9天<br>
-                  住加護中心平均住院天數為4天<br></td>
-              </tr>
-              <td colspan="2"><img width=25% class="center-image" src="hospitaldate.png" /></td>
-              <tr>
-                <th scope="row" rowspan="2">一年再開刀比率</th>
-                <td>	
-                  傳統手術因為手術視野清楚，直接用人工血管取代病變血管，一年再開刀比率為3.3%。</td>
-                <td>	
-                  微創手術因為滲漏及支架移位，一年再開刀比率為11.2%。</td>
-              </tr>
-              <td colspan="2"><img width=25% class="center-image" src="resurgrey.png" /></td>
-              <tr>
-                <th scope="row" rowspan="2">死亡率</th>
-                <td>	
-                  1.傳統手術因為手術時間長，手術過程採低溫及暫時心臟停止，故有較高的死亡風險。<br>
-                  <br>手術過程中死亡率為18.6%<br>
-                  一年死亡率為24.3%<br>
-                  五年死亡率為46.7%<br>
-                  2.經文獻評讀及統計原因後發現：<br>
-                  一年的死亡率雖然較高，但其五年的死亡率追蹤較微創手術稍低。</td>
-                <td>	
-                  1.微創手術因為手術時間短，無須低溫及暫時心臟停止，故有較低死亡風險。<br>
-                  <br>手術過程中死亡率為7.4%<br>
-                  一年死亡率為14.3%<br>
-                  五年死亡率為49.7%<br>
-                  2.經文獻評讀及統計原因後發現：<br>
-                  微創手術支架置入後，較易沿血管往上裂，形成甲型主動脈剝離，因此控制血壓、規則服藥、定期追蹤電腦斷層是很重要的。</td>
-              </tr>
-              <td colspan="2"><img width=25% class="center-image" src="dead.png" /></td>
-              <tr>
-                <th scope="row">滲漏</th>
-                <td>無</td>
-                <td>1.手術後立即發生滲漏機會為7.2%。<br>
-                    2.五年後約25%病人發生滲漏情形。
+                <td>如上述，住院情況約為每個月須住院6天5夜接受化學治療，持續3-4次。<br>
+                  期間若因化療後血球低下產生合併症如發燒、腹瀉等，視病情需要而留院或住院治療。
                   </td>
               </tr>
               <tr>
-                <th scope="row" rowspan="2">併發症</th>
+                <th scope="row">治療時間長短</th>
+                <td style="padding-left: 20px;">
+                  <ul style="list-style-type: none; padding-left: 0;">
+                      <li style="text-indent: -20px;">1.從移植日開始算起的3-4個月，期間可能發生急性排斥、感染、血球恢復緩慢等等問題，接受過移植前調理化療後也可能產生嚴重黏膜破損、心肺功能退化、肝腎功能異常等副作用。</li>
+                      <li style="text-indent: -20px;">2.移植日100天後相對進入穩定期，往後仍可能發生慢性排斥，總療程的長度視不同併發症、副作用而變化。</li>
+                  </ul>
+                </td>
                 <td>	
-                  手術以左側開胸，手術過程需全程或部分進行低溫體外循環，將剝離的胸主動脈病灶切除，手術時間較長，常見併發症為癱瘓(2.9%)、心臟併發症(8.9%)、中風(2.9%)、神經系統併發症(6.9%)、急性腎功能衰竭(25.4%)、敗血症(14%)。</td>
-                <td>	
-                  手術由腹股溝劃開長度約2-3公分傷口，將導管置入進行手術，手術時間較短，常見併發症為癱瘓1.3%、心臟併發症5.0%、中風1.3%、神經系統併發症4.8%、急性腎功能衰竭16.6%、敗血症4%。</td>
+                  總治療時間約為4-5個月。期間會有血球降低導致感染、出血等併發症，血球及體力恢復後罕有治療相關併發症或副作用。<br>
+                  仍需定期於門診追蹤疾病是否穩定。
+                </td>
               </tr>
-              <td colspan="2"><img width=25% class="center-image" src="complication.png" /></td>
+              <tr>
+                <th scope="row">年齡限制</th>
+                <td>	
+                  	目前骨髓移植的年齡限制為65歲。<br>
+                    但需看病人的體能狀況決定，若65歲以下但長期臥床者也不合適，65-70歲之間需身體狀況絕佳者才考慮進行骨髓移植。</td>
+                <td>	
+                  目前對於急性骨髓性血癌是以60歲以上以下分界定義老年或非老年。<br>
+                  但目前化療並無特定的年齡限制，端看病人的體能狀況、共病症等等決定是否能承受化療。<br>
+                  體能狀況最好是ECOG(美國東岸癌症臨床研究合作組織，Eastern Cooperative Oncology Group)分類中的0-1分，也就是日常生活能幾乎完全自理者，長期臥床之患者則需要謹慎考量。
+                </td>
+              </tr>
+                <th scope="row">慢性病限制</th>
+                <td>	
+                  在骨髓移植前須評估心臟、肺臟、肝、腎等器官功能，因移植前調理化療有對臟器產生不良影響的可能（視使用藥物而定），若有器官功能不全者可能不合適，一般高血壓、糖尿病控制良好則不受影響。
+                <td>	
+                  有嚴重器官功能衰竭者可能較不適合，但一般高血壓、糖尿病並不受影響。
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">花費</th>
+                <td style="padding-left: 20px;">
+                  <ul style="list-style-type: none; padding-left: 0;">
+                      <li style="text-indent: -20px;">目前骨髓移植花費健保多有給付，然而移植前調理化療的選用如有特殊情況可能需要自費。<br>
+                        此外某些藥物可能健保不給付，例如止吐藥、維他命等營養補給品，或第三步驟等待幹細胞生長的階段需要補充白蛋白、營養針等，或特定併發症需要的特殊檢查或藥物。<br>
+                        但特定併發症發生率相對不高，並不需要常規預防或使用。</li>
+                      <li style="text-indent: -20px;">非親屬移植的配對篩選、捐贈者健康檢查、捐贈過程相關費用等約需要新台幣15萬左右。</li>
+                  </ul>
+                </td>
+                <td>化療費用目前健保均有給付，惟須使用特定標靶藥物如針對FLT3-ITD、IDH1、IDH2等用藥目前健保無給付，但標靶藥物之使用要看基因檢測結果，並非所有病人都需要且適用。
+                  </td>
+              </tr>
+              <tr>
+                <th scope="row">相關副作用</th>
+                <td>	
+                  血球低下、感染、移植物對抗宿主疾病（排斥）為最重要三大副作用。<br>
+                  其他：<br>
+                  如嚴重黏膜破損、肝靜脈栓塞、植入症候群、全身放射照射導致肺纖維化、免疫性肺炎等等，但此類併發症相對少見且並非絕對會發生。
+                </td>
+                <td>	
+                  化療導致的血球低下、出血、感染。<br>
+                  高劑量賽德薩(Cytarabine)可能會有小腦毒性，造成暈眩等症狀。
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">生活品質</th>
+                <td>	
+                  治療短期內，若合併較多併發症時，會因身體虛弱而有數個月無法生活自理的可能；<br>
+                  然而，恢復良好其生活品質可與正常人相同。
+                </td>
+                <td>	
+                  相對移植而言較佳，雖血球低下時可能也會有跟骨髓移植相同的身體虛弱症狀，但相對時間短，一般鞏固性治療導致的血球低下約為1週。
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">身體功能狀況</th>
+                <td>	
+                  接受移植前三個月尚在恢復期，體力會明顯衰退，之後可慢慢恢復，恢復速度因人而異，約需休養半年至一年尚可完全正常生活（如工作）。
+                </td>
+                <td>	
+                  血球恢復後與正常狀況無異。
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">治療後藥物使用</th>
+                <td>	
+                  移植後均需使用抗排斥藥，待體力恢復及無排斥狀況下可慢慢減藥，目標為完全停止抗排斥藥物。<br>
+                  移植後免疫力重建期間，可能需使用預防性抗生素。其他藥物同平時慢性病控制。
+                </td>
+                <td>	
+                  無特殊藥物必須。
+                </td>
+              </tr>
             </div>
+        </tbody>
+      </table>
+      <table id="riskTable" class="table" style="display: none;">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th colspan="3" scope="col">移植</th>
+            <th colspan="3" scope="col">不移植</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="3">長期存活率<br>(存活超過3-5的機率)(以急性骨髓性血癌來說，若能存活超過5年通常表示疾病治癒)</td>
+            <td>低風險</td>
+            <td>中風險</td>
+            <td>高風險</td>
+            <td>低風險</td>
+            <td>中風險</td>
+            <td>高風險</td>
+          </tr>
+          <tr>
+            <td>50%-70%</td>
+            <td>45%-67%</td>
+            <td>20%-47%</td>
+            <td>50-70%<br>考量到移植併發症風險不建議常規接受移植。</td>
+            <td>27-54%</td>
+            <td>3-35%。<br>目前醫學證據建議高風險病人常規接受移植治療。</td>
+          </tr>
+          <tr>
+            <td colspan="6"><img width=60% class="center-image" src="aliverate.png" /></td>
+          </tr>
+          <tr>
+            <td rowspan="3">復發率<br>(5年內復發率)</td>
+            <td>低風險</td>
+            <td>中風險</td>
+            <td>高風險</td>
+            <td>低風險</td>
+            <td>中風險</td>
+            <td>高風險</td>
+          </tr>
+          <tr>
+            <td>30%-50%</td>
+            <td>38%-61%</td>
+            <td>61%-84%</td>
+            <td>30%-50%</td>
+            <td>68%-83%</td>
+            <td>78-100%</td>
+          </tr>
+          <tr>
+            <td colspan="6"><img width=60% class="center-image" src="relapse.png" /></td>
+          </tr>
+          <tr>
+            <td rowspan="3">併發症死亡率<br>(包含感染、排斥、出血、移植本身等等併發症造成的死亡，而非癌症惡化導致)</td>
+            <td>低風險</td>
+            <td>中風險</td>
+            <td>高風險</td>
+            <td>低風險</td>
+            <td>中風險</td>
+            <td>高風險</td>
+          </tr>
+          <tr>
+            <td>20%</td>
+            <td>20%</td>
+            <td>16%-22%</td>
+            <td>3-5%</td>
+            <td>3%</td>
+            <td>5~17%
+          </tr>
+          <tr>
+            <td colspan="6"><img width=60% class="center-image" src="deadrate.png" /></td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -320,14 +436,14 @@
             <table class="table table-striped-columns">
               <thead>
                 <tr>
-                  <th scope="col">我想選擇傳統手術的理由</th>
-                  <th scope="col">程度(自身狀況越接近哪種，就選擇越靠近該敘述的選項)</th>
-                  <th scope="col">我想選擇微創手術的理由</th>
+                  <th scope="col">選擇不造血幹細胞移植的理由</th>
+                  <th scope="col">(傾向接受化學治療)程度(傾向接受異體造血細胞)</th>
+                  <th scope="col">選擇造血幹細胞移植的理由</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td scope="row" id="Ch2_1_N">我較不在意住院天數長短。</td>
+                  <td scope="row" id="Ch2_1_N">我希望先用化學治療控制疾病就好，暫時先不考慮異體造血幹細胞移植。</td>
                   <td>
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1" value="1">
@@ -362,10 +478,10 @@
                       <label class="form-check-label" for="ch2_1_8">8</label>
                   </div>
                   </td>
-                  <td id="Ch2_1_Y">我希望能早點出院。</td>
+                  <td id="Ch2_1_Y">我知道治療過程比較辛苦，但是為了有機會治癒我希望接受異體造血幹細胞移植。</td>
                 </tr>
                 <tr>
-                  <td scope="row" id="N-ch1-2">我可以接受手術產生的較大傷口。</td>
+                  <td scope="row" id="N-ch1-2">我害怕異體造血幹細胞移植帶來的副作用，我也擔心住在隔離病房會有適應的問題。</td>
                   <td>
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_1" value="1">
@@ -400,10 +516,10 @@
                       <label class="form-check-label" for="ch2_2_8">8</label>
                   </div>
                   </td>
-                  <td id="Y-ch1-2">我希望傷口較小，術後比較不疼痛。</td>
+                  <td id="Y-ch1-2">我可以理解異體造血幹細胞移植因為會有一段時間血球低下、免疫下降，所以需要住在隔離病房，也可能會因輕微血球偏低造成嚴重感染。</td>
                 </tr>
                 <tr>
-                  <td scope="row" id="N-ch1-3">我希望不要有過多的自費項目。</td>
+                  <td scope="row" id="N-ch1-3">我希望不要有額外的花費。</td>
                   <td>
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_1" value="1">
@@ -438,10 +554,10 @@
                       <label class="form-check-label" for="ch2_3_8">8</label>
                   </div>
                   </td>
-                  <td id="Y-ch1-3">我可以接受治療時所需的必要自費項目。</td>
+                  <td id="Y-ch1-3">我明白在配對和異體造血幹細胞移植治療的過程當中，可能會有必要的自費項目。</td>
                 </tr>
                 <tr>
-                  <td scope="row" id="Ch2_4_N">我不希望之後還要再次手術。</td>
+                  <td scope="row" id="Ch2_4_N">我和我的家人對於異體造血幹細胞移植還有需要討論的地方，暫時先採用化學資料。</td>
                   <td>
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_4" id="ch2_4_1" value="1">
@@ -476,45 +592,7 @@
                       <label class="form-check-label" for="ch2_4_8">8</label>
                   </div>
                   </td>
-                  <td id="Ch2_4_Y">我可以理解微創手術後可能因支架移位需重新手術。</td>
-                </tr>
-                <tr>
-                  <td scope="row">我擔心反覆接受顯影劑電腦斷層檢查會影響腎功能。</td>
-                  <td>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_5" id="ch2_5_1" value="1">
-                      <label class="form-check-label" for="ch2_5_1">1</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_5" id="ch2_5_2" value="2">
-                      <label class="form-check-label" for="ch2_5_2">2</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_5" id="ch2_5_3" value="3">
-                      <label class="form-check-label" for="ch2_5_3">3</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_5" id="ch2_5_4" value="4">
-                      <label class="form-check-label" for="ch2_5_4">4</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_5" id="ch2_5_5" value="5">
-                      <label class="form-check-label" for="ch2_5_5">5</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_5" id="ch2_5_6" value="6">
-                      <label class="form-check-label" for="ch2_5_6">6</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_5" id="ch2_5_7" value="7">
-                      <label class="form-check-label" for="ch2_5_7">7</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_5" id="ch2_5_8" value="8">
-                      <label class="form-check-label" for="ch2_5_8">8</label>
-                  </div>
-                  </td>
-                  <td> 因手術方式必要，我了解需每年接受2~4次的顯影劑電腦斷層檢查。</td>
+                  <td id="Ch2_4_Y">我和我的家人都希望可以接受積極治療，希望能夠試試看異體造血幹細胞移植。</td>
                 </tr>
               </tbody>
             </table>
@@ -524,7 +602,7 @@
         <div id="content7" class="content">
                 <!-- Content for button 7 -->
                 <h4>對於以上提供的資訊，您是否已經了解了呢</h4>
-                <p id="ch3-1">微創手術常見的併發症是支架移位及血管滲漏，需要再次進行手術治療。</p>
+                <p id="ch3-1">接受異體造血幹細胞移植後就不再需要鞏固化學治療了。</p>
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="exampleRadios-ch3-1" id="Ch3_1_A1" value="1" >
                   <label class="form-check-label" for="Ch3_1_A1">
@@ -544,7 +622,7 @@
                     </label>
                   </div>
 
-                  <p id="ch3-2">傳統手術一年再手術比率比微創手術高。</p>
+                  <p id="ch3-2">接受異體造血幹細胞移植後，疾病就不會再復發了。</p>
                   <div class="form-check">
                     <input class="form-check-input" type="radio" name="exampleRadios-ch3-2" id="Ch3_2_A1" value="1" >
                     <label class="form-check-label" for="Ch3_2_A1">
@@ -564,7 +642,7 @@
                       </label>
                     </div>
 
-                    <p id="ch3-3">傳統手術傷口比微創手術大，手術時間也比較長。</p>
+                    <p id="ch3-3">急性骨髓性白血病高風險族群，接受異體造血幹細胞移植後之長期存活率較不接受造血幹細胞移植高。</p>
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="exampleRadios-ch3-3" id="Ch3_3_A1" value="1" >
                       <label class="form-check-label" for="Ch3_3_A1">
@@ -584,7 +662,7 @@
                         </label>
                       </div>
 
-                      <p id="ch3-4">傳統和微創手術都會造成急性腎衰竭，但傳統手術發生比率較高。</p>
+                      <p id="ch3-4">急性骨髓性白血病高風險族群，接受異體造血幹細胞移植後之復發率較不接受幹細胞造血幹細胞移植低。</p>
                       <div class="form-check">
                         <input class="form-check-input" type="radio" name="exampleRadios-ch3-4" id="Ch3_4_A1" value="1" >
                         <label class="form-check-label" for="Ch3_4_A1">
@@ -603,22 +681,22 @@
                             不知道
                           </label>
                         </div>
-                        <p id="ch3-4">微創手術後每年僅須執行一次電腦斷層檢查。</p>
+                        <p id="ch3-5">異體造血幹細胞移植的三項重要併發症為血球低下、感染和移植物對抗宿主疾病（排斥）。</p>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios-ch3-2" id="ch3-4-1" value="ch3-4-1" >
-                            <label class="form-check-label" for="ch3-4-1">
+                            <input class="form-check-input" type="radio" name="exampleRadios-ch3-5" id="Ch3_5_A1" value="1" >
+                            <label class="form-check-label" for="Ch3_5_A1">
                               是
                             </label>
                           </div>
                           <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios-ch3-2" id="ch3-4-2" value="ch3-4-2">
-                            <label class="form-check-label" for="ch3-4-2">
+                            <input class="form-check-input" type="radio" name="exampleRadios-ch3-5" id="Ch3_5_A2" value="0">
+                            <label class="form-check-label" for="Ch3_5_A2">
                               不是
                             </label>
                           </div>
                           <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios-ch3-2" id="ch3-4-3" value="ch3-4-3">
-                            <label class="form-check-label" for="ch3-4-3">
+                            <input class="form-check-input" type="radio" name="exampleRadios-ch3-5" id="Ch3_5_A3" value="-1">
+                            <label class="form-check-label" for="Ch3_5_A3">
                               不知道
                             </label>
                           </div>
@@ -633,13 +711,13 @@
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="exampleRadios-Ch4_1_A" id="Ch4_1_A_1" value="1" >
                   <label class="form-check-label" for="Ch4_1_A_1">
-                      執行傳統手術
+                    接受異體造血幹細胞移植
                     </label>
                   </div>
                   <div class="form-check">
                     <input class="form-check-input" type="radio" name="exampleRadios-Ch4_1_A" id="Ch4_1_A_2" value="2">
                     <label class="form-check-label" for="Ch4_1_A_2">
-                      執行微創手術
+                      不接受異體造血幹細胞移植
                     </label>
                   </div>
                   <div class="form-check">
@@ -694,11 +772,6 @@ function showContent(contentId) {
     }
 }
 
-        
-
-
-
-  
     </script>
     
     </body>
@@ -763,8 +836,8 @@ function showContent(contentId) {
           const user = JSON.parse(localStorage.getItem('user')); 
           const user_name = user.user_name;
           const user_idNumber = user.user_idNumber;
-          const sdm_title = '乙型主動脈剝離手術治療我該選擇微創手術還是傳統手術比較適合?';
-          const sdm_id = 5;
+          const sdm_title = '急性骨髓性白血病經治療達到完全緩解後需要骨髓移植嗎?';
+          const sdm_id = 2;
     
           return { user, user_name, user_idNumber, sdm_title, sdm_id };
 }
@@ -791,7 +864,7 @@ submitButton1.addEventListener('click', function() {
     const selectedOption5 = document.querySelector('input[name="inlineRadioOptions-ch2_5"]:checked');
 
     // 检查是否有选中的选项
-    if (!selectedOption1 || !selectedOption2 || !selectedOption3 || !selectedOption4 || !selectedOption5) {
+    if (!selectedOption1 || !selectedOption2 || !selectedOption3 || !selectedOption4) {
         alert('请确保所有问题都已回答');
         return;
     }
@@ -802,7 +875,6 @@ submitButton1.addEventListener('click', function() {
         Ch2_2_A: selectedOption2.value,
         Ch2_3_A: selectedOption3.value,
         Ch2_4_A: selectedOption4.value,
-        Ch2_5_A: selectedOption5.value,
         // 添加其他问题的答案字段...
     };
 
@@ -834,9 +906,9 @@ submitButton2.addEventListener('click', function() {
     const selectedOption2 = document.querySelector('input[name="exampleRadios-ch3-2"]:checked');
     const selectedOption3 = document.querySelector('input[name="exampleRadios-ch3-3"]:checked');
     const selectedOption4 = document.querySelector('input[name="exampleRadios-ch3-4"]:checked');
-
+    const selectedOption5 = document.querySelector('input[name="exampleRadios-ch3-5"]:checked');
     // 检查是否有选中的选项
-    if (!selectedOption1 || !selectedOption2 || !selectedOption3 || !selectedOption4 ) {
+    if (!selectedOption1 || !selectedOption2 || !selectedOption3 || !selectedOption4 || !selectedOption5 ) {
         alert('请确保所有问题都已回答');
         return;
     }
@@ -847,6 +919,7 @@ submitButton2.addEventListener('click', function() {
         Ch3_2_A: selectedOption2.value,
         Ch3_3_A: selectedOption3.value,
         Ch3_4_A: selectedOption4.value,
+        Ch3_5_A: selectedOption5.value,
         // 添加其他问题的答案字段...
     };
 
@@ -911,7 +984,24 @@ submitButton3.addEventListener('click', function() {
 });    
 });
   
-
+document.addEventListener("DOMContentLoaded", function() {
+  const treatmentBtn = document.getElementById('treatmentBtn');
+  const riskBtn = document.getElementById('riskBtn');
+  const treatmentTable = document.getElementById('treatmentTable');
+  const riskTable = document.getElementById('riskTable');
+  
+  // 點擊“治療方式比較”按鈕時顯示相應表格
+  treatmentBtn.addEventListener('click', function() {
+    treatmentTable.style.display = 'table';
+    riskTable.style.display = 'none';
+  });
+  
+  // 點擊“風險比較”按鈕時顯示相應表格
+  riskBtn.addEventListener('click', function() {
+    treatmentTable.style.display = 'none';
+    riskTable.style.display = 'table';
+  });
+});
 const admin = localStorage.getItem('admin'); // 去得lacalStorage裡的admin資訊
 const user = JSON.parse(localStorage.getItem('user')); // 去得lacalStorage裡的user資訊
 const logoutButton = document.getElementById('logout-button');

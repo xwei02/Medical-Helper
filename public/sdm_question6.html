@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/modal.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg " id="nav-color">
+        <a class="navbar-brand" href="test.html" style="font-weight: bold">
+          <img src="medical_icon.png" alt="Logo" width="40" height="40"> 醫療小幫手</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="test.html" style="font-weight: bold">
+                <img src="home_icon.png" alt="Logo" width="25" height="25"> 首頁</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="medical_form.html" style="font-weight: bold">
+                <img src="leaflet.png" alt="Logo" width="25" height="25"> 手術問卷</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="personal_medicalcare.html" style="font-weight: bold">
+                <img src="personal_medical.png" alt="Logo" width="30" height="30"> 個人醫療</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="user_info_modifiy.html" style="font-weight: bold">
+                  <img src="modify.png" alt="Logo" width="28" height="28"> 用戶基本資料修改</a>
+              </li>
+            <li class="nav-item">
+                <a class="nav-link" href="user_feedback.html" style="font-weight: bold">
+                  <img src="reply2.png" alt="Logo" width="30" height="30"> 回饋</a>
+            </li>  
+            <li class="nav-item">
+                <a class="nav-link" id="sdm" href="sdm.html" style="font-weight: bold">
+                  <img src="sdmicon.png" alt="Logo" width="25" height="27"> 醫病共享決策</a>
+            </li> 
+          </ul>
+          <div class="ms-auto">
+            <a class="btn btn-light" id="logout-button">登出</a>
+          </div>
+          <div id="userNameDisplay" class="user-name-display"></div>
+
+        </div>
+    </nav>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .content {
+                display: none; /* 默認隱藏內容 */
+            }
+    
+            .active {
+                display: block; /* 顯示選擇內容 */
+            }
+            .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* 保持元素之间的间距 */
+            padding: 10px;
+            }
+            .nav-links {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            }
+            .nav-links li {
+            display: inline;
+            margin-right: 10px;
+            }
+            .font-size-adjustment {
+              display: flex;
+              align-items: center;
+            }
+            .font-size-adjustment label {
+              margin-right: 5px;
+            }
+        </style>
+        <title>Dynamic Content Example</title>
+    </head>
+    <style>
+     .btn-outline-secondary {
+        margin-top: 20px; 
+        
+    }
+    .content{
+        margin: 50px;
+    }
+    .center-image{
+        margin:auto;
+        margin-top: 50px;
+        display: block;
+    }
+    .btn-primary{
+        margin:auto;
+        display: block;
+    }
+    h4 {
+    margin: 30px; /* 控制顶部边距 */
+  }
+  .btn-large {
+        border-radius: 50%; /* 將按鈕設置為圓形 */
+        font-size: 20px;
+        padding: 10px 15px;
+    }
+  .btn-circle {
+        border-radius: 50%; /* 將按鈕設置為圓形 */
+        font-size: 20px; /* 調整按鈕內字體大小 */
+    }
+  .btn-group {
+  margin-bottom: 20px;
+}
+  .tag-btn {
+  margin-right: 10px;
+  border-radius: 20px; /* 圆角按钮 */
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.tag-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+/* 按钮悬停时的效果 */
+.tag-btn:hover {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+/* 按钮激活（被选中）时的效果 */
+.tag-btn.active {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+}
+    </style>
+    <body>
+      <nav aria-label="breadcrumb" class="navbar">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="sdm.html">醫病共享決策</a></li>
+            <li class="breadcrumb-item"><a href="sdm_question6.html">我得了大腸直腸癌,我該選擇什麼樣的手術方式?</a></li>
+            <li id="navItem" class="breadcrumb-item active" aria-current="page">目前位置</li>
+        </ol>
+
+        <!-- 字體調整功能 -->
+        <div class="font-size-adjustment">
+          <button onclick="resetFontSize()">恢復</button>
+            <label for="font-size">字體大小：</label>
+            <button onclick="decreaseFontSize()" class="btn-circle">小</button>
+            <input type="range" id="font-size" min="10" max="30" value="16" onchange="changeFontSize(this.value)">
+            <button onclick="increaseFontSize()" class="btn-large">大</button>
+          </div>
+    </nav>
+
+    <button onclick="showContent('content1')" type="button" id="btn1" class="btn btn-outline-secondary btn-lg">前言</button>
+    <button onclick="showContent('content2')" type="button" id="btn2" class="btn btn-outline-secondary btn-lg">適用對象/狀況</button>
+    <button onclick="showContent('content3')" type="button" id="btn3" class="btn btn-outline-secondary btn-lg">疾病或健康議題介紹</button>
+    <button onclick="showContent('content4')" type="button" id="btn4" class="btn btn-outline-secondary btn-lg">醫療選項介紹</button>
+    <button onclick="showContent('content5')" type="button" id="btn5" class="btn btn-outline-secondary btn-lg">醫療選項比較</button>
+    <button onclick="showContent('content6')" type="button" id="btn6" class="btn btn-outline-secondary btn-lg">醫療方式的考量</button>
+    <button onclick="showContent('content7')" type="button" id="btn7" class="btn btn-outline-secondary btn-lg">醫療資訊的認知</button>
+    <button onclick="showContent('content8')" type="button" id="btn8" class="btn btn-outline-secondary btn-lg">醫療方式的確認</button>
+
+    <div id="content1" class="content">
+        <!-- Content for button 1 -->
+        <h4>根據健保署的癌症統計，大腸直腸癌的發生率位居首位已超過十年，其死亡率與每年治療花費也在所有癌症中排名第三。<br>
+            依照癌症分期，第1及2期為癌細胞拘限於腸壁本身，第3期則代表侵犯至周邊的淋巴結，第4期則包含遠端器官轉移（例如肝臟、肺臟、腹膜⋯⋯等）。<br>
+            手術切除是治療大腸直腸癌主要方法之一，也是早期大腸直腸癌唯一能夠治癒的方式。<br>
+            傳統開腹手術已行之多年，微創手術應用在大腸直腸癌的治療則始於1990年，現在已是相當普及的手術方法，對於病患來說，對於手術方法存在的迷思或誤解，常會造成選擇的困難。<br>
+            </h4>
+        </div>
+    
+    <div id="content2" class="content">
+        <!-- Content for button 2 -->
+        <h4>適用於即將接受手術治療的大腸直腸癌患者。</h4>
+    </div>
+    
+    <div id="content3" class="content">
+        <!-- Content for button 3 -->
+        <h4>大腸直腸位於消化道的末端，長度約120~150公分，大腸位於腹腔內，直腸則位於骨盆腔，主要的功能為水分及營養成分的再吸收，也負責儲存大便及排便。<br>
+            大腸直腸癌最常好發的位置依序是直腸、乙狀結腸與升結腸。</h4>
+        <img width=40% src="intestines.png" class = "center-image"  />
+        <h4>大部分的大腸直腸癌（90%）為腺瘤，其成因主要是一連串原致癌基因與抑癌基因的突變造成小息肉變大及癌化。<br>
+            除了遺傳性的因素之外，大部分的危險因子是後天的環境因素、飲食(例如：低纖維、精緻澱粉、紅肉、加工肉品、酒)及生活習慣(例如：抽菸、少運動)。<br>
+            大腸直腸癌的症狀依腫瘤位置而有所差異，常見的症狀包括貧血、血便、排便習慣改變、糞便直徑變細、裡急後重、腹痛、體重減輕⋯⋯等。<br>
+            治療的方式除了電療及化療之外，手術還是主要治療的方式。<br>
+            手術的原則除了包括腫瘤所在腸道外還要沿著供應的血管拿到足夠的淋巴數目，且不論是腫瘤縱向還是環形的切緣均要足夠，也就是有足夠的安全距離，必要時需切除侵犯的鄰近器官或組織。
+        </h4>
+    </div>
+    
+    <div id="content4" class="content">
+        <!-- Content for button 4 -->
+        <h4>
+        <ul style="list-style-type: none; padding-left: 0;">
+            <li style="text-indent: -20px;"><b>1.傳統開腹手術</b><br>
+                視腫瘤的位置在上腹部或是下腹部切開約15-20公分的傷口，使用傷口保護套，配合視覺與觸覺能夠對整個腹腔進行完整的檢查。
+            </li>
+            <br>
+        <li style="text-indent: -20px;"><b>2.內視鏡微創手術</b><br>
+            在肚皮上切開三至五個0.5-1cm的小傷口，其中一個小傷口會延長至3-5公分讓切下之腫瘤能夠取出。<br>
+            配合影像技術的發展，腹腔鏡的鏡頭目前能達到Full HD甚至更高的解析度並且將腹腔內的組織放大4-6倍，讓醫生能夠做精準的執行手術。<br>
+            更進一步甚至有3D影像使手術更精確。目前對於內視鏡手術可以完整切除的腫瘤，淋巴取得數量，復發機率與長期存活率皆與傳統手術相仿。            
+        </li>   
+        </ul>
+        </h4>
+        </div>
+
+    <div id="content5" class="content">
+        <!-- Content for button 5 -->
+        <table id="treatmentTable" class="table">
+            <thead>
+              <tr>
+                <th scope="col">選項考量</th>
+                <th scope="col">傳統開腹手術</th>
+                <th scope="col">微創內視鏡手術<br>
+                    約5-10%轉換至傳統手術
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">適應症<br>
+                    (適合開刀的情況)</th>
+                <td><ul style="list-style-type: disc; padding-left: 0;">	
+                    <li style="margin-left: 20px; "><b>病灶較大或侵犯之周邊器官</b></li>
+                    <li style="margin-left: 20px; ">腫瘤<b>阻塞</b></li>
+                    <li style="margin-left: 20px; ">腫瘤<b>穿孔</b></li>
+                    <li style="margin-left: 20px; ">腹腔<b>嚴重沾粘</b></li>
+                </td>
+                <td><ul style="list-style-type: disc; padding-left: 0;">	
+                    <li style="margin-left: 20px; "><b>心肺功能適當</b>能夠承受腹腔內打氣</li>
+                    <li style="margin-left: 20px; "><b>生命徵象穩定</b></li>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">手術傷口示意圖</th>
+                <td>
+                    <img width=40% src="Colorectal_traditional.png"   />
+                </td>
+                <td>
+                    <img width=40% src="Colorectal_micro.png"  />
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">手術時間(小時)</th>
+                <td>3小時
+                </td>
+                <td>4小時
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">手術中失血量(cc)</th>
+                <td>100cc<br>
+                    約一瓶養樂多
+                </td>
+                <td>130cc<br>
+                    約一個小藥杯
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">傷口感染率</th>
+                <td>	
+                	10%
+                </td>
+                <td>
+                    5%
+                </td>
+              </tr>
+                <th scope="row">腸道吻合滲漏率</th>
+                <td>	
+                  4%
+                <td>	
+                  3%
+                </td>
+              </tr>
+              <th scope="row">術後死亡率</th>
+              <td>	
+                1%
+              <td>	
+                1%
+              </td>
+            </tr>
+            <th scope="row">術後排氣天數</th>
+            <td>	
+              3天
+            <td>	
+              2天
+            </td>
+          </tr>
+          <th scope="row">手術後平均住院天數</th>
+          <td>	
+            6天
+          <td>	
+            5天
+          </td>
+        </tr>
+        <th scope="row">手術自費耗材</th>
+        <td>	
+            約1-3萬元
+        <td>	
+            約5-15萬元
+        </td>
+      </tr>
+        </tbody>
+      </table>
+    </div>
+        <div id="content6" class="content">
+            <!-- Content for button 6 -->
+            <table class="table table-striped-columns">
+              <thead>
+                <tr>
+                  <th scope="col">想選擇傳統開腹手術的理由</th>
+                  <th scope="col">哪邊的狀況對您比較重要</th>
+                  <th scope="col">想選擇微創內視鏡手術的理由</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td scope="row" id="Ch2_1_N">除了目視檢查，能夠以手觸摸做更進一步的檢查</td>
+                  <td>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1" value="1">
+                      <label class="form-check-label" for="ch2_1_1">1</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1" value="2">
+                      <label class="form-check-label" for="ch2_1_2">2</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1" value="3">
+                      <label class="form-check-label" for="ch2_1_3">3</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1" value="4">
+                      <label class="form-check-label" for="ch2_1_4">4</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1" value="5">
+                      <label class="form-check-label" for="ch2_1_5">5</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1"value="6">
+                      <label class="form-check-label" for="ch2_1_6">6</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1" value="7">
+                      <label class="form-check-label" for="ch2_1_7">7</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1" value="8">
+                      <label class="form-check-label" for="ch2_1_8">8</label>
+                  </div>
+                  </td>
+                  <td id="Ch2_1_Y">僅以腹腔鏡做目視檢查</td>
+                </tr>
+                <tr>
+                  <td scope="row" id="N-ch1-2">不在意傷口大小、疼痛與美觀</td>
+                  <td>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_1" value="1">
+                      <label class="form-check-label" for="ch2_2_1">1</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_2" value="2">
+                      <label class="form-check-label" for="ch2_2_2">2</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_3" value="3">
+                      <label class="form-check-label" for="ch2_2_3">3</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_4" value="4">
+                      <label class="form-check-label" for="ch2_2_4">4</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_5" value="5">
+                      <label class="form-check-label" for="ch2_2_5">5</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_6" value="6">
+                      <label class="form-check-label" for="ch2_2_6">6</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_7" value="7">
+                      <label class="form-check-label" for="ch2_2_7">7</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_8" value="8">
+                      <label class="form-check-label" for="ch2_2_8">8</label>
+                  </div>
+                  </td>
+                  <td id="Y-ch1-2">非常在意傷口大小、疼痛與美觀</td>
+                </tr>
+                <tr>
+                  <td scope="row" id="N-ch1-3">能接受較長時間的恢復</td>
+                  <td>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_1" value="1">
+                      <label class="form-check-label" for="ch2_3_1">1</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_2" value="2">
+                      <label class="form-check-label" for="ch2_3_2">2</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_3" value="3">
+                      <label class="form-check-label" for="ch2_3_3">3</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_4" value="4">
+                      <label class="form-check-label" for="ch2_3_4">4</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_5" value="5">
+                      <label class="form-check-label" for="ch2_3_5">5</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_6" value="6">
+                      <label class="form-check-label" for="ch2_3_6">6</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_7" value="7">
+                      <label class="form-check-label" for="ch2_3_7">7</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_8" value="8">
+                      <label class="form-check-label" for="ch2_3_8">8</label>
+                  </div>
+                  </td>
+                  <td id="Y-ch1-3">自費藥品、耗材的使用</td>
+                </tr>
+                <tr>
+                    <td scope="row" id="N-ch1-4">我不希望有額外的支出</td>
+                    <td>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_4" id="ch2_4_1" value="1">
+                        <label class="form-check-label" for="ch2_4_1">1</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_4" id="ch2_4_2" value="2">
+                        <label class="form-check-label" for="ch2_4_2">2</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_4" id="ch2_4_3" value="3">
+                        <label class="form-check-label" for="ch2_4_3">3</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_4" id="ch2_4_4" value="4">
+                        <label class="form-check-label" for="ch2_4_4">4</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_4" id="ch2_4_5" value="5">
+                        <label class="form-check-label" for="ch2_4_5">5</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_4" id="ch2_4_6" value="6">
+                        <label class="form-check-label" for="ch2_4_6">6</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_4" id="ch2_4_7" value="7">
+                        <label class="form-check-label" for="ch2_4_7">7</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_4" id="ch2_4_8" value="8">
+                        <label class="form-check-label" for="ch2_4_8">8</label>
+                    </div>
+                    </td>
+                    <td id="Y-ch1-3">醫師認為有幫助的，我希望盡量使用</td>
+                  </tr>
+              </tbody>
+            </table>
+            <button class="btn btn-primary" type="submit" id="submitForm1">提交</button>
+        </div>
+
+        <div id="content7" class="content">
+                <!-- Content for button 7 -->
+                <h4>對於以上提供的資訊，您是否已經了解了呢</h4>
+                <p id="ch3-1">不管什麼樣的狀況下都能夠執行內視鏡手術？</p>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="exampleRadios-ch3-1" id="Ch3_1_A1" value="1" >
+                  <label class="form-check-label" for="Ch3_1_A1">
+                      是
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios-ch3-1" id="Ch3_1_A2" value="0">
+                    <label class="form-check-label" for="Ch3_1_A2">
+                      不是
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios-ch3-1" id="Ch3_1_A3" value="-1">
+                    <label class="form-check-label" for="Ch3_1_A3">
+                      不知道
+                    </label>
+                  </div>
+
+                  <p id="ch3-2">在能夠執行內視鏡手術的狀況下，效果與傳統手術相似？</p>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios-ch3-2" id="Ch3_2_A1" value="1" >
+                    <label class="form-check-label" for="Ch3_2_A1">
+                        是
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="exampleRadios-ch3-2" id="Ch3_2_A2" value="0" >
+                      <label class="form-check-label" for="Ch3_2_A2">
+                        不是
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="exampleRadios-ch3-2" id="Ch3_2_A3" value="-1" >
+                      <label class="form-check-label" for="Ch3_2_A3">
+                        不知道
+                      </label>
+                    </div>
+
+                    <p id="ch3-3">在執行內視鏡手術有困難或是手術中大出血時，必要時會捨棄微創傷口，使用傳統開腹傷口完成手術，已使用的自費器械品項無法退費或減免。</p>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="exampleRadios-ch3-3" id="Ch3_3_A1" value="1" >
+                      <label class="form-check-label" for="Ch3_3_A1">
+                          是
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios-ch3-3" id="Ch3_3_A2" value="0">
+                        <label class="form-check-label" for="Ch3_3_A2">
+                          不是
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios-ch3-3" id="Ch3_3_A3" value="-1">
+                        <label class="form-check-label" for="Ch3_3_A3">
+                          不知道
+                        </label>
+                      </div>
+                          <button class="btn btn-primary" type="submit" id="submitForm2">提交</button>
+        </div>
+
+
+        <div id="content8" class="content">
+            <!-- Content for button 8 -->
+            <h4>您現在確認好治療方式了嗎</h4>
+            <p id="ch4-1">我已經確認好想要的治療方式，我決定選擇：（下列擇一）</p>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="exampleRadios-Ch4_1_A" id="Ch4_1_A_1" value="1" >
+                  <label class="form-check-label" for="Ch4_1_A_1">
+                    接受傳統開腹手術
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios-Ch4_1_A" id="Ch4_1_A_2" value="2">
+                    <label class="form-check-label" for="Ch4_1_A_2">
+                        接受微創內視鏡手術
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios-Ch4_1_A" id="Ch4_1_A_3" value="3">
+                    <label class="form-check-label" for="Ch4_1_A_3">
+                        目前還無法做決定
+                    </label>
+                  </div>
+
+                  <td scope="row" id="Ch4_2_Q"><h5><br>請問您對於做這個決定，您信心指數為多少？請勾選出您心中的分數</h5></td>
+                  <td>
+                      <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions-Ch4_2_A" id="Ch4_2_A_1" value="1">
+                          <label class="form-check-label" for="Ch4_2_A_1">1(非常沒信心) </label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions-Ch4_2_A" id="Ch4_2_A_2" value="2">
+                          <label class="form-check-label" for="Ch4_2_A_2">2(有點沒信心) </label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions-Ch4_2_A" id="Ch4_2_A_3" value="3">
+                          <label class="form-check-label" for="Ch4_2_A_3">3(普通) </label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions-Ch4_2_A" id="Ch4_2_A_4" value="4">
+                          <label class="form-check-label" for="Ch4_2_A_4">4(有信心) </label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions-Ch4_2_A" id="Ch4_2_A_5" value="4">
+                        <label class="form-check-label" for="Ch4_2_A_5">5(非常有信心) </label>
+                    </div>
+                  </td>
+                </tr>
+                    <button class="btn btn-primary" type="submit" id="submitForm3">提交</button>
+      </div>
+    
+        
+    <script>
+
+function showContent(contentId) {
+    // 隐藏所有内容
+    var contents = document.querySelectorAll('.content');
+    contents.forEach(function (content) {
+        content.style.display = 'none';
+    });
+
+    // 显示点击的按钮对应的内容
+    var selectedContent = document.getElementById(contentId);
+    if (selectedContent) {
+        selectedContent.style.display = 'block';
+        updateNavText(contentId); // 更新导航栏文字内容
+    }
+}
+
+    </script>
+    
+    </body>
+    </html>
+    
+
+<script>
+
+ function changeFontSize(size) {
+            var elements = document.querySelectorAll("*"); // 選擇所有元素
+            elements.forEach(function(element) {
+              document.documentElement.style.fontSize = size + "px"; // 設置每個元素的字體大小
+            });
+        }
+        //加大字體
+        function increaseFontSize() {
+        var fontSizeSlider = document.getElementById('font-size');
+        var newSize = parseInt(fontSizeSlider.value) + 1;
+        if (newSize <= parseInt(fontSizeSlider.max)) {
+            fontSizeSlider.value = newSize;
+            changeFontSize(newSize);
+        }
+    }
+
+    // 减小字體
+    function decreaseFontSize() {
+        var fontSizeSlider = document.getElementById('font-size');
+        var newSize = parseInt(fontSizeSlider.value) - 1;
+        if (newSize >= parseInt(fontSizeSlider.min)) {
+            fontSizeSlider.value = newSize;
+            changeFontSize(newSize);
+        }
+    }
+        // 恢復預設字體大小函數
+        function resetFontSize() {
+            var elements = document.querySelectorAll("*"); // 選擇所有元素
+            elements.forEach(function(element) {
+                element.style.fontSize = ""; // 清除直接設定的字體大小，使其回復到預設值
+            });
+
+            // 重置滑動桿的值為預設值
+            var fontSizeSlider = document.getElementById('font-size');
+            fontSizeSlider.value = 16;
+
+            // 重置導航條樣式
+            var breadcrumb = document.querySelector(".breadcrumb");
+            breadcrumb.classList.remove("active");
+        }
+
+        function showContent(contentId) {
+          var contentDivs = document.querySelectorAll('.content');
+          for (var i = 0; i < contentDivs.length; i++) {
+            contentDivs[i].style.display = 'none';
+          }
+          document.getElementById(contentId).style.display = 'block';
+           // 如果显示了其他 content，则隐藏 introText
+          document.getElementById('introText').style.display = 'none';
+          
+        }    
+
+        function getUserData() {
+          const user = JSON.parse(localStorage.getItem('user')); 
+          const user_name = user.user_name;
+          const user_idNumber = user.user_idNumber;
+          const sdm_title = '我得了大腸直腸癌,我該選擇什麼樣的手術方式?';
+          const sdm_id = 6;
+    
+          return { user, user_name, user_idNumber, sdm_title, sdm_id };
+}
+// 在頁面顯示user名字
+document.addEventListener('DOMContentLoaded', function() {
+    const userId = JSON.parse(localStorage.getItem('user')); 
+    fetch(`/api/user_name?userId=${userId}`) 
+    .then(response => response.json())
+    .then(user => {
+        const userNameDisplay = document.getElementById('userNameDisplay');
+        user.forEach(user_name => {
+            userNameDisplay.textContent = 'Hello, ' + user_name.user_name; 
+        })
+    })
+    .catch(error => console.error('Error:', error));
+  
+    const submitButton1 = document.getElementById('submitForm1');
+submitButton1.addEventListener('click', function() {
+    // 获取用户的答案
+    const selectedOption1 = document.querySelector('input[name="inlineRadioOptions-ch2_1"]:checked');
+    const selectedOption2 = document.querySelector('input[name="inlineRadioOptions-ch2_2"]:checked');
+    const selectedOption3 = document.querySelector('input[name="inlineRadioOptions-ch2_3"]:checked');
+    const selectedOption4 = document.querySelector('input[name="inlineRadioOptions-ch2_4"]:checked');
+
+    // 检查是否有选中的选项
+    if (!selectedOption1 || !selectedOption2 || !selectedOption3 || !selectedOption4) {
+        alert('请确保所有问题都已回答');
+        return;
+    }
+    const { user, user_name, user_idNumber, sdm_title, sdm_id } = getUserData();
+
+    const answers = {
+        Ch2_1_A: selectedOption1.value,
+        Ch2_2_A: selectedOption2.value,
+        Ch2_3_A: selectedOption3.value,
+        Ch2_4_A: selectedOption4.value,
+        // 添加其他问题的答案字段...
+    };
+
+    // 发送答案到服务器
+    fetch('/save-answers-1', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user, user_name, user_idNumber, sdm_title, sdm_id, ...answers }), // 使用解构和扩展运算符合并对象
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Response from server:', data);
+        // 更新用户界面，例如显示成功消息
+        showSuccessMessage('回答已保存！');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // 更新用户界面，例如显示错误消息
+        showErrorMessage('保存答案时出错，请稍后再试。');
+    });
+});
+
+const submitButton2 = document.getElementById('submitForm2');
+submitButton2.addEventListener('click', function() {
+    // 获取用户的答案
+    const selectedOption1 = document.querySelector('input[name="exampleRadios-ch3-1"]:checked');
+    const selectedOption2 = document.querySelector('input[name="exampleRadios-ch3-2"]:checked');
+    const selectedOption3 = document.querySelector('input[name="exampleRadios-ch3-3"]:checked');
+    // 检查是否有选中的选项
+    if (!selectedOption1 || !selectedOption2 || !selectedOption3 ) {
+        alert('请确保所有问题都已回答');
+        return;
+    }
+    const { user, user_name, user_idNumber, sdm_title, sdm_id } = getUserData();
+
+    const answers = {
+        Ch3_1_A: selectedOption1.value,
+        Ch3_2_A: selectedOption2.value,
+        Ch3_3_A: selectedOption3.value,
+        // 添加其他问题的答案字段...
+    };
+
+    // 发送答案到服务器
+    fetch('/save-answers-2', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user, user_name, user_idNumber, sdm_title, sdm_id, ...answers }), // 使用解构和扩展运算符合并对象
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Response from server:', data);
+        // 更新用户界面，例如显示成功消息
+        showSuccessMessage('回答已保存！');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // 更新用户界面，例如显示错误消息
+        showErrorMessage('保存答案时出错，请稍后再试。');
+    });
+});
+const submitButton3 = document.getElementById('submitForm3');
+submitButton3.addEventListener('click', function() {
+    // 获取用户的答案
+    const selectedOption1 = document.querySelector('input[name="exampleRadios-Ch4_1_A"]:checked');
+    const selectedOption2 = document.querySelector('input[name="inlineRadioOptions-Ch4_2_A"]:checked');
+
+    // 检查是否有选中的选项
+    if (!selectedOption1 || !selectedOption2 ) {
+        alert('请确保所有问题都已回答');
+        return;
+    }
+    const { user, user_name, user_idNumber, sdm_title, sdm_id } = getUserData();
+
+    const answers = {
+        Ch4_1_A: selectedOption1.value,
+        Ch4_2_A: selectedOption2.value,
+        // 添加其他问题的答案字段...
+    };
+
+    // 发送答案到服务器
+    fetch('/save-answers-3', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user, user_name, user_idNumber, sdm_title, sdm_id, ...answers }), // 使用解构和扩展运算符合并对象
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Response from server:', data);
+        // 更新用户界面，例如显示成功消息
+        showSuccessMessage('回答已保存！');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // 更新用户界面，例如显示错误消息
+        showErrorMessage('保存答案时出错，请稍后再试。');
+    });
+});    
+});
+  
+document.addEventListener("DOMContentLoaded", function() {
+  const treatmentBtn = document.getElementById('treatmentBtn');
+  const riskBtn = document.getElementById('riskBtn');
+  const treatmentTable = document.getElementById('treatmentTable');
+  const riskTable = document.getElementById('riskTable');
+  
+  // 點擊“治療方式比較”按鈕時顯示相應表格
+  treatmentBtn.addEventListener('click', function() {
+    treatmentTable.style.display = 'table';
+    riskTable.style.display = 'none';
+  });
+  
+  // 點擊“風險比較”按鈕時顯示相應表格
+  riskBtn.addEventListener('click', function() {
+    treatmentTable.style.display = 'none';
+    riskTable.style.display = 'table';
+  });
+});
+const admin = localStorage.getItem('admin'); // 去得lacalStorage裡的admin資訊
+const user = JSON.parse(localStorage.getItem('user')); // 去得lacalStorage裡的user資訊
+const logoutButton = document.getElementById('logout-button');
+logoutButton.addEventListener('click', function() {
+  // 檢查localStorage中是否有admin資訊
+  if (localStorage.getItem('admin')) {
+    localStorage.removeItem('admin'); // 移除管理員資訊
+    window.location.href = 'manager_login.html'; // 跳轉到管理員登入頁面
+  } else if (localStorage.getItem('user')) {     // 檢查localStorage中是否有user資訊
+    localStorage.removeItem('user'); // 移除使用者資訊
+    window.location.href = 'user_login.html'; // 跳轉到使用者登入頁面
+  }
+});
+</script>
+</body>
+</html>
