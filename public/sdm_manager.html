@@ -119,57 +119,50 @@
             <th scope="col">SDM主題類別</th>
             <th scope="col">疾病科室分類</th>
             <th scope="col">衛教資訊</th>
-            <th scope="col">填寫狀態</th>
           </tr>
         </thead>
         <tbody>
           <tr data-SDM_id="3">
-            <th scope="row"><a href="sdm_question1.html?SDM_id=3">我該接受全人工膝關節置換術嗎?</a></th>
+            <th scope="row"><a href="sdm_view_manager.html?SDM_id=3">我該接受全人工膝關節置換術嗎?</a></th>
             <td>2023/07/06</td>
             <td>肌肉骨骼系統</td>
             <td>骨科</td>
             <td></td>
-            <td id="status"></td>
           </tr>
           <tr data-SDM_id="1">
-            <th scope="row"><a href="sdm_question2.html?SDM_id=1" >我有心房顫動﹐應該服用抗凝血劑預防中風嗎?</a></th>
+            <th scope="row"><a href="sdm_view_manager.html?SDM_id=1" >我有心房顫動﹐應該服用抗凝血劑預防中風嗎?</a></th>
             <td>2023/11/08</td>
             <td>其他</td>
             <td>心臟內外科</td>
             <td></td>
-            <td id="status"></td>
           </tr>
           <tr data-SDM_id="5">
-            <th scope="row"><a href="sdm_question3.html?SDM_id=5" >乙型主動脈剝離手術治療我該選擇微創手術還是傳統手術比較適合?</a></th>
+            <th scope="row"><a href="sdm_view_manager.html?SDM_id=5" >乙型主動脈剝離手術治療我該選擇微創手術還是傳統手術比較適合?</a></th>
             <td>2023/5/17</td>
             <td>循環系統</td>
             <td>心臟內外科</td>
             <td></td>
-            <td id="status"></td>
           </tr>
           <tr data-SDM_id="2">
-            <th scope="row"><a href="sdm_question4.html?SDM_id=2" >急性骨髓性白血病經治療達到完全緩解後需要骨髓移植嗎?</a></th>
+            <th scope="row"><a href="sdm_view_manager.html?SDM_id=2" >急性骨髓性白血病經治療達到完全緩解後需要骨髓移植嗎?</a></th>
             <td>2023/06/19</td>
             <td>腫瘤</td>
             <td>血液科</td>
             <td></td>
-            <td id="status"></td>
           </tr>
           <tr data-SDM_id="4">
-            <th scope="row"><a href="sdm_question5.html?SDM_id=4" >HER2陽性乳癌的術前標靶</a></th>
+            <th scope="row"><a href="sdm_view_manager.html?SDM_id=4" >HER2陽性乳癌的術前標靶</a></th>
             <td>2023/6/7</td>
             <td>腫瘤</td>
             <td>乳房醫學中心</td>
             <td></td>
-            <td id="status"></td>
           </tr>
           <tr data-SDM_id="6">
-            <th scope="row"><a href="sdm_question6.html?SDM_id=6" >我得了大腸直腸癌,我該選擇什麼樣的手術方式?</a></th>
+            <th scope="row"><a href="sdm_view_manager.html?SDM_id=6" >我得了大腸直腸癌,我該選擇什麼樣的手術方式?</a></th>
             <td>2023/05/30</td>
             <td>消化系統</td>
             <td>大腸直腸外科</td>
             <td></td>
-            <td id="status"></td>
           </tr>
         </tbody>
       </table>
@@ -218,11 +211,6 @@
     }
   });
 
-  function getSDMId() {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('sdm_id');
-}
-
 
   document.addEventListener('DOMContentLoaded', function() {
             const userId = JSON.parse(localStorage.getItem('user'));
@@ -266,16 +254,16 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 const admin = localStorage.getItem('admin'); // 去得lacalStorage裡的admin資訊
-const user = JSON.parse(localStorage.getItem('user')); // 去得lacalStorage裡的user資訊
-const logoutButton = document.getElementById('logout-button');
-logoutButton.addEventListener('click', function() {
-  // 檢查localStorage中是否有admin資訊
-  if (localStorage.getItem('admin')) {
-    localStorage.removeItem('admin'); // 移除管理員資訊
-    window.location.href = 'manager_login.html'; // 跳轉到管理員登入頁面
-  } else if (localStorage.getItem('user')) {     // 檢查localStorage中是否有user資訊
-    localStorage.removeItem('user'); // 移除使用者資訊
-    window.location.href = 'user_login.html'; // 跳轉到使用者登入頁面
-  }
-});
+  const user = JSON.parse(localStorage.getItem('user')); // 去得lacalStorage裡的user資訊
+  const logoutButton = document.getElementById('logout-button');
+    logoutButton.addEventListener('click', function() {
+    // 檢查localStorage中是否有admin資訊
+    if (localStorage.getItem('admin')) {
+      localStorage.removeItem('admin'); // 移除管理員資訊
+      window.location.href = 'manager_login.html'; // 跳轉到管理員登入頁面
+    } else if (localStorage.getItem('user')) {     // 檢查localStorage中是否有user資訊
+      localStorage.removeItem('user'); // 移除使用者資訊
+      window.location.href = 'user_login.html'; // 跳轉到使用者登入頁面
+    }
+  });
 </script>
