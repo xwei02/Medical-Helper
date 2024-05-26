@@ -777,6 +777,56 @@ app.post('/get-sdm-data', (req, res) => {
     });
 });
 
+app.post('/get-sdm-manager', (req, res) => {
+    const sdmId = req.body.SDM_id; // 获取前端发送的 SDM_ID
+
+    // 检查是否提供了所需的 SDM ID
+    if (!sdmId) {
+        return res.status(400).json({ error: 'Missing sdm_id' });
+    }
+
+    // 构建 SQL 查询语句
+    const sql1 = `SELECT user_id, SDM_tittle, SDM_id, Ch2_1_A, Ch2_2_A, Ch2_3_A, Ch2_4_A, Ch2_5_A FROM sdm_patientreplych2 WHERE sdm_id = ?`;
+    const sql2 = `SELECT user_id, SDM_tittle, SDM_id, Ch3_1_A, Ch3_2_A, Ch3_3_A, Ch3_4_A, Ch3_5_A FROM sdm_patientreplych3 WHERE sdm_id = ?`;
+    const sql3 = `SELECT user_id, SDM_tittle, SDM_id, Ch4_1_A, Ch4_2_A FROM sdm_patientreplych4 WHERE sdm_id = ?`;
+
+    // 使用连接池执行查询
+    pool.getConnection((err, connection) => {
+        if (err) {
+            console.error('Error connecting to database:', err);
+            return res.status(500).json({ error: 'Database connection error' });
+        }
+
+        // 执行查询并发送结果给客户端
+        connection.query(sql1, [sdmId], (err, results1) => {
+            if (err) {
+                connection.release(); // 释放连接
+                console.error('Error querying database:', err);
+                return res.status(500).json({ error: 'Database query error' });
+            }
+
+            connection.query(sql2, [sdmId], (err, results2) => {
+                if (err) {
+                    connection.release(); // 释放连接
+                    console.error('Error querying database:', err);
+                    return res.status(500).json({ error: 'Database query error' });
+                }
+
+                connection.query(sql3, [sdmId], (err, results3) => {
+                    connection.release(); // 释放连接
+
+                    if (err) {
+                        console.error('Error querying database:', err);
+                        return res.status(500).json({ error: 'Database query error' });
+                    }
+
+                    // 发送结果给客户端
+                    res.json({ table1: results1, table2: results2, table3: results3 });
+                });
+            });
+        });
+    });
+});
 
 // 啟動伺服器
 const port = 3000;

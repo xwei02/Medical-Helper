@@ -113,6 +113,10 @@
             <a class="nav-link" id="sdm" href="sdm.html" style="font-weight: bold">
               <img src="sdmicon.png" alt="Logo" width="25" height="27"> 醫病共享決策</a>
         </li> 
+        <li class="nav-item">
+          <a class="nav-link" id="sdm" href="sdm_manager.html" style="font-weight: bold">
+            <img src="sdmicon.png" alt="Logo" width="25" height="27"> 醫病共享決策</a>
+      </li> 
           </ul>
           <div class="ms-auto">
             <a class="btn btn-light" href="user_login.html" id="login-button">登入</a>
@@ -289,6 +293,7 @@ if(admin){
   document.getElementById('personal_medicalcare').style.display = 'none';
   document.getElementById('medical_form').style.display = 'none';
   document.getElementById('response').style.display = 'none';
+  document.getElementById('sdm').style.display = 'none';
 
 }else if (user) {
   // user登入，顯示登入按鈕
@@ -297,6 +302,7 @@ if(admin){
   document.getElementById('logout-button').style.display = 'inline-block';
   document.getElementById('leaflets_change').style.display = 'none';
   document.getElementById('manager_response').style.display = 'none';
+  document.getElementById('sdm_manager').style.display = 'none';
 
 }else {
   // user未登入，顯示登入及註冊按鈕
@@ -309,6 +315,10 @@ if(admin){
   document.getElementById('personal_medicalcare').style.display = 'none';
   document.getElementById('response').style.display = 'none';
   document.getElementById('manager_response').style.display = 'none';
+  document.getElementById('sdm').style.display = 'none';
+  document.getElementById('sdm_manager').style.display = 'none';
+
+
 }
 
 document.addEventListener('DOMContentLoaded', function() {
