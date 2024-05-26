@@ -3,7 +3,6 @@ const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const { google } = require('googleapis');
 const app = express();
-
 app.use(express.static("public"));
 app.use(express.json());
 
@@ -18,9 +17,17 @@ const connection = mysql.createConnection({
     host: 'localhost', 
     port : 3306,
     user: 'root',
-    password: 'wei920116',
+    password: 'Yvonne920415',
     database: 'newschema'
 });
+// 用於頻繁呼叫
+const pool = mysql.createPool({
+    host: 'localhost', 
+    port : 3306,
+    user: 'root',
+    password: 'Yvonne920415',
+    database: 'newschema'
+  });
 
 // Test the database connection
 connection.connect(function(err) {
@@ -574,6 +581,115 @@ app.get('/api/leaflet_showdetail', (req, res) => {
     });
 });
 
+
+
+
+app.post('/save-answers-1', (req, res) => {
+    const answers = req.body;
+    const userId = req.body.user;
+    const sdmTitle=req.body.sdm_title;
+    const sdmId=req.body.sdm_id;
+
+    // 将答案插入到数据库中
+    pool.getConnection((err, connection) => {
+        if (err) {
+            console.error('Error connecting to database:', err);
+            res.status(500).json({ success: false, message: 'Error connecting to database' });
+            return;
+        }
+
+
+
+        // 执行数据库查询
+        connection.query(
+            'INSERT INTO sdm_patientreplych2 ( user_id, sdm_tittle, sdm_id, Ch2_1_A, Ch2_2_A, Ch2_3_A, Ch2_4_A, Ch2_5_A) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)',
+            [userId, sdmTitle, sdmId, answers.Ch2_1_A, answers.Ch2_2_A, answers.Ch2_3_A, answers.Ch2_4_A, answers.Ch2_5_A],
+            (error, results) => {
+                connection.release(); // 释放连接
+
+                if (error) {
+                    console.error('Error saving answers:', error);
+                    res.status(500).json({ success: false, message: 'Error saving answers' });
+                    return;
+                }
+
+                console.log('Answers saved successfully');
+                res.json({ success: true, message: 'Answers saved successfully' });
+            }
+        );
+    });
+});
+
+app.post('/save-answers-2', (req, res) => {
+    const answers = req.body;
+    const userId = req.body.user;
+    const sdmTitle=req.body.sdm_title;
+    const sdmId=req.body.sdm_id;
+
+    // 将答案插入到数据库中
+    pool.getConnection((err, connection) => {
+        if (err) {
+            console.error('Error connecting to database:', err);
+            res.status(500).json({ success: false, message: 'Error connecting to database' });
+            return;
+        }
+
+
+
+        // 执行数据库查询
+        connection.query(
+            'INSERT INTO sdm_patientreplych3 ( user_id, sdm_tittle, sdm_id, Ch3_1_A, Ch3_2_A, Ch3_3_A, Ch3_4_A, Ch3_5_A) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)',
+            [userId, sdmTitle, sdmId, answers.Ch3_1_A, answers.Ch3_2_A, answers.Ch3_3_A, answers.Ch3_4_A, answers.Ch3_5_A],
+            (error, results) => {
+                connection.release(); // 释放连接
+
+                if (error) {
+                    console.error('Error saving answers:', error);
+                    res.status(500).json({ success: false, message: 'Error saving answers' });
+                    return;
+                }
+
+                console.log('Answers saved successfully');
+                res.json({ success: true, message: 'Answers saved successfully' });
+            }
+        );
+    });
+});
+app.post('/save-answers-3', (req, res) => {
+    const answers = req.body;
+    const userId = req.body.user;
+    const sdmTitle=req.body.sdm_title;
+    const sdmId=req.body.sdm_id;
+
+    // 将答案插入到数据库中
+    pool.getConnection((err, connection) => {
+        if (err) {
+            console.error('Error connecting to database:', err);
+            res.status(500).json({ success: false, message: 'Error connecting to database' });
+            return;
+        }
+
+
+
+        // 执行数据库查询
+        connection.query(
+            'INSERT INTO sdm_patientreplych4 ( user_id, sdm_tittle, sdm_id, Ch4_1_A, Ch4_2_A) VALUES ( ?, ?, ?, ?, ?)',
+            [userId, sdmTitle, sdmId, answers.Ch4_1_A, answers.Ch4_2_A],
+            (error, results) => {
+                connection.release(); // 释放连接
+
+                if (error) {
+                    console.error('Error saving answers:', error);
+                    res.status(500).json({ success: false, message: 'Error saving answers' });
+                    return;
+                }
+
+                console.log('Answers saved successfully');
+                res.json({ success: true, message: 'Answers saved successfully' });
+            }
+        );
+    });
+});
 // 啟動伺服器
 const port = 3000;
 app.listen(port, () => {

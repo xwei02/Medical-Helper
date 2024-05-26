@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/modal.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg " id="nav-color">
+        <a class="navbar-brand" href="test.html" style="font-weight: bold">
+          <img src="medical_icon.png" alt="Logo" width="40" height="40"> 醫療小幫手</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="test.html" style="font-weight: bold">
+                <img src="home_icon.png" alt="Logo" width="25" height="25"> 首頁</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="medical_form.html" style="font-weight: bold">
+                <img src="leaflet.png" alt="Logo" width="25" height="25"> 手術問卷</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="personal_medicalcare.html" style="font-weight: bold">
+                <img src="personal_medical.png" alt="Logo" width="30" height="30"> 個人醫療</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="user_info_modifiy.html" style="font-weight: bold">
+                  <img src="modify.png" alt="Logo" width="28" height="28"> 用戶基本資料修改</a>
+              </li>
+            <li class="nav-item">
+                <a class="nav-link" href="user_feedback.html" style="font-weight: bold">
+                  <img src="reply2.png" alt="Logo" width="30" height="30"> 回饋</a>
+            </li>  
+            <li class="nav-item">
+                <a class="nav-link" id="sdm" href="sdm.html" style="font-weight: bold">
+                  <img src="sdmicon.png" alt="Logo" width="25" height="27"> 醫病共享決策</a>
+            </li> 
+          </ul>
+          <div class="ms-auto">
+            <a class="btn btn-light" id="logout-button">登出</a>
+          </div>
+          <div id="userNameDisplay" class="user-name-display"></div>
+
+        </div>
+    </nav>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .content {
+                display: none; /* 默認隱藏內容 */
+            }
+    
+            .active {
+                display: block; /* 顯示選擇內容 */
+            }
+            .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* 保持元素之间的间距 */
+            padding: 10px;
+            }
+            .nav-links {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            }
+            .nav-links li {
+            display: inline;
+            margin-right: 10px;
+            }
+            .font-size-adjustment {
+              display: flex;
+              align-items: center;
+            }
+            .font-size-adjustment label {
+              margin-right: 5px;
+            }
+        </style>
+        <title>Dynamic Content Example</title>
+    </head>
+    <style>
+     .btn-outline-secondary {
+        margin-top: 20px; 
+        
+    }
+    .content{
+        margin: 50px;
+    }
+    .center-image{
+        margin:auto;
+        margin-top: 50px;
+        display: block;
+    }
+    .btn-primary{
+        margin:auto;
+        display: block;
+    }
+    h4 {
+    margin: 30px; /* 控制顶部边距 */
+  }
+  .btn-large {
+        border-radius: 50%; /* 將按鈕設置為圓形 */
+        font-size: 20px;
+        padding: 10px 15px;
+    }
+  .btn-circle {
+        border-radius: 50%; /* 將按鈕設置為圓形 */
+        font-size: 20px; /* 調整按鈕內字體大小 */
+    }
+  .btn-group {
+  margin-bottom: 20px;
+}
+  .tag-btn {
+  margin-right: 10px;
+  border-radius: 20px; /* 圆角按钮 */
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.tag-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+/* 按钮悬停时的效果 */
+.tag-btn:hover {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+/* 按钮激活（被选中）时的效果 */
+.tag-btn.active {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+}
+    </style>
+    <body>
+      <nav aria-label="breadcrumb" class="navbar">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="sdm.html">醫病共享決策</a></li>
+            <li class="breadcrumb-item"><a href="sdm_question5.html">HER2陽性乳癌的術前標靶</a></li>
+            <li id="navItem" class="breadcrumb-item active" aria-current="page">目前位置</li>
+        </ol>
+
+        <!-- 字體調整功能 -->
+        <div class="font-size-adjustment">
+          <button onclick="resetFontSize()">恢復</button>
+            <label for="font-size">字體大小：</label>
+            <button onclick="decreaseFontSize()" class="btn-circle">小</button>
+            <input type="range" id="font-size" min="10" max="30" value="16" onchange="changeFontSize(this.value)">
+            <button onclick="increaseFontSize()" class="btn-large">大</button>
+          </div>
+    </nav>
+
+    <button onclick="showContent('content1')" type="button" id="btn1" class="btn btn-outline-secondary btn-lg">前言</button>
+    <button onclick="showContent('content2')" type="button" id="btn2" class="btn btn-outline-secondary btn-lg">適用對象/狀況</button>
+    <button onclick="showContent('content3')" type="button" id="btn3" class="btn btn-outline-secondary btn-lg">疾病或健康議題介紹</button>
+    <button onclick="showContent('content4')" type="button" id="btn4" class="btn btn-outline-secondary btn-lg">醫療選項介紹</button>
+    <button onclick="showContent('content5')" type="button" id="btn5" class="btn btn-outline-secondary btn-lg">醫療選項比較</button>
+    <button onclick="showContent('content6')" type="button" id="btn6" class="btn btn-outline-secondary btn-lg">醫療方式的考量</button>
+    <button onclick="showContent('content7')" type="button" id="btn7" class="btn btn-outline-secondary btn-lg">醫療資訊的認知</button>
+    <button onclick="showContent('content8')" type="button" id="btn8" class="btn btn-outline-secondary btn-lg">醫療方式的確認</button>
+
+    <div id="content1" class="content">
+        <!-- Content for button 1 -->
+        <h4>HER2（第二型人類上皮細胞生長因子受體）陽性乳癌病人的術前標靶治療有兩種：<br>
+            <br>
+            <ul style="list-style-type: none; padding-left: 0;">
+            <li style="margin-left: 20px; ">1.單標靶（賀癌平）和雙標靶（賀癌平+賀疾妥）；無論選擇哪種，都必須與化學藥物合併使用以達最佳效果。</li>
+            <li style="margin-left: 20px; ">2.雙標靶治療能提供病人較高的病理完全緩解率，但費用也相對昂貴。</li>
+              <br>病每個病人的狀況、考量不同，適合的方案也因此不同。以下將為您說明這兩種術前標靶治療，希望有助於您做出合適的選擇。
+            </ul>
+            </h4>
+        </div>
+    
+    <div id="content2" class="content">
+        <!-- Content for button 2 -->
+        <h4>第二或第三期HER2陽性乳癌病人。</h4>
+    </div>
+    
+    <div id="content3" class="content">
+        <!-- Content for button 3 -->
+        <h4>臺灣每年有超過一萬名女性被診斷有乳癌，其中約有四分之一的病人其病理組織呈HER2陽性。<br>
+            過量的HER2將加速癌細胞的生長，也因此HER2陽性乳癌有較高的轉移與復發風險。</h4>
+        <img width=40% src="HER2.png" class = "center-image"  />
+        <h4>雖然HER2陽性乳癌有較高的復發率，但所幸市面上已推出有多種HER2標靶藥物。<br>
+            針對欲接受乳癌手術的HER2陽性病人，我們可考慮在術前給予HER2標靶藥物。<br>
+            術前給藥可提升病人接受乳房保留手術的機會，也有助於醫師瞭解藥物是否有效（腫瘤變大或縮小）。<br>
+            臨床研究指出，在術前治療加入HER2標靶能提高HER2陽性病人的病理完全緩解率（即藥物治療後，乳房/淋巴結病理報告顯示無癌細胞）。<br>
+            <br>適合接受術前藥物治療的狀況如下：
+            <li style="text-indent: -20px;">發炎性乳癌病人；</li>
+            <li style="text-indent: -20px;">腫瘤大於5公分的病人；</li>
+            <li style="text-indent: -20px;">腫瘤介於2–5公分，且希望做乳房保留手術的病人；</li>
+            <li style="text-indent: -20px;">有腋下淋巴結轉移的病人。</li>
+        </h4>
+    </div>
+    
+    <div id="content4" class="content">
+        <!-- Content for button 4 -->
+        <h4>第二、三期HER2陽性乳癌病人的術前標靶治療有兩種：單標靶（賀癌平）和雙標靶（賀癌平+賀疾妥）；<br>
+            無論選擇哪種，都必須與化學藥物合併使用。</h4>
+            <h5>
+            <ul style="list-style-type: none; padding-left: 0;">
+            <li style="text-indent: -20px;"><b>1.單標靶（賀癌平）+化學治療</b><br>
+                <br>
+                賀癌平的術前療程為每三週一次，共6–8次；搭配的化療施打週期依醫師處方而有所不同（每週一次或每三週一次）。術後應繼續使用至完成一年治療。<br>
+                常見副作用主要來自所合併的化學治療，包括：禿髮、嗜中性白血球減少症、腹瀉、噁心、疲倦、周邊神經病變、虛弱、周邊水腫。<br>
+                賀癌平的術前治療費用約為30–40萬（健保給付淋巴結轉移病人，無淋巴結轉移病人需自費使用），有靜脈輸注和皮下注射二種劑型。<br>
+                臨床研究指出，在術前治療加入賀癌平能增加HER2陽性乳癌病人的病理完全緩解率，且達成病理完全緩解的病人有較長的存活期。</li>
+                <br>
+            <li style="text-indent: -20px;"><b>2.雙標靶（賀癌平+賀疾妥）+化學治療</b><br>
+                <br>
+                雙標靶的術前療程為每三週一次，共6–8次；搭配的化療施打週期依醫師處方而有所不同（每週一次或每三週一次）。術後應繼續使用至完成一年治療。<br>
+                常見副作用主要來自所合併的化學治療，包括：腹瀉、禿髮、嗜中性白血球減少症、噁心、疲倦、皮疹及周邊神經病變。<br>
+                賀癌平的術前治療費用約為30–40萬（健保給付淋巴結轉移病人，無淋巴結轉移病人需自費使用）、賀疾妥約為55–75萬（需自費使用）。<br>
+                雙標靶治療能提供更全面的HER2阻斷；臨床研究指出，比起單標靶治療，接受雙標靶治療的病人有更高的病理完全緩解率。 </li>
+        
+                <img width=40% src="hercompare.png" class = "center-image"  />
+            </ul>
+            </h5>
+        </div>
+
+    <div id="content5" class="content">
+        <!-- Content for button 5 -->
+        <table id="treatmentTable" class="table">
+            <thead>
+              <tr>
+                <th scope="col">選項考量</th>
+                <th scope="col">單標靶（賀癌平）</th>
+                <th scope="col">雙標靶（賀癌平+賀疾妥）</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">療效</th>
+                <td>病理完全緩解率較低（29.0%）
+                </td>
+                <td>病理完全緩解率較高（45.8%）
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">副作用<br>
+                    （主要來自化療）</th>
+                <td>
+                    <ul style="list-style-type: disc; padding-left: 0;">	
+                    <li style="margin-left: 20px; ">禿髮（60.5%）、嗜中性白血球減少症（49.6%）、
+
+                    腹瀉（46.3%）、噁心（41.6%）、疲倦（36.8%）、
+                    
+                    周邊神經病變（33.8%）</li>
+                </ul>
+                </td>
+                <td>
+                    <ul style="list-style-type: disc; padding-left: 0;">	
+                        <li style="margin-left: 20px; ">腹瀉（66.8%）、禿髮（60.9%）、嗜中性白血球減少症（52.8%）、噁心（42.3%）、疲倦（37.6%）、
+                    皮疹（33.7%）、周邊神經病變（32.4%）</li>
+                    <li style="margin-left: 20px;">腹瀉機率較單標靶治療高（雙標靶vs.單標靶= 66.8% vs. 46.3%）</li>
+                    </ul>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">術前治療費用<br>
+                    （不計術後費用）</th>
+                <td><ul style="list-style-type: disc; padding-left: 0;">	
+                    <li style="margin-left: 20px; ">有淋巴結轉移：健保給付</li>
+                    <li style="margin-left: 20px;">無淋巴結轉移：30–40萬</li>
+                </ul>
+                </td>
+                <td><ul style="list-style-type: disc; padding-left: 0;">	
+                    <li style="margin-left: 20px; ">有淋巴結轉移：55–75萬</li>
+                    <li style="margin-left: 20px;">無淋巴結轉移：85–115萬</li>
+                </ul>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">療程</th>
+                <td style="padding-left: 20px;">
+                    <ul style="list-style-type: disc; padding-left: 0;">	
+                        <li style="margin-left: 20px; ">術前：每三週一次，共6–8次</li>
+                      <li style="margin-left: 20px;">術後應繼續使用至完成一年療程</li>
+                  </ul>
+                </td>
+                <td>	
+                    <ul style="list-style-type: disc; padding-left: 0;">	
+                        <li style="margin-left: 20px; ">術前：每三週一次，共6–8次</li>
+                      <li style="margin-left: 20px;">術後應繼續使用至完成一年療程</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">劑型</th>
+                <td>	
+                	靜脈輸注或皮下注射
+                </td>
+                <td>
+                    <ul style="list-style-type: disc; padding-left: 0;">	
+                    <li style="margin-left: 20px; ">賀癌平：靜脈輸注或皮下注射</li>
+                  <li style="margin-left: 20px;">賀疾妥：靜脈輸注</li>
+              </ul>
+                </td>
+              </tr>
+                <th scope="row">合併化學治療</th>
+                <td>	
+                  必須
+                <td>	
+                  必須
+                </td>
+              </tr>
+        </tbody>
+      </table>
+    </div>
+        <div id="content6" class="content">
+            <!-- Content for button 6 -->
+            <table class="table table-striped-columns">
+              <thead>
+                <tr>
+                  <th scope="col">想選擇單標靶的理由</th>
+                  <th scope="col">哪邊的狀況對您比較重要</th>
+                  <th scope="col">想選擇雙標靶的理由</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td scope="row" id="Ch2_1_N">我有療效以外的考量，如：費用、副作用。</td>
+                  <td>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1" value="1">
+                      <label class="form-check-label" for="ch2_1_1">1</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1" value="2">
+                      <label class="form-check-label" for="ch2_1_2">2</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1" value="3">
+                      <label class="form-check-label" for="ch2_1_3">3</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1" value="4">
+                      <label class="form-check-label" for="ch2_1_4">4</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1" value="5">
+                      <label class="form-check-label" for="ch2_1_5">5</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1"value="6">
+                      <label class="form-check-label" for="ch2_1_6">6</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1" value="7">
+                      <label class="form-check-label" for="ch2_1_7">7</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_1" id="ch2_1" value="8">
+                      <label class="form-check-label" for="ch2_1_8">8</label>
+                  </div>
+                  </td>
+                  <td id="Ch2_1_Y">我想提升病理完全緩解率。</td>
+                </tr>
+                <tr>
+                  <td scope="row" id="N-ch1-2">我會擔心腹瀉副作用。</td>
+                  <td>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_1" value="1">
+                      <label class="form-check-label" for="ch2_2_1">1</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_2" value="2">
+                      <label class="form-check-label" for="ch2_2_2">2</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_3" value="3">
+                      <label class="form-check-label" for="ch2_2_3">3</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_4" value="4">
+                      <label class="form-check-label" for="ch2_2_4">4</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_5" value="5">
+                      <label class="form-check-label" for="ch2_2_5">5</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_6" value="6">
+                      <label class="form-check-label" for="ch2_2_6">6</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_7" value="7">
+                      <label class="form-check-label" for="ch2_2_7">7</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_2" id="ch2_2_8" value="8">
+                      <label class="form-check-label" for="ch2_2_8">8</label>
+                  </div>
+                  </td>
+                  <td id="Y-ch1-2">我可以接受較高的腹瀉機率。</td>
+                </tr>
+                <tr>
+                  <td scope="row" id="N-ch1-3">額外的自費藥物對我而言會是一大負擔。</td>
+                  <td>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_1" value="1">
+                      <label class="form-check-label" for="ch2_3_1">1</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_2" value="2">
+                      <label class="form-check-label" for="ch2_3_2">2</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_3" value="3">
+                      <label class="form-check-label" for="ch2_3_3">3</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_4" value="4">
+                      <label class="form-check-label" for="ch2_3_4">4</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_5" value="5">
+                      <label class="form-check-label" for="ch2_3_5">5</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_6" value="6">
+                      <label class="form-check-label" for="ch2_3_6">6</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_7" value="7">
+                      <label class="form-check-label" for="ch2_3_7">7</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions-ch2_3" id="ch2_3_8" value="8">
+                      <label class="form-check-label" for="ch2_3_8">8</label>
+                  </div>
+                  </td>
+                  <td id="Y-ch1-3">我能夠、並且願意負擔額外的自費藥物。</td>
+                </tr>
+              </tbody>
+            </table>
+            <button class="btn btn-primary" type="submit" id="submitForm1">提交</button>
+        </div>
+
+        <div id="content7" class="content">
+                <!-- Content for button 7 -->
+                <h4>對於以上提供的資訊，您是否已經了解了呢</h4>
+                <p id="ch3-1">雙標靶治療的病理完全緩解率優於單標靶治療。</p>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="exampleRadios-ch3-1" id="Ch3_1_A1" value="1" >
+                  <label class="form-check-label" for="Ch3_1_A1">
+                      是
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios-ch3-1" id="Ch3_1_A2" value="0">
+                    <label class="form-check-label" for="Ch3_1_A2">
+                      不是
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios-ch3-1" id="Ch3_1_A3" value="-1">
+                    <label class="form-check-label" for="Ch3_1_A3">
+                      不知道
+                    </label>
+                  </div>
+
+                  <p id="ch3-2">接受雙標靶治療有較高的腹瀉（副作用）機率。</p>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios-ch3-2" id="Ch3_2_A1" value="1" >
+                    <label class="form-check-label" for="Ch3_2_A1">
+                        是
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="exampleRadios-ch3-2" id="Ch3_2_A2" value="0" >
+                      <label class="form-check-label" for="Ch3_2_A2">
+                        不是
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="exampleRadios-ch3-2" id="Ch3_2_A3" value="-1" >
+                      <label class="form-check-label" for="Ch3_2_A3">
+                        不知道
+                      </label>
+                    </div>
+
+                    <p id="ch3-3">雙標靶治療的費用高於單標靶治療。</p>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="exampleRadios-ch3-3" id="Ch3_3_A1" value="1" >
+                      <label class="form-check-label" for="Ch3_3_A1">
+                          是
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios-ch3-3" id="Ch3_3_A2" value="0">
+                        <label class="form-check-label" for="Ch3_3_A2">
+                          不是
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios-ch3-3" id="Ch3_3_A3" value="-1">
+                        <label class="form-check-label" for="Ch3_3_A3">
+                          不知道
+                        </label>
+                      </div>
+
+                      <p id="ch3-4">單、雙標靶藥物的術前療程皆為每三週一次、共6–8次。</p>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios-ch3-4" id="Ch3_4_A1" value="1" >
+                        <label class="form-check-label" for="Ch3_4_A1">
+                            是
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="exampleRadios-ch3-4" id="Ch3_4_A2" value="0">
+                          <label class="form-check-label" for="Ch3_4_A2">
+                            不是
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="exampleRadios-ch3-4" id="Ch3_4_A3" value="-1">
+                          <label class="form-check-label" for="Ch3_4_A3">
+                            不知道
+                          </label>
+                        </div>
+                        <p id="ch3-5">單、雙標靶藥物皆需合併化學治療。</p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios-ch3-5" id="Ch3_5_A1" value="1" >
+                            <label class="form-check-label" for="Ch3_5_A1">
+                              是
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios-ch3-5" id="Ch3_5_A2" value="0">
+                            <label class="form-check-label" for="Ch3_5_A2">
+                              不是
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios-ch3-5" id="Ch3_5_A3" value="-1">
+                            <label class="form-check-label" for="Ch3_5_A3">
+                              不知道
+                            </label>
+                          </div>
+                          <button class="btn btn-primary" type="submit" id="submitForm2">提交</button>
+        </div>
+
+
+        <div id="content8" class="content">
+            <!-- Content for button 8 -->
+            <h4>您現在確認好治療方式了嗎</h4>
+            <p id="ch4-1">我已經確認好想要的治療方式，我決定選擇：（下列擇一）</p>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="exampleRadios-Ch4_1_A" id="Ch4_1_A_1" value="1" >
+                  <label class="form-check-label" for="Ch4_1_A_1">
+                    單標靶藥物（賀癌平）+化學治療
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios-Ch4_1_A" id="Ch4_1_A_2" value="2">
+                    <label class="form-check-label" for="Ch4_1_A_2">
+                      雙標靶藥物（賀癌平+賀疾妥）+化學治療
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios-Ch4_1_A" id="Ch4_1_A_3" value="3">
+                    <label class="form-check-label" for="Ch4_1_A_3">
+                        目前還無法做決定
+                    </label>
+                  </div>
+
+                  <td scope="row" id="Ch4_2_Q"><h5><br>請問您對於做這個決定，您信心指數為多少？請勾選出您心中的分數</h5></td>
+                  <td>
+                      <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions-Ch4_2_A" id="Ch4_2_A_1" value="1">
+                          <label class="form-check-label" for="Ch4_2_A_1">1(非常沒信心) </label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions-Ch4_2_A" id="Ch4_2_A_2" value="2">
+                          <label class="form-check-label" for="Ch4_2_A_2">2(有點沒信心) </label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions-Ch4_2_A" id="Ch4_2_A_3" value="3">
+                          <label class="form-check-label" for="Ch4_2_A_3">3(普通) </label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions-Ch4_2_A" id="Ch4_2_A_4" value="4">
+                          <label class="form-check-label" for="Ch4_2_A_4">4(有信心) </label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions-Ch4_2_A" id="Ch4_2_A_5" value="4">
+                        <label class="form-check-label" for="Ch4_2_A_5">5(非常有信心) </label>
+                    </div>
+                  </td>
+                </tr>
+                    <button class="btn btn-primary" type="submit" id="submitForm3">提交</button>
+      </div>
+    
+        
+    <script>
+
+function showContent(contentId) {
+    // 隐藏所有内容
+    var contents = document.querySelectorAll('.content');
+    contents.forEach(function (content) {
+        content.style.display = 'none';
+    });
+
+    // 显示点击的按钮对应的内容
+    var selectedContent = document.getElementById(contentId);
+    if (selectedContent) {
+        selectedContent.style.display = 'block';
+        updateNavText(contentId); // 更新导航栏文字内容
+    }
+}
+
+    </script>
+    
+    </body>
+    </html>
+    
+
+<script>
+
+ function changeFontSize(size) {
+            var elements = document.querySelectorAll("*"); // 選擇所有元素
+            elements.forEach(function(element) {
+              document.documentElement.style.fontSize = size + "px"; // 設置每個元素的字體大小
+            });
+        }
+        //加大字體
+        function increaseFontSize() {
+        var fontSizeSlider = document.getElementById('font-size');
+        var newSize = parseInt(fontSizeSlider.value) + 1;
+        if (newSize <= parseInt(fontSizeSlider.max)) {
+            fontSizeSlider.value = newSize;
+            changeFontSize(newSize);
+        }
+    }
+
+    // 减小字體
+    function decreaseFontSize() {
+        var fontSizeSlider = document.getElementById('font-size');
+        var newSize = parseInt(fontSizeSlider.value) - 1;
+        if (newSize >= parseInt(fontSizeSlider.min)) {
+            fontSizeSlider.value = newSize;
+            changeFontSize(newSize);
+        }
+    }
+        // 恢復預設字體大小函數
+        function resetFontSize() {
+            var elements = document.querySelectorAll("*"); // 選擇所有元素
+            elements.forEach(function(element) {
+                element.style.fontSize = ""; // 清除直接設定的字體大小，使其回復到預設值
+            });
+
+            // 重置滑動桿的值為預設值
+            var fontSizeSlider = document.getElementById('font-size');
+            fontSizeSlider.value = 16;
+
+            // 重置導航條樣式
+            var breadcrumb = document.querySelector(".breadcrumb");
+            breadcrumb.classList.remove("active");
+        }
+
+        function showContent(contentId) {
+          var contentDivs = document.querySelectorAll('.content');
+          for (var i = 0; i < contentDivs.length; i++) {
+            contentDivs[i].style.display = 'none';
+          }
+          document.getElementById(contentId).style.display = 'block';
+           // 如果显示了其他 content，则隐藏 introText
+          document.getElementById('introText').style.display = 'none';
+          
+        }    
+
+        function getUserData() {
+          const user = JSON.parse(localStorage.getItem('user')); 
+          const user_name = user.user_name;
+          const user_idNumber = user.user_idNumber;
+          const sdm_title = 'HER2陽性乳癌的術前標靶';
+          const sdm_id = 4;
+    
+          return { user, user_name, user_idNumber, sdm_title, sdm_id };
+}
+// 在頁面顯示user名字
+document.addEventListener('DOMContentLoaded', function() {
+    const userId = JSON.parse(localStorage.getItem('user')); 
+    fetch(`/api/user_name?userId=${userId}`) 
+    .then(response => response.json())
+    .then(user => {
+        const userNameDisplay = document.getElementById('userNameDisplay');
+        user.forEach(user_name => {
+            userNameDisplay.textContent = 'Hello, ' + user_name.user_name; 
+        })
+    })
+    .catch(error => console.error('Error:', error));
+  
+    const submitButton1 = document.getElementById('submitForm1');
+submitButton1.addEventListener('click', function() {
+    // 获取用户的答案
+    const selectedOption1 = document.querySelector('input[name="inlineRadioOptions-ch2_1"]:checked');
+    const selectedOption2 = document.querySelector('input[name="inlineRadioOptions-ch2_2"]:checked');
+    const selectedOption3 = document.querySelector('input[name="inlineRadioOptions-ch2_3"]:checked');
+    // 检查是否有选中的选项
+    if (!selectedOption1 || !selectedOption2 || !selectedOption3 ) {
+        alert('请确保所有问题都已回答');
+        return;
+    }
+    const { user, user_name, user_idNumber, sdm_title, sdm_id } = getUserData();
+
+    const answers = {
+        Ch2_1_A: selectedOption1.value,
+        Ch2_2_A: selectedOption2.value,
+        Ch2_3_A: selectedOption3.value,
+        // 添加其他问题的答案字段...
+    };
+
+    // 发送答案到服务器
+    fetch('/save-answers-1', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user, user_name, user_idNumber, sdm_title, sdm_id, ...answers }), // 使用解构和扩展运算符合并对象
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Response from server:', data);
+        // 更新用户界面，例如显示成功消息
+        showSuccessMessage('回答已保存！');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // 更新用户界面，例如显示错误消息
+        showErrorMessage('保存答案时出错，请稍后再试。');
+    });
+});
+
+const submitButton2 = document.getElementById('submitForm2');
+submitButton2.addEventListener('click', function() {
+    // 获取用户的答案
+    const selectedOption1 = document.querySelector('input[name="exampleRadios-ch3-1"]:checked');
+    const selectedOption2 = document.querySelector('input[name="exampleRadios-ch3-2"]:checked');
+    const selectedOption3 = document.querySelector('input[name="exampleRadios-ch3-3"]:checked');
+    const selectedOption4 = document.querySelector('input[name="exampleRadios-ch3-4"]:checked');
+    const selectedOption5 = document.querySelector('input[name="exampleRadios-ch3-5"]:checked');
+    // 检查是否有选中的选项
+    if (!selectedOption1 || !selectedOption2 || !selectedOption3 || !selectedOption4 || !selectedOption5 ) {
+        alert('请确保所有问题都已回答');
+        return;
+    }
+    const { user, user_name, user_idNumber, sdm_title, sdm_id } = getUserData();
+
+    const answers = {
+        Ch3_1_A: selectedOption1.value,
+        Ch3_2_A: selectedOption2.value,
+        Ch3_3_A: selectedOption3.value,
+        Ch3_4_A: selectedOption4.value,
+        Ch3_5_A: selectedOption5.value,
+        // 添加其他问题的答案字段...
+    };
+
+    // 发送答案到服务器
+    fetch('/save-answers-2', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user, user_name, user_idNumber, sdm_title, sdm_id, ...answers }), // 使用解构和扩展运算符合并对象
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Response from server:', data);
+        // 更新用户界面，例如显示成功消息
+        showSuccessMessage('回答已保存！');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // 更新用户界面，例如显示错误消息
+        showErrorMessage('保存答案时出错，请稍后再试。');
+    });
+});
+const submitButton3 = document.getElementById('submitForm3');
+submitButton3.addEventListener('click', function() {
+    // 获取用户的答案
+    const selectedOption1 = document.querySelector('input[name="exampleRadios-Ch4_1_A"]:checked');
+    const selectedOption2 = document.querySelector('input[name="inlineRadioOptions-Ch4_2_A"]:checked');
+
+    // 检查是否有选中的选项
+    if (!selectedOption1 || !selectedOption2 ) {
+        alert('请确保所有问题都已回答');
+        return;
+    }
+    const { user, user_name, user_idNumber, sdm_title, sdm_id } = getUserData();
+
+    const answers = {
+        Ch4_1_A: selectedOption1.value,
+        Ch4_2_A: selectedOption2.value,
+        // 添加其他问题的答案字段...
+    };
+
+    // 发送答案到服务器
+    fetch('/save-answers-3', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user, user_name, user_idNumber, sdm_title, sdm_id, ...answers }), // 使用解构和扩展运算符合并对象
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Response from server:', data);
+        // 更新用户界面，例如显示成功消息
+        showSuccessMessage('回答已保存！');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // 更新用户界面，例如显示错误消息
+        showErrorMessage('保存答案时出错，请稍后再试。');
+    });
+});    
+});
+  
+document.addEventListener("DOMContentLoaded", function() {
+  const treatmentBtn = document.getElementById('treatmentBtn');
+  const riskBtn = document.getElementById('riskBtn');
+  const treatmentTable = document.getElementById('treatmentTable');
+  const riskTable = document.getElementById('riskTable');
+  
+  // 點擊“治療方式比較”按鈕時顯示相應表格
+  treatmentBtn.addEventListener('click', function() {
+    treatmentTable.style.display = 'table';
+    riskTable.style.display = 'none';
+  });
+  
+  // 點擊“風險比較”按鈕時顯示相應表格
+  riskBtn.addEventListener('click', function() {
+    treatmentTable.style.display = 'none';
+    riskTable.style.display = 'table';
+  });
+});
+const admin = localStorage.getItem('admin'); // 去得lacalStorage裡的admin資訊
+const user = JSON.parse(localStorage.getItem('user')); // 去得lacalStorage裡的user資訊
+const logoutButton = document.getElementById('logout-button');
+logoutButton.addEventListener('click', function() {
+  // 檢查localStorage中是否有admin資訊
+  if (localStorage.getItem('admin')) {
+    localStorage.removeItem('admin'); // 移除管理員資訊
+    window.location.href = 'manager_login.html'; // 跳轉到管理員登入頁面
+  } else if (localStorage.getItem('user')) {     // 檢查localStorage中是否有user資訊
+    localStorage.removeItem('user'); // 移除使用者資訊
+    window.location.href = 'user_login.html'; // 跳轉到使用者登入頁面
+  }
+});
+</script>
+</body>
+</html>

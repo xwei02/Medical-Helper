@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/modal.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg " id="nav-color">
+        <a class="navbar-brand" href="test.html" style="font-weight: bold">
+          <img src="medical_icon.png" alt="Logo" width="40" height="40"> 醫療小幫手</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="test.html" style="font-weight: bold">
+                <img src="home_icon.png" alt="Logo" width="25" height="25"> 首頁</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="medical_form.html" style="font-weight: bold">
+                <img src="leaflet.png" alt="Logo" width="25" height="25"> 手術問卷</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="personal_medicalcare.html" style="font-weight: bold">
+                <img src="personal_medical.png" alt="Logo" width="30" height="30"> 個人醫療</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="user_info_modifiy.html" style="font-weight: bold">
+                  <img src="modify.png" alt="Logo" width="28" height="28"> 用戶基本資料修改</a>
+              </li>
+            <li class="nav-item">
+                <a class="nav-link" href="user_feedback.html" style="font-weight: bold">
+                  <img src="reply2.png" alt="Logo" width="30" height="30"> 回饋</a>
+            </li>  
+            <li class="nav-item">
+                <a class="nav-link" id="sdm" href="sdm.html" style="font-weight: bold">
+                  <img src="sdmicon.png" alt="Logo" width="25" height="27"> 醫病共享決策</a>
+            </li> 
+          </ul>
+          <div class="ms-auto">
+            <a class="btn btn-light" id="logout-button">登出</a>
+          </div>
+          <div id="userNameDisplay" class="user-name-display"></div>
+
+        </div>
+    </nav>
+    <style>
+    /* 調整邊距，避免重疊*/
+        .dropdown {
+            margin: 20px; 
+        }
+        .table{
+            width: 97%;
+            border-collapse: collapse;
+            margin: 20px; 
+        }
+    </style>
+    
+    <div style="display: flex; flex-direction: row;">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          SDM主題類別
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">全部</a></li>
+          <li><a class="dropdown-item" href="#">腫瘤</a></li>
+          <li><a class="dropdown-item" href="#">肌肉骨骼系統</a></li>
+          <li><a class="dropdown-item" href="#">循環系統</a></li>
+          <li><a class="dropdown-item" href="#">消化系統</a></li>
+          <li><a class="dropdown-item" href="#">其他</a></li>
+        </ul>
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          疾病科室分類
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">全部</a></li>
+          <li><a class="dropdown-item" href="#">心臟內外科</a></li>
+          <li><a class="dropdown-item" href="#">血液科</a></li>
+          <li><a class="dropdown-item" href="#">乳房醫學中心</a></li>
+          <li><a class="dropdown-item" href="#">大腸直腸外科</a></li>
+          <li><a class="dropdown-item" href="#">骨科</a></li>
+          <li><a class="dropdown-item" href="#">其他</a></li>
+        </ul>
+      </div>
+    </div>
+    
+      <table class="table table-light table-hover">
+        <thead class="table-info">
+          <tr>
+            <th scope="col">決策輔助工具</th>
+            <th scope="col">建置日期</th>
+            <th scope="col">SDM主題類別</th>
+            <th scope="col">疾病科室分類</th>
+            <th scope="col">衛教資訊</th>
+            <th scope="col">填寫狀態</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row"><a href="sdm_question1.html" >我該接受全人工膝關節置換術嗎?</a></th>
+            <td>2023/07/06</td>
+            <td>肌肉骨骼系統</td>
+            <td>骨科</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="sdm_question2.html" >我有心房顫動﹐應該服用抗凝血劑預防中風嗎?</a></th>
+            <td>2023/11/08</td>
+            <td>其他</td>
+            <td>心臟內外科</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="sdm_question3.html" >乙型主動脈剝離手術治療我該選擇微創手術還是傳統手術比較適合?</a></th>
+            <td>2023/5/17</td>
+            <td>循環系統</td>
+            <td>心臟內外科</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="sdm_question4.html" >急性骨髓性白血病經治療達到完全緩解後需要骨髓移植嗎?</a></th>
+            <td>2023/06/19</td>
+            <td>腫瘤</td>
+            <td>血液科</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="sdm_question5.html" >HER2陽性乳癌的術前標靶</a></th>
+            <td>2023/6/7</td>
+            <td>腫瘤</td>
+            <td>乳房醫學中心</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="sdm_question6.html" >我得了大腸直腸癌,我該選擇什麼樣的手術方式?</a></th>
+            <td>2023/05/30</td>
+            <td>消化系統</td>
+            <td>大腸直腸外科</td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+  </body>
+</html>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // 獲取兩個下拉選單
+    const dropdowns = document.querySelectorAll('.dropdown-menu');
+  
+    // 添加事件監聽器
+    dropdowns.forEach(dropdown => {
+      dropdown.addEventListener('click', function(event) {
+        event.preventDefault(); // 防止默認行為
+        const targetCategory = event.target.textContent; // 獲取點擊的下拉選單項目文本內容
+        updateTableContent(targetCategory); // 更新表格內容
+      });
+    });
+  
+    // 更新表格內容函數
+    function updateTableContent(category) {
+      const tableRows = document.querySelectorAll('tbody tr');
+  
+      // 檢查是否選擇了"全部"，如果是則顯示所有表格行
+      if (category === "全部") {
+        tableRows.forEach(row => {
+          row.style.display = 'table-row';
+        });
+        return; // 結束函數執行
+      }
+  
+      // 隱藏所有表格行
+      tableRows.forEach(row => {
+        row.style.display = 'none';
+      });
+  
+      // 顯示與所選類別相匹配的表格行
+      tableRows.forEach(row => {
+        const sdmCategory = row.children[2].textContent.trim(); // 獲取SDM主題類別列的內容
+        const diseaseCategory = row.children[3].textContent.trim(); // 獲取疾病科室分類列的內容
+        if (sdmCategory === category || diseaseCategory === category) {
+          row.style.display = 'table-row';
+        }
+      });
+    }
+  });
+
+// 在頁面顯示user名字
+document.addEventListener('DOMContentLoaded', function() {
+  const userId = JSON.parse(localStorage.getItem('user')); 
+  fetch(`/api/user_name?userId=${userId}`) 
+  .then(response => response.json())
+  .then(user => {
+    const userNameDisplay = document.getElementById('userNameDisplay');
+    user.forEach(user_name => {
+      userNameDisplay.textContent = 'Hello, ' + user_name.user_name; 
+
+    })
+  })
+  .catch(error => console.error('Error:', error));
+});
+
+const admin = localStorage.getItem('admin'); // 去得lacalStorage裡的admin資訊
+const user = JSON.parse(localStorage.getItem('user')); // 去得lacalStorage裡的user資訊
+const logoutButton = document.getElementById('logout-button');
+logoutButton.addEventListener('click', function() {
+  // 檢查localStorage中是否有admin資訊
+  if (localStorage.getItem('admin')) {
+    localStorage.removeItem('admin'); // 移除管理員資訊
+    window.location.href = 'manager_login.html'; // 跳轉到管理員登入頁面
+  } else if (localStorage.getItem('user')) {     // 檢查localStorage中是否有user資訊
+    localStorage.removeItem('user'); // 移除使用者資訊
+    window.location.href = 'user_login.html'; // 跳轉到使用者登入頁面
+  }
+});
+</script>

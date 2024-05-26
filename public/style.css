@@ -82,7 +82,9 @@ body {
   background-color: #fff7e6; /* 淺鵝黃色背景 */
 }
 
-
+body, h1, h2, h3, h4, h5, h6 {
+  font-family: '華康粗黑體', '微軟正黑體', 'LiHei Pro', Arial, Helvetica, sans-serif !important;
+}
 
 
 
