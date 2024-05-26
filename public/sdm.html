@@ -123,53 +123,53 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row"><a href="sdm_question1.html" >我該接受全人工膝關節置換術嗎?</a></th>
+          <tr data-SDM_id="3">
+            <th scope="row"><a href="sdm_question1.html?SDM_id=3" >我該接受全人工膝關節置換術嗎?</a></th>
             <td>2023/07/06</td>
             <td>肌肉骨骼系統</td>
             <td>骨科</td>
             <td></td>
-            <td></td>
+            <td id="status"></td>
           </tr>
-          <tr>
-            <th scope="row"><a href="sdm_question2.html" >我有心房顫動﹐應該服用抗凝血劑預防中風嗎?</a></th>
+          <tr data-SDM_id="1">
+            <th scope="row"><a href="sdm_question2.html?SDM_id=1" >我有心房顫動﹐應該服用抗凝血劑預防中風嗎?</a></th>
             <td>2023/11/08</td>
             <td>其他</td>
             <td>心臟內外科</td>
             <td></td>
-            <td></td>
+            <td id="status"></td>
           </tr>
-          <tr>
-            <th scope="row"><a href="sdm_question3.html" >乙型主動脈剝離手術治療我該選擇微創手術還是傳統手術比較適合?</a></th>
+          <tr data-SDM_id="5">
+            <th scope="row"><a href="sdm_question3.html?SDM_id=5" >乙型主動脈剝離手術治療我該選擇微創手術還是傳統手術比較適合?</a></th>
             <td>2023/5/17</td>
             <td>循環系統</td>
             <td>心臟內外科</td>
             <td></td>
-            <td></td>
+            <td id="status"></td>
           </tr>
-          <tr>
-            <th scope="row"><a href="sdm_question4.html" >急性骨髓性白血病經治療達到完全緩解後需要骨髓移植嗎?</a></th>
+          <tr data-SDM_id="2">
+            <th scope="row"><a href="sdm_question4.html?SDM_id=2" >急性骨髓性白血病經治療達到完全緩解後需要骨髓移植嗎?</a></th>
             <td>2023/06/19</td>
             <td>腫瘤</td>
             <td>血液科</td>
             <td></td>
-            <td></td>
+            <td id="status"></td>
           </tr>
-          <tr>
-            <th scope="row"><a href="sdm_question5.html" >HER2陽性乳癌的術前標靶</a></th>
+          <tr data-SDM_id="4">
+            <th scope="row"><a href="sdm_question5.html?SDM_id=4" >HER2陽性乳癌的術前標靶</a></th>
             <td>2023/6/7</td>
             <td>腫瘤</td>
             <td>乳房醫學中心</td>
             <td></td>
-            <td></td>
+            <td id="status"></td>
           </tr>
-          <tr>
-            <th scope="row"><a href="sdm_question6.html" >我得了大腸直腸癌,我該選擇什麼樣的手術方式?</a></th>
+          <tr data-SDM_id="6">
+            <th scope="row"><a href="sdm_question6.html?SDM_id=6" >我得了大腸直腸癌,我該選擇什麼樣的手術方式?</a></th>
             <td>2023/05/30</td>
             <td>消化系統</td>
             <td>大腸直腸外科</td>
             <td></td>
-            <td></td>
+            <td id="status"></td>
           </tr>
         </tbody>
       </table>
@@ -217,6 +217,33 @@
       });
     }
   });
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+            const userId = JSON.parse(localStorage.getItem('user'));
+            const rows = document.querySelectorAll('tr[data-SDM_id]');
+            rows.forEach(row => {
+                const sdmId = row.getAttribute('data-SDM_id');
+                const statusElement = row.querySelector('td[id="status"]');
+                checkFormStatus(userId, sdmId, statusElement);
+            });
+        });
+
+        function checkFormStatus(userId, sdmId, element) {
+            fetch(`/check_form_status?user_id=${userId}&sdm_id=${sdmId}`)
+                .then(response => response.text())
+                .then(status => {
+                    if (status === 'filled') {
+                        element.innerHTML = `<a href='sdm_view.html?user_id=${userId}&sdm_id=${sdmId}'>查看内容</a>`;
+                    } else {
+                        element.innerHTML = '無填寫紀錄';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
 
 // 在頁面顯示user名字
 document.addEventListener('DOMContentLoaded', function() {

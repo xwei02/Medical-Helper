@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        .btn-outline-secondary {
+           margin-top: 20px; 
+           
+       }
+       .content{
+           margin: 50px;
+       }
+       .center-image{
+           margin:auto;
+           margin-top: 50px;
+           display: block;
+       }
+       .btn-primary{
+           margin:auto;
+           display: block;
+       }
+       .btn-large {
+           border-radius: 50%; /* 將按鈕設置為圓形 */
+           font-size: 20px;
+           padding: 10px 15px;
+       }
+     .btn-circle {
+           border-radius: 50%; /* 將按鈕設置為圓形 */
+           font-size: 20px; /* 調整按鈕內字體大小 */
+       }
+       </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg " id="nav-color">
+        <a class="navbar-brand" href="test.html" style="font-weight: bold">
+          <img src="medical_icon.png" alt="Logo" width="40" height="40"> 醫療小幫手</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="test.html" style="font-weight: bold">
+                <img src="home_icon.png" alt="Logo" width="25" height="25"> 首頁</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="medical_form.html" style="font-weight: bold">
+                <img src="leaflet.png" alt="Logo" width="25" height="25"> 手術問卷</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="personal_medicalcare.html" style="font-weight: bold">
+                <img src="personal_medical.png" alt="Logo" width="30" height="30"> 個人醫療</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="user_info_modifiy.html" style="font-weight: bold">
+                  <img src="modify.png" alt="Logo" width="28" height="28"> 用戶基本資料修改</a>
+              </li>
+            <li class="nav-item">
+                <a class="nav-link" href="user_feedback.html" style="font-weight: bold">
+                  <img src="reply2.png" alt="Logo" width="30" height="30"> 回饋</a>
+            </li>  
+            <li class="nav-item">
+              <a class="nav-link" id="sdm" href="sdm.html" style="font-weight: bold">
+                <img src="sdmicon.png" alt="Logo" width="25" height="27"> 醫病共享決策</a>
+          </li> 
+          </ul>
+          <div class="ms-auto">
+            <a class="btn btn-light"  id="logout-button">登出</a>
+          </div>
+          <div id="userNameDisplay" class="user-name-display"></div>
+
+        </div>
+    </nav>
+    <div class="container">
+    <nav aria-label="breadcrumb" class="navbar">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="sdm.html">醫病共享決策</a></li>
+            <li class="breadcrumb-item"></a>醫共享決策作答內容</li>
+            <li class="breadcrumb-item" id="breadcrumbItem"></li>
+        </ol>
+
+        <!-- 字體調整功能 -->
+        <div class="font-size-adjustment">
+          <button onclick="resetFontSize()">恢復</button>
+            <label for="font-size">字體大小：</label>
+            <button onclick="decreaseFontSize()" class="btn-circle">小</button>
+            <input type="range" id="font-size" min="10" max="30" value="16" onchange="changeFontSize(this.value)">
+            <button onclick="increaseFontSize()" class="btn-large">大</button>
+          </div>
+      </nav>
+        <h2>您的填寫紀錄如下</h2>
+        <button class="btn btn-outline-secondary btn-lg" onclick="showTable(1)">醫療方式的考量</button>
+        <button class="btn btn-outline-secondary btn-lg" onclick="showTable(2)">醫療資訊的認知</button>
+        <button class="btn btn-outline-secondary btn-lg" onclick="showTable(3)">醫療方式的確認</button>
+        <div id="table1" style="display: none;">
+        <table class="table">
+            <!-- 醫療方式的考量 -->
+            <thead>
+                <tr>
+                    <th scope="col">SDM Title</th>
+                    <th scope="col">Ch2_1_A</th>
+                    <th scope="col">Ch2_2_A</th>
+                    <th scope="col">Ch2_3_A</th>
+                    <th scope="col">Ch2_4_A</th>
+                    <th scope="col">Ch2_5_A</th>
+                </tr>
+            </thead>
+            <tbody id="table1Body"></tbody>
+        </table>
+        </div>
+        <div id="table2" style="display: none;">
+            <table class="table">
+                <!-- 醫療資訊的認知 -->
+                <thead>
+                    <tr>
+                        <th scope="col">SDM Title</th>
+                        <th scope="col">Ch3_1_A</th>
+                        <th scope="col">Ch3_2_A</th>
+                        <th scope="col">Ch3_3_A</th>
+                        <th scope="col">Ch3_4_A</th>
+                        <th scope="col">Ch3_5_A</th>
+                    </tr>
+                </thead>
+                <tbody id="table2Body"></tbody>
+              </table>
+        </div>
+        <div id="table3" style="display: none;">
+            <table class="table">
+                <!-- 醫療方式的確認 -->
+                <thead>
+                    <tr>
+                        <th scope="col">SDM Title</th>
+                        <th scope="col">Ch4_1_A</th>
+                        <th scope="col">Ch4_2_A</th>
+                    </tr>
+                </thead>
+                <tbody id="table3BodyBody"></tbody>
+            </table>
+        </div>
+    </div>
+   </body>
+</html>
+
+<script>
+  const admin = localStorage.getItem('admin'); // 去得lacalStorage裡的admin資訊
+  const user = JSON.parse(localStorage.getItem('user')); // 去得lacalStorage裡的user資訊
+  const logoutButton = document.getElementById('logout-button');
+    logoutButton.addEventListener('click', function() {
+    // 檢查localStorage中是否有admin資訊
+    if (localStorage.getItem('admin')) {
+      localStorage.removeItem('admin'); // 移除管理員資訊
+      window.location.href = 'manager_login.html'; // 跳轉到管理員登入頁面
+    } else if (localStorage.getItem('user')) {     // 檢查localStorage中是否有user資訊
+      localStorage.removeItem('user'); // 移除使用者資訊
+      window.location.href = 'user_login.html'; // 跳轉到使用者登入頁面
+    }
+  });
+  function changeFontSize(size) {
+            var elements = document.querySelectorAll("*"); // 選擇所有元素
+            elements.forEach(function(element) {
+              document.documentElement.style.fontSize = size + "px"; // 設置每個元素的字體大小
+            });
+        }
+        //加大字體
+        function increaseFontSize() {
+        var fontSizeSlider = document.getElementById('font-size');
+        var newSize = parseInt(fontSizeSlider.value) + 1;
+        if (newSize <= parseInt(fontSizeSlider.max)) {
+            fontSizeSlider.value = newSize;
+            changeFontSize(newSize);
+        }
+    }
+
+    // 减小字體
+    function decreaseFontSize() {
+        var fontSizeSlider = document.getElementById('font-size');
+        var newSize = parseInt(fontSizeSlider.value) - 1;
+        if (newSize >= parseInt(fontSizeSlider.min)) {
+            fontSizeSlider.value = newSize;
+            changeFontSize(newSize);
+        }
+    }
+        // 恢復預設字體大小函數
+        function resetFontSize() {
+            var elements = document.querySelectorAll("*"); // 選擇所有元素
+            elements.forEach(function(element) {
+                element.style.fontSize = ""; // 清除直接設定的字體大小，使其回復到預設值
+            });
+
+            // 重置滑動桿的值為預設值
+            var fontSizeSlider = document.getElementById('font-size');
+            fontSizeSlider.value = 16;
+
+            // 重置導航條樣式
+            var breadcrumb = document.querySelector(".breadcrumb");
+            breadcrumb.classList.remove("active");
+        }
+
+        async function fetchData(tableName) {
+      const response = await fetch(`/api/data/${tableName}`);
+      const data = await response.json();
+      return data;
+    }
+
+    
+  function showTable(tableNumber) {
+    const breadcrumbItem = document.getElementById('breadcrumbItem');
+    const userId = localStorage.getItem('user');
+    fetch(`/user_data?user_id=${userId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (tableNumber === 1) {
+                        fillTable(data.table1);
+                    } else if (tableNumber === 2) {
+                        fillTable(data.table2);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+
+            switch (tableNumber) {
+                case 1:
+                    breadcrumbItem.textContent = '醫療方式的考量';
+                    break;
+                case 2:
+                    breadcrumbItem.textContent = '醫療資訊的認知';
+                    break;
+                case 3:
+                    breadcrumbItem.textContent = '醫療方式的確認';
+                    break;
+                default:
+                    breadcrumbItem.textContent = '醫共享決策作答內容';
+            }
+            // 隐藏所有表格
+            document.getElementById('table1').style.display = 'none';
+            document.getElementById('table2').style.display = 'none';
+            document.getElementById('table3').style.display = 'none';
+
+            // 显示所选表格
+            document.getElementById(`table${tableNumber}`).style.display = 'block';
+
+
+
+}
+
+
+
+// 在頁面顯示user名字
+  document.addEventListener('DOMContentLoaded', function() {
+  const userId = JSON.parse(localStorage.getItem('user')); 
+  fetch(`/api/user_name?userId=${userId}`) 
+  .then(response => response.json())
+  .then(user => {
+    const userNameDisplay = document.getElementById('userNameDisplay');
+    user.forEach(user_name => {
+      userNameDisplay.textContent = 'Hello, ' + user_name.user_name; 
+
+    })
+  })
+  .catch(error => console.error('Error:', error));
+});
+</script>
+
+ 

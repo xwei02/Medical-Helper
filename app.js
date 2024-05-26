@@ -581,6 +581,38 @@ app.get('/api/leaflet_showdetail', (req, res) => {
     });
 });
 
+app.get('/check_form_status', (req, res) => {
+    const userId = req.query.user_id;
+    const sdmId = req.query.sdm_id;
+
+    if (!userId) {
+        return res.status(400).send('請登入再進行操作');
+    }
+
+    if(!sdmId){
+        return res.status(400).send('查無此輔助工具');
+    }
+
+    const sql = `
+        SELECT sdm_id FROM sdm_patientreplych2 WHERE user_id = ? AND sdm_id = ?
+        UNION
+        SELECT sdm_id FROM sdm_patientreplych3 WHERE user_id = ? AND sdm_id = ?
+        UNION
+        SELECT sdm_id FROM sdm_patientreplych4 WHERE user_id = ? AND sdm_id = ?
+    `;
+    connection.query(sql, [userId, sdmId, userId, sdmId, userId, sdmId], (err, results) => {
+        if (err) {
+            console.error('Error querying database:', err.stack);
+            return res.status(500).send('Internal Server Error');
+        }
+
+        if (results.length > 0) {
+            res.send('filled');
+        } else {
+            res.send('not filled');
+        }
+    });
+});
 
 
 
@@ -589,6 +621,7 @@ app.post('/save-answers-1', (req, res) => {
     const userId = req.body.user;
     const sdmTitle=req.body.sdm_title;
     const sdmId=req.body.sdm_id;
+
 
     // 将答案插入到数据库中
     pool.getConnection((err, connection) => {
@@ -690,6 +723,38 @@ app.post('/save-answers-3', (req, res) => {
         );
     });
 });
+
+
+app.get('/user_data', (req, res) => {
+    const userId = req.query.user_id;
+    const sdmId=req.body.sdm_id;
+    // 查询三个 SQL 表格的数据
+
+    let sql = `SELECT SDM_title, Ch2_1_A, Ch2_2_A, Ch2_3_A, Ch2_4_A, Ch2_5_A FROM sdm_patientreplych2 WHERE user_id = ? AND sdm_id = ?`;
+    pool.query(sql, [userId], (err, results1) => {
+        if (err) {
+            return res.status(500).json({ error: 'Database error' });
+        }
+
+        sql = `SELECT SDM_title, Ch3_1_A, Ch3_2_A, Ch3_3_A, Ch3_4_A, Ch3_5_A FROM sdm_patientreplych3 WHERE user_id = ?`;
+        pool.query(sql, [userId], (err, results2) => {
+            if (err) {
+                return res.status(500).json({ error: 'Database error' });
+            }
+
+            sql = `SELECT SDM_title, Ch4_1_A, Ch4_2_A FROM sdm_patientreplych4 WHERE user_id = ?`;
+            pool.query(sql, [userId], (err, results3) => {
+                if (err) {
+                    return res.status(500).json({ error: 'Database error' });
+                }
+
+                // 将结果发送给客户端
+                res.json({ table1: results1, table2: results2, table3: results3 });
+            });
+        });
+    });
+});
+
 // 啟動伺服器
 const port = 3000;
 app.listen(port, () => {
