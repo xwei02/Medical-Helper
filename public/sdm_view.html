@@ -159,7 +159,7 @@
                         <th scope="col">Ch4_2_A</th>
                     </tr>
                 </thead>
-                <tbody id="table3BodyBody"></tbody>
+                <tbody id="table3Body"></tbody>
             </table>
         </div>
     </div>
@@ -220,13 +220,6 @@
             var breadcrumb = document.querySelector(".breadcrumb");
             breadcrumb.classList.remove("active");
         }
-
-        async function fetchData(tableName) {
-      const response = await fetch(`/api/data/${tableName}`);
-      const data = await response.json();
-      return data;
-    }
-
     
   function showTable(tableNumber) {
     const breadcrumbItem = document.getElementById('breadcrumbItem');
@@ -262,12 +255,91 @@
 
             // 显示所选表格
             document.getElementById(`table${tableNumber}`).style.display = 'block';
+}
 
+// 获取数据并显示在 HTML 页面中
+function getDataAndDisplay() {
+    const params = new URLSearchParams(window.location.search);
+    const userId = params.get('user_id');
+    const sdmId = params.get('sdm_id');
 
+    fetch('/get-sdm-data', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ user_id: userId, sdm_id: sdmId })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to fetch data');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // 处理从后端获取的数据
+        const table1Data = data.table1;
+        const table2Data = data.table2;
+        const table3Data = data.table3;
 
+        // 将数据显示在 HTML 页面中
+        displayDataInHTML(table1Data, table2Data, table3Data);
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
 }
 
 
+// 将数据显示在 HTML 页面中
+function displayDataInHTML(table1Data, table2Data, table3Data) {
+    // 显示第一个表格的数据
+    const table1Body = document.getElementById('table1Body');
+    table1Data.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${row.SDM_tittle}</td>
+            <td>${row.Ch2_1_A}</td>
+            <td>${row.Ch2_2_A}</td>
+            <td>${row.Ch2_3_A}</td>
+            <td>${row.Ch2_4_A}</td>
+            <td>${row.Ch2_5_A}</td>
+        `;
+        table1Body.appendChild(tr);
+    });
+
+    // 显示第二个表格的数据
+    const table2Body = document.getElementById('table2Body');
+    table2Data.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${row.SDM_tittle}</td>
+            <td>${row.Ch3_1_A}</td>
+            <td>${row.Ch3_2_A}</td>
+            <td>${row.Ch3_3_A}</td>
+            <td>${row.Ch3_4_A}</td>
+            <td>${row.Ch3_5_A}</td>
+        `;
+        table2Body.appendChild(tr);
+    });
+
+    // 显示第三个表格的数据
+    const table3Body = document.getElementById('table3Body');
+    table3Data.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${row.SDM_tittle}</td>
+            <td>${row.Ch4_1_A}</td>
+            <td>${row.Ch4_2_A}</td>
+        `;
+        table3Body.appendChild(tr);
+    });
+}
+
+// 在页面加载完成后调用函数获取并显示数据
+window.addEventListener('DOMContentLoaded', () => {
+    getDataAndDisplay();
+});
 
 // 在頁面顯示user名字
   document.addEventListener('DOMContentLoaded', function() {

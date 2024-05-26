@@ -124,7 +124,7 @@
         </thead>
         <tbody>
           <tr data-SDM_id="3">
-            <th scope="row"><a href="sdm_question1.html?SDM_id=3" >我該接受全人工膝關節置換術嗎?</a></th>
+            <th scope="row"><a href="sdm_question1.html?SDM_id=3">我該接受全人工膝關節置換術嗎?</a></th>
             <td>2023/07/06</td>
             <td>肌肉骨骼系統</td>
             <td>骨科</td>
@@ -217,6 +217,11 @@
       });
     }
   });
+
+  function getSDMId() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('sdm_id');
+}
 
 
   document.addEventListener('DOMContentLoaded', function() {

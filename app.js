@@ -725,35 +725,58 @@ app.post('/save-answers-3', (req, res) => {
 });
 
 
-app.get('/user_data', (req, res) => {
-    const userId = req.query.user_id;
-    const sdmId=req.body.sdm_id;
-    // 查询三个 SQL 表格的数据
+app.post('/get-sdm-data', (req, res) => {
+    const sdmId = req.body.sdm_id;
+    const userId = req.body.user_id;
 
-    let sql = `SELECT SDM_title, Ch2_1_A, Ch2_2_A, Ch2_3_A, Ch2_4_A, Ch2_5_A FROM sdm_patientreplych2 WHERE user_id = ? AND sdm_id = ?`;
-    pool.query(sql, [userId], (err, results1) => {
+    // 检查是否提供了所需的用户 ID 和 SDM ID
+    if (!userId || !sdmId) {
+        return res.status(400).json({ error: 'Missing user_id or sdm_id' });
+    }
+
+    // 查询数据库获取 SDM 数据
+    const sql1 = `SELECT SDM_tittle, Ch2_1_A, Ch2_2_A, Ch2_3_A, Ch2_4_A, Ch2_5_A FROM sdm_patientreplych2 WHERE user_id = ? AND sdm_id = ?`;
+    const sql2 = `SELECT SDM_tittle, Ch3_1_A, Ch3_2_A, Ch3_3_A, Ch3_4_A, Ch3_5_A FROM sdm_patientreplych3 WHERE user_id = ? AND sdm_id = ?`;
+    const sql3 = `SELECT SDM_tittle, Ch4_1_A, Ch4_2_A FROM sdm_patientreplych4 WHERE user_id = ? AND sdm_id = ?`;
+
+    // 使用连接池执行查询
+    pool.getConnection((err, connection) => {
         if (err) {
-            return res.status(500).json({ error: 'Database error' });
+            console.error('Error connecting to database:', err);
+            return res.status(500).json({ error: 'Database connection error' });
         }
 
-        sql = `SELECT SDM_title, Ch3_1_A, Ch3_2_A, Ch3_3_A, Ch3_4_A, Ch3_5_A FROM sdm_patientreplych3 WHERE user_id = ?`;
-        pool.query(sql, [userId], (err, results2) => {
+        // 执行查询并发送结果给客户端
+        connection.query(sql1, [userId, sdmId], (err, results1) => {
             if (err) {
-                return res.status(500).json({ error: 'Database error' });
+                connection.release(); // 释放连接
+                console.error('Error querying database:', err);
+                return res.status(500).json({ error: 'Database query error' });
             }
 
-            sql = `SELECT SDM_title, Ch4_1_A, Ch4_2_A FROM sdm_patientreplych4 WHERE user_id = ?`;
-            pool.query(sql, [userId], (err, results3) => {
+            connection.query(sql2, [userId, sdmId], (err, results2) => {
                 if (err) {
-                    return res.status(500).json({ error: 'Database error' });
+                    connection.release(); // 释放连接
+                    console.error('Error querying database:', err);
+                    return res.status(500).json({ error: 'Database query error' });
                 }
 
-                // 将结果发送给客户端
-                res.json({ table1: results1, table2: results2, table3: results3 });
+                connection.query(sql3, [userId, sdmId], (err, results3) => {
+
+                    if (err) {
+                        connection.release(); // 释放连接
+                        console.error('Error querying database:', err);
+                        return res.status(500).json({ error: 'Database query error' });
+                    }
+
+                    // 发送结果给客户端
+                    res.json({ table1: results1, table2: results2, table3: results3 });
+                });
             });
         });
     });
 });
+
 
 // 啟動伺服器
 const port = 3000;
