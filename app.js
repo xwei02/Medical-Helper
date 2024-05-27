@@ -777,6 +777,21 @@ app.post('/get-sdm-data', (req, res) => {
     });
 });
 
+app.post('/update-form-status', (req, res) => {
+    const { SDM_id, status } = req.body;
+
+    // 更新数据库中的表单状态
+    const sql = `UPDATE your_table_name SET form_status = ? WHERE SDM_id = ?`;
+    pool.query(sql, [status, SDM_id], (err, results) => {
+        if (err) {
+            console.error('Error updating form status:', err);
+            return res.status(500).json({ error: 'Error updating form status' });
+        }
+
+        res.json({ success: true });
+    });
+});
+
 app.post('/get-sdm-manager', (req, res) => {
     const sdmId = req.body.SDM_id; // 获取前端发送的 SDM_ID
 
@@ -786,9 +801,9 @@ app.post('/get-sdm-manager', (req, res) => {
     }
 
     // 构建 SQL 查询语句
-    const sql1 = `SELECT user_id, SDM_tittle, SDM_id, Ch2_1_A, Ch2_2_A, Ch2_3_A, Ch2_4_A, Ch2_5_A FROM sdm_patientreplych2 WHERE sdm_id = ?`;
-    const sql2 = `SELECT user_id, SDM_tittle, SDM_id, Ch3_1_A, Ch3_2_A, Ch3_3_A, Ch3_4_A, Ch3_5_A FROM sdm_patientreplych3 WHERE sdm_id = ?`;
-    const sql3 = `SELECT user_id, SDM_tittle, SDM_id, Ch4_1_A, Ch4_2_A FROM sdm_patientreplych4 WHERE sdm_id = ?`;
+    const sql1 = `SELECT user_id, SDM_tittle, SDM_id, Ch2_1_A, Ch2_2_A, Ch2_3_A, Ch2_4_A, Ch2_5_A, form_status FROM sdm_patientreplych2 WHERE sdm_id = ?`;
+    const sql2 = `SELECT user_id, SDM_tittle, SDM_id, Ch3_1_A, Ch3_2_A, Ch3_3_A, Ch3_4_A, Ch3_5_A, form_status FROM sdm_patientreplych3 WHERE sdm_id = ?`;
+    const sql3 = `SELECT user_id, SDM_tittle, SDM_id, Ch4_1_A, Ch4_2_A, form_status FROM sdm_patientreplych4 WHERE sdm_id = ?`;
 
     // 使用连接池执行查询
     pool.getConnection((err, connection) => {

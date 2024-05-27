@@ -131,7 +131,7 @@
                     <th scope="col">Ch2_4_A</th>
                     <th scope="col">Ch2_5_A</th>
                     <th scope="col">重新作答</th>
-                    <th scope="col">刪除</th>
+                    <th scope="col">表單狀態</th>
 
                 </tr>
             </thead>
@@ -152,7 +152,7 @@
                         <th scope="col">Ch3_4_A</th>
                         <th scope="col">Ch3_5_A</th>
                         <th scope="col">重新作答</th>
-                        <th scope="col">刪除</th>
+                        <th scope="col">表單狀態</th>
                     </tr>
                 </thead>
                 <tbody id="table2Body"></tbody>
@@ -169,7 +169,7 @@
                         <th scope="col">Ch4_1_A</th>
                         <th scope="col">Ch4_2_A</th>
                         <th scope="col">重新作答</th>
-                        <th scope="col">刪除</th>
+                        <th scope="col">表單狀態</th>
                     </tr>
                 </thead>
                 <tbody id="table3Body"></tbody>
@@ -323,6 +323,14 @@ function displayDataInHTML(table1Data, table2Data, table3Data) {
             <td>${row.Ch2_3_A}</td>
             <td>${row.Ch2_4_A}</td>
             <td>${row.Ch2_5_A}</td>
+            <td><button >重新作答</button></td>
+            <td>
+                <select onchange="updateFormStatus(${row.SDM_id}, this.value)">
+                    <option value="未處理" ${row.form_status === '未處理' ? 'selected' : ''}>未處理</option>
+                    <option value="處理中" ${row.form_status === '處理中' ? 'selected' : ''}>處理中</option>
+                    <option value="已完成" ${row.form_status === '已完成' ? 'selected' : ''}>已完成</option>
+                </select>
+            </td>
         `;
         table1Body.appendChild(tr);
     });
@@ -340,6 +348,14 @@ function displayDataInHTML(table1Data, table2Data, table3Data) {
             <td>${row.Ch3_3_A}</td>
             <td>${row.Ch3_4_A}</td>
             <td>${row.Ch3_5_A}</td>
+            <td><button>重新作答</button></td>
+            <td>
+                <select onchange="updateFormStatus(${row.SDM_id}, this.value)">
+                    <option value="未處理" ${row.form_status === '未處理' ? 'selected' : ''}>未處理</option>
+                    <option value="處理中" ${row.form_status === '處理中' ? 'selected' : ''}>處理中</option>
+                    <option value="已完成" ${row.form_status === '已完成' ? 'selected' : ''}>已完成</option>
+                </select>
+            </td>
         `;
         table2Body.appendChild(tr);
     });
@@ -354,10 +370,40 @@ function displayDataInHTML(table1Data, table2Data, table3Data) {
             <td>${row.SDM_id}</td>
             <td>${row.Ch4_1_A}</td>
             <td>${row.Ch4_2_A}</td>
+            <td><button >重新作答</button></td>
+            <td>
+                <select onchange="updateFormStatus(${row.SDM_id}, this.value)">
+                    <option value="未處理" ${row.form_status === '未處理' ? 'selected' : ''}>未處理</option>
+                    <option value="處理中" ${row.form_status === '處理中' ? 'selected' : ''}>處理中</option>
+                    <option value="已完成" ${row.form_status === '已完成' ? 'selected' : ''}>已完成</option>
+                </select>
+            </td>
         `;
         table3Body.appendChild(tr);
     });
 }
+
+function updateFormStatus(sdmId, newStatus) {
+    fetch('/update-form-status', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ SDM_id: sdmId, status: newStatus })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log('表单状态更新成功');
+        } else {
+            console.error('表单状态更新失败');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
 
 // 在页面加载完成后调用函数获取并显示数据
 window.addEventListener('DOMContentLoaded', () => {
