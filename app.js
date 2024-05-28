@@ -778,10 +778,26 @@ app.post('/get-sdm-data', (req, res) => {
 });
 
 app.post('/update-form-status', (req, res) => {
-    const { SDM_id, status } = req.body;
-
+    const { SDM_id, formType, status } = req.body;
+    if (!SDM_id || !formType || !status) {
+        return res.status(400).json({ error: 'Missing SDM_id, formType, or status' });
+    }
+    let tableName;
+    switch (formType) {
+        case 'ch2':
+            tableName = 'sdm_patientreplych2';
+            break;
+        case 'ch3':
+            tableName = 'sdm_patientreplych3';
+            break;
+        case 'ch4':
+            tableName = 'sdm_patientreplych4';
+            break;
+        default:
+            return res.status(400).json({ error: 'Invalid formType' });
+    }
     // 更新数据库中的表单状态
-    const sql = `UPDATE your_table_name SET form_status = ? WHERE SDM_id = ?`;
+    const sql = `UPDATE ${tableName} SET form_status = ? WHERE SDM_id = ?`;
     pool.query(sql, [status, SDM_id], (err, results) => {
         if (err) {
             console.error('Error updating form status:', err);
@@ -790,6 +806,60 @@ app.post('/update-form-status', (req, res) => {
 
         res.json({ success: true });
     });
+});
+app.post('/update-all-form-statuses', (req, res) => {
+    const { statuses } = req.body;
+
+    if (!statuses || !Array.isArray(statuses)) {
+        return res.status(400).json({ error: 'Invalid statuses data' });
+    }
+
+    let queries = statuses.map(statusObj => {
+        let tableName;
+        switch (statusObj.formType) {
+            case 'ch2':
+                tableName = 'sdm_patientreplych2';
+                break;
+            case 'ch3':
+                tableName = 'sdm_patientreplych3';
+                break;
+            case 'ch4':
+                tableName = 'sdm_patientreplych4';
+                break;
+            default:
+                return null;
+        }
+
+        return {
+            query: `UPDATE ${tableName} SET form_status = ? WHERE SDM_id = ? AND user_id = ?`,
+            values: [statusObj.status, statusObj.SDM_id, statusObj.user_id]
+        };
+    }).filter(queryObj => queryObj !== null);
+
+    if (queries.length === 0) {
+        return res.status(400).json({ error: 'No valid queries to execute' });
+    }
+
+    let promises = queries.map(queryObj => {
+        return new Promise((resolve, reject) => {
+            pool.query(queryObj.query, queryObj.values, (err, results) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(results);
+                }
+            });
+        });
+    });
+
+    Promise.all(promises)
+        .then(results => {
+            res.json({ success: true });
+        })
+        .catch(err => {
+            console.error('Error updating form statuses:', err);
+            res.status(500).json({ error: 'Error updating form statuses' });
+        });
 });
 
 app.post('/get-sdm-manager', (req, res) => {

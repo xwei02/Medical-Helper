@@ -137,6 +137,7 @@
             </thead>
             <tbody id="table1Body"></tbody>
         </table>
+        <button onclick="saveAllStatuses()">保存</button>
         </div>
         <div id="table2" style="display: none;">
             <table class="table">
@@ -157,6 +158,7 @@
                 </thead>
                 <tbody id="table2Body"></tbody>
               </table>
+              <button onclick="saveAllStatuses()">保存</button>
         </div>
         <div id="table3" style="display: none;">
             <table class="table">
@@ -174,6 +176,7 @@
                 </thead>
                 <tbody id="table3Body"></tbody>
             </table>
+            <button onclick="saveAllStatuses()">保存</button>
         </div>
     </div>
    </body>
@@ -325,7 +328,7 @@ function displayDataInHTML(table1Data, table2Data, table3Data) {
             <td>${row.Ch2_5_A}</td>
             <td><button >重新作答</button></td>
             <td>
-                <select onchange="updateFormStatus(${row.SDM_id}, this.value)">
+                <select onchange="updateFormStatus(${row.SDM_id}, 'ch2', this.value)">
                     <option value="未處理" ${row.form_status === '未處理' ? 'selected' : ''}>未處理</option>
                     <option value="處理中" ${row.form_status === '處理中' ? 'selected' : ''}>處理中</option>
                     <option value="已完成" ${row.form_status === '已完成' ? 'selected' : ''}>已完成</option>
@@ -350,7 +353,7 @@ function displayDataInHTML(table1Data, table2Data, table3Data) {
             <td>${row.Ch3_5_A}</td>
             <td><button>重新作答</button></td>
             <td>
-                <select onchange="updateFormStatus(${row.SDM_id}, this.value)">
+                <select onchange="updateFormStatus(${row.SDM_id}, 'ch3', this.value)">
                     <option value="未處理" ${row.form_status === '未處理' ? 'selected' : ''}>未處理</option>
                     <option value="處理中" ${row.form_status === '處理中' ? 'selected' : ''}>處理中</option>
                     <option value="已完成" ${row.form_status === '已完成' ? 'selected' : ''}>已完成</option>
@@ -372,7 +375,7 @@ function displayDataInHTML(table1Data, table2Data, table3Data) {
             <td>${row.Ch4_2_A}</td>
             <td><button >重新作答</button></td>
             <td>
-                <select onchange="updateFormStatus(${row.SDM_id}, this.value)">
+                <select onchange="updateFormStatus(${row.SDM_id}, 'ch4', this.value)">
                     <option value="未處理" ${row.form_status === '未處理' ? 'selected' : ''}>未處理</option>
                     <option value="處理中" ${row.form_status === '處理中' ? 'selected' : ''}>處理中</option>
                     <option value="已完成" ${row.form_status === '已完成' ? 'selected' : ''}>已完成</option>
@@ -382,14 +385,43 @@ function displayDataInHTML(table1Data, table2Data, table3Data) {
         table3Body.appendChild(tr);
     });
 }
+function saveAllStatuses() {
+            const statuses = [];
+            document.querySelectorAll('tbody tr').forEach(row => {
+                const sdmId = row.children[2].textContent;
+                const userId = row.children[0].textContent;
+                const formType = row.parentElement.id === 'table1Body' ? 'ch2' :
+                                 row.parentElement.id === 'table2Body' ? 'ch3' : 'ch4';
+                const status = row.querySelector('select').value;
+                statuses.push({ SDM_id: sdmId, user_id: userId, formType: formType, status: status });
+            });
 
+            fetch('/update-all-form-statuses', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ statuses: statuses })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('所有表單狀態更新成功');
+                } else {
+                    console.error('更新表單狀態時發生錯誤');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
 function updateFormStatus(sdmId, newStatus) {
     fetch('/update-form-status', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ SDM_id: sdmId, status: newStatus })
+        body: JSON.stringify({ SDM_id: sdmId, formType: formType, status: newStatus })
     })
     .then(response => response.json())
     .then(data => {
