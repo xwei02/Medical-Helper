@@ -326,12 +326,13 @@ function displayDataInHTML(table1Data, table2Data, table3Data) {
             <td>${row.Ch2_3_A}</td>
             <td>${row.Ch2_4_A}</td>
             <td>${row.Ch2_5_A}</td>
-            <td><button >重新作答</button></td>
+            <td><button onclick="notifyUserToRetake('${row.user_id}', '${row.SDM_id}')">重新作答</button></td>
             <td>
                 <select onchange="updateFormStatus(${row.SDM_id}, 'ch2', this.value)">
                     <option value="未處理" ${row.form_status === '未處理' ? 'selected' : ''}>未處理</option>
                     <option value="處理中" ${row.form_status === '處理中' ? 'selected' : ''}>處理中</option>
                     <option value="已完成" ${row.form_status === '已完成' ? 'selected' : ''}>已完成</option>
+                    <option value="作廢" ${row.form_status === '作廢' ? 'selected' : ''}>作廢</option>
                 </select>
             </td>
         `;
@@ -351,12 +352,13 @@ function displayDataInHTML(table1Data, table2Data, table3Data) {
             <td>${row.Ch3_3_A}</td>
             <td>${row.Ch3_4_A}</td>
             <td>${row.Ch3_5_A}</td>
-            <td><button>重新作答</button></td>
+            <td><button onclick="notifyUserToRetake('${row.user_id}', '${row.SDM_id}')">重新作答</button></td>
             <td>
                 <select onchange="updateFormStatus(${row.SDM_id}, 'ch3', this.value)">
                     <option value="未處理" ${row.form_status === '未處理' ? 'selected' : ''}>未處理</option>
                     <option value="處理中" ${row.form_status === '處理中' ? 'selected' : ''}>處理中</option>
                     <option value="已完成" ${row.form_status === '已完成' ? 'selected' : ''}>已完成</option>
+                    <option value="作廢" ${row.form_status === '作廢' ? 'selected' : ''}>作廢</option>
                 </select>
             </td>
         `;
@@ -373,18 +375,43 @@ function displayDataInHTML(table1Data, table2Data, table3Data) {
             <td>${row.SDM_id}</td>
             <td>${row.Ch4_1_A}</td>
             <td>${row.Ch4_2_A}</td>
-            <td><button >重新作答</button></td>
+            <td><button onclick="notifyUserToRetake('${row.user_id}', '${row.SDM_id}')">重新作答</button></td>
             <td>
                 <select onchange="updateFormStatus(${row.SDM_id}, 'ch4', this.value)">
                     <option value="未處理" ${row.form_status === '未處理' ? 'selected' : ''}>未處理</option>
                     <option value="處理中" ${row.form_status === '處理中' ? 'selected' : ''}>處理中</option>
                     <option value="已完成" ${row.form_status === '已完成' ? 'selected' : ''}>已完成</option>
+                    <option value="作廢" ${row.form_status === '作廢' ? 'selected' : ''}>作廢</option>
+
                 </select>
             </td>
         `;
         table3Body.appendChild(tr);
     });
 }
+
+function notifyUserToRetake(userId, sdmId) {
+    fetch('/notify-retake', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ user_id: userId, SDM_id: sdmId, })
+    })
+    .then(response => {
+        if (response.ok) {
+            alert(`通知已发送给用户 ${userId}，需要重新作答 SDM ${sdmId}`);
+            location.reload();
+        } else {
+            alert('發送通知出現錯誤');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('連結出錯');
+    });
+}
+
 function saveAllStatuses() {
             const statuses = [];
             document.querySelectorAll('tbody tr').forEach(row => {

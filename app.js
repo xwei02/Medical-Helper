@@ -782,6 +782,9 @@ app.post('/update-form-status', (req, res) => {
     if (!SDM_id || !formType || !status) {
         return res.status(400).json({ error: 'Missing SDM_id, formType, or status' });
     }
+    if (status === '作廢') {
+        return res.json({ success: true, message: 'Form status is already "作廢"' });
+    }
     let tableName;
     switch (formType) {
         case 'ch2':
@@ -912,6 +915,53 @@ app.post('/get-sdm-manager', (req, res) => {
         });
     });
 });
+
+app.post('/notify-retake', async (req, res) => {
+    const userId = req.body.user_id;
+    const sdmId = req.body.SDM_id;
+    const sql1 = `SELECT * FROM sdm_patientreplych2 WHERE user_id = ? AND sdm_id = ?`;
+    const sql2 = `SELECT * FROM sdm_patientreplych3 WHERE user_id = ? AND sdm_id = ?`;
+    const sql3 = `SELECT * FROM sdm_patientreplych4 WHERE user_id = ? AND sdm_id = ?`;
+    
+    try {
+        const results1 = await query(sql1, [userId, sdmId]);
+        const results2 = await query(sql2, [userId, sdmId]);
+        const results3 = await query(sql3, [userId, sdmId]);
+
+        if (results1.length === 0 || results2.length === 0 || results3.length === 0) {
+            return res.status(404).json({ error: 'Record not found' });
+        }
+
+        await updateFormStatus('sdm_patientreplych2', userId, sdmId);
+        await updateFormStatus('sdm_patientreplych3', userId, sdmId);
+        await updateFormStatus('sdm_patientreplych4', userId, sdmId);
+
+        // 在这里执行通知用户重新作答的操作，例如发送邮件、短信或推送通知等
+
+        // 返回成功响应给前端
+        res.json({ success: true, message: '已通知用户重新作答并更新状态。' });
+    } catch (err) {
+        console.error('Error:', err);
+        return res.status(500).json({ error: 'An error occurred' });
+    }
+});
+
+async function query(sql, values) {
+    return new Promise((resolve, reject) => {
+        pool.query(sql, values, (err, results) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(results);
+            }
+        });
+    });
+}
+
+async function updateFormStatus(tableName, userId, sdmId) {
+    const updateSql = `UPDATE ${tableName} SET form_status = '作廢' WHERE user_id = ? AND sdm_id = ?`;
+    return query(updateSql, [userId, sdmId]);
+}
 
 // 啟動伺服器
 const port = 3000;

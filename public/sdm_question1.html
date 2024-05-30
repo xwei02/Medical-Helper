@@ -593,7 +593,7 @@
                     </td>
                   </tr>
                       <button class="btn btn-primary" type="submit" id="submitForm3">提交</button>
-        </div>
+                    </div>
       
     <script>
       function changeFontSize(size) {
@@ -672,6 +672,7 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .catch(error => console.error('Error:', error));
   
+
     const submitButton1 = document.getElementById('submitForm1');
 submitButton1.addEventListener('click', function() {
     // 获取用户的答案
@@ -801,7 +802,7 @@ submitButton3.addEventListener('click', function() {
     });
 });    
 });
-  
+
 
 const admin = localStorage.getItem('admin'); // 去得lacalStorage裡的admin資訊
 const user = JSON.parse(localStorage.getItem('user')); // 去得lacalStorage裡的user資訊
