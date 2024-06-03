@@ -63,32 +63,24 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="test.html" style="font-weight: bold">
-                <img src="home_icon.png" alt="Logo" width="25" height="25"> 首頁</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="medical_form.html" style="font-weight: bold">
-                <img src="leaflet.png" alt="Logo" width="25" height="25"> 手術問卷</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="personal_medicalcare.html" style="font-weight: bold">
-                <img src="personal_medical.png" alt="Logo" width="30" height="30"> 個人醫療</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="user_info_modifiy.html" style="font-weight: bold">
-                  <img src="modify.png" alt="Logo" width="28" height="28"> 用戶基本資料修改</a>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="test.html" style="font-weight: bold">
+                    <img src="home_icon.png" alt="Logo" width="25" height="25"> 首頁</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="leaflets_change" href="health_leaflet.html" style="font-weight: bold">
+                    <img src="leaflet2.png" alt="Logo" width="28" height="28"> 衛教單張管理</a>
               </li>
-            <li class="nav-item">
-                <a class="nav-link" href="user_feedback.html" style="font-weight: bold">
+              <li class="nav-item">
+                <a class="nav-link" id="manager_response" href="manager_response.html" style="font-weight: bold">
                   <img src="reply2.png" alt="Logo" width="30" height="30"> 回饋</a>
-            </li>  
+            </li> 
             <li class="nav-item">
-              <a class="nav-link" id="sdm" href="sdm.html" style="font-weight: bold">
+              <a class="nav-link" id="sdm_manager" href="sdm_manager.html" style="font-weight: bold">
                 <img src="sdmicon.png" alt="Logo" width="25" height="27"> 醫病共享決策</a>
-          </li> 
-          </ul>
+          </li>  
+              </ul>
           <div class="ms-auto">
             <a class="btn btn-light"  id="logout-button">登出</a>
           </div>
@@ -132,6 +124,7 @@
                     <th scope="col">Ch2_5_A</th>
                     <th scope="col">重新作答</th>
                     <th scope="col">表單狀態</th>
+                    <th scope="col">詳情</th>
 
                 </tr>
             </thead>
@@ -154,6 +147,8 @@
                         <th scope="col">Ch3_5_A</th>
                         <th scope="col">重新作答</th>
                         <th scope="col">表單狀態</th>
+                        <th scope="col">詳情</th>
+
                     </tr>
                 </thead>
                 <tbody id="table2Body"></tbody>
@@ -172,6 +167,8 @@
                         <th scope="col">Ch4_2_A</th>
                         <th scope="col">重新作答</th>
                         <th scope="col">表單狀態</th>
+                        <th scope="col">詳情</th>
+
                     </tr>
                 </thead>
                 <tbody id="table3Body"></tbody>
@@ -335,6 +332,8 @@ function displayDataInHTML(table1Data, table2Data, table3Data) {
                     <option value="作廢" ${row.form_status === '作廢' ? 'selected' : ''}>作廢</option>
                 </select>
             </td>
+            <td><a href="sdm_ans_detail.html">查看完整內容</a></td>
+
         `;
         table1Body.appendChild(tr);
     });
@@ -361,6 +360,7 @@ function displayDataInHTML(table1Data, table2Data, table3Data) {
                     <option value="作廢" ${row.form_status === '作廢' ? 'selected' : ''}>作廢</option>
                 </select>
             </td>
+            <td><a href="sdm_ans_detail.html">查看完整內容</a></td>
         `;
         table2Body.appendChild(tr);
     });
@@ -385,6 +385,8 @@ function displayDataInHTML(table1Data, table2Data, table3Data) {
 
                 </select>
             </td>
+            <td><a href="sdm_ans_detail.html">查看完整內容</a></td>
+
         `;
         table3Body.appendChild(tr);
     });

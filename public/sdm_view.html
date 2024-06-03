@@ -128,6 +128,7 @@
                     <th scope="col">Ch2_3_A</th>
                     <th scope="col">Ch2_4_A</th>
                     <th scope="col">Ch2_5_A</th>
+                    <th scope="col">詳情</th>
                 </tr>
             </thead>
             <tbody id="table1Body"></tbody>
@@ -144,6 +145,7 @@
                         <th scope="col">Ch3_3_A</th>
                         <th scope="col">Ch3_4_A</th>
                         <th scope="col">Ch3_5_A</th>
+                        <th scope="col">詳情</th>
                     </tr>
                 </thead>
                 <tbody id="table2Body"></tbody>
@@ -157,6 +159,7 @@
                         <th scope="col">SDM Title</th>
                         <th scope="col">Ch4_1_A</th>
                         <th scope="col">Ch4_2_A</th>
+                        <th scope="col">詳情</th>
                     </tr>
                 </thead>
                 <tbody id="table3Body"></tbody>
@@ -304,6 +307,8 @@ function displayDataInHTML(table1Data, table2Data, table3Data) {
             <td>${row.Ch2_3_A}</td>
             <td>${row.Ch2_4_A}</td>
             <td>${row.Ch2_5_A}</td>
+            <td><a href="sdm_ans_detail.html">查看完整內容</a></td>
+
         `;
         table1Body.appendChild(tr);
     });
@@ -319,6 +324,8 @@ function displayDataInHTML(table1Data, table2Data, table3Data) {
             <td>${row.Ch3_3_A}</td>
             <td>${row.Ch3_4_A}</td>
             <td>${row.Ch3_5_A}</td>
+            <td><a href="sdm_ans_detail.html">查看完整內容</a></td>
+
         `;
         table2Body.appendChild(tr);
     });
@@ -331,6 +338,8 @@ function displayDataInHTML(table1Data, table2Data, table3Data) {
             <td>${row.SDM_tittle}</td>
             <td>${row.Ch4_1_A}</td>
             <td>${row.Ch4_2_A}</td>
+            <td><a href="sdm_ans_detail.html">查看完整內容</a></td>
+
         `;
         table3Body.appendChild(tr);
     });

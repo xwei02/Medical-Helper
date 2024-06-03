@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/modal.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg " id="nav-color">
+        <a class="navbar-brand" href="test.html" style="font-weight: bold">
+          <img src="medical_icon.png" alt="Logo" width="40" height="40"> 醫療小幫手</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <div class="ms-auto">
+            <a class="btn btn-light" id="logout-button">登出</a>
+          </div>
+          <div id="userNameDisplay" class="user-name-display"></div>
+
+        </div>
+    </nav>
+    <style>
+    /* 調整邊距，避免重疊*/
+        .dropdown {
+            margin: 20px; 
+        }
+        .table{
+            width: 97%;
+            border-collapse: collapse;
+            margin: 20px; 
+        }
+        .content-container {
+            padding: 20px; /* 添加內邊距 */
+            margin: 20px;  /* 添加外邊距 */
+            border: 1px solid #ccc; /* 添加邊框以更清楚地看到容器 */
+        }
+    </style>
+  </body>
+    <body>
+      <div class="content-container">
+        <h2>作答者:10004 何冠宇</h2>
+        <h2>輔助工具: </h2>        <h2><a href="sdm.html" class="link-style">我有心房顫動﹐應該服用抗凝血劑預防中風嗎</a></h2>
+        <h2>填寫紀錄如下</h2>
+    </div>
+    <button class="btn btn-outline-secondary btn-lg" onclick="showTable(1)">醫療方式的考量</button>
+    <button class="btn btn-outline-secondary btn-lg" onclick="showTable(2)">醫療資訊的認知</button>
+    <button class="btn btn-outline-secondary btn-lg" onclick="showTable(3)">醫療方式的確認</button>
+    <div id="table1" style="display: none;">
+    <table class="table">
+        <!-- 醫療方式的考量 -->
+        <thead>
+            <tr>
+                <th scope="col">偏好治療因素(1分)</th>
+                <th scope="col">偏好治療因素(8分)</th>
+                <th scope="col">病患選擇分數</th>
+            </tr>
+            <tr>
+              <td>不服用抗凝血劑</td>
+              <td>接受服用抗凝血劑</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>我中風風險分數低，中風機會不高</td>
+              <td>我很擔心會中風</td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td>比起中風，我更擔心藥物造成腦出血或腸胃出血</td>
+              <td>比起出血，我更擔心中風</td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td>我很擔心自己沒辦法按時吃藥</td>
+              <td>我能定期回診，按時吃藥</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>很難遵守或記住飲食禁忌，太過麻煩</td>
+              <td>注意飲食禁忌對我來說不會造成生活困擾</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>我平常從事的活動類型大多是屬於較激烈或高危險性</td>
+              <td>我平常的活動，大多數不會太激烈或危險</td>
+              <td>8</td>
+            </tr>
+        </thead>
+        <tbody id="table1Body"></tbody>
+    </table>
+    </div>
+    <div id="table2" style="display: none;">
+        <table class="table">
+            <!-- 醫療資訊的認知 -->
+            <thead>
+                <tr>
+                    <th scope="col">認知確認</th>
+                    <th scope="col">病患作答</th>
+                </tr>
+                <tr>
+                  <td>我有心房顫動，比起其他心律正常的人，我中風發生的機率較高？</td>
+                  <td>對</td>
+                </tr>
+                <tr>
+                  <td>心房顫動病人，中風發生的機率越高，使用抗凝血劑的好處越大？</td>
+                  <td>對</td>
+                </tr>
+                <tr>
+                  <td>使用抗凝血劑，會增加出血的風險？</td>
+                  <td>對</td>
+                </tr>
+                <tr>
+                  <td>我有心房顫動，新型抗凝血劑與傳統抗凝血劑，都可以降低中風發生的機率？</td>
+                  <td>對</td>
+                </tr>
+            </thead>
+            <tbody id="table2Body"></tbody>
+          </table>
+    </div>
+    <div id="table3" style="display: none;">
+        <table class="table">
+            <!-- 醫療方式的確認 -->
+            <thead>
+                <tr>
+                    <th scope="col">治療方式</th>
+                    <th scope="col">病患選擇</th>
+                    <th scope="col">對於選擇的信心指數(1-5分)</th>
+                    <th scope="col">病患選擇</th>
+                </tr>
+                <tr>
+                  <td>經過以上分析與判斷，您決定好是否服用抗凝血用藥了呢?</td>
+                  <td>服用抗凝血劑</td>
+                  <td>請問您對於做這個決定，您信心指數為多少？請勾選出您心中的分數</td>
+                  <td>5(非常有信心)</td>
+                </tr>
+            </thead>
+            <tbody id="table3Body"></tbody>
+        </table>
+    </div>
+</div>
+  </body>
+</html>
+
+<script>
+  function showTable(tableNumber) {
+      // 隱藏所有表格
+      document.getElementById("table1").style.display = "none";
+      document.getElementById("table2").style.display = "none";
+      document.getElementById("table3").style.display = "none";
+      
+      // 顯示指定的表格
+      document.getElementById("table" + tableNumber).style.display = "block";
+  }
+  </script>
+  
